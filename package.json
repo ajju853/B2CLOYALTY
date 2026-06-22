@@ -1,0 +1,23 @@
+{
+  "name": "b2c-loyalty-os",
+  "version": "1.2.0",
+  "description": "B2C Loyalty OS — Interactive Enterprise Architecture & Simulation Platform",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.4"
+  },
+  "keywords": [
+    "loyalty",
+    "b2c",
+    "simulation",
+    "architecture",
+    "enterprise"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}

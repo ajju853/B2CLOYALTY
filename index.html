@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2C Loyalty OS — Interactive Presentation & Guide Platform</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+  <!-- Rebuilt Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top bar with horizontal navigation tabs -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <i class="ti ti-activity-heartbeat"></i>
+        <span>B2C Loyalty</span>
+      </div>
+      <div class="nav-tabs">
+        <div class="nav-tab active" onclick="showPage('tech-presentation')" id="tab-tech-presentation">
+          <i class="ti ti-slideshow"></i> Presenter Deck
+        </div>
+        <div class="nav-tab" onclick="showPage('journey')" id="tab-journey">
+          <i class="ti ti-route"></i>Customer Journey
+        </div>
+        <div class="nav-tab" onclick="showPage('formula')" id="tab-formula">
+          <i class="ti ti-calculator"></i>Points Formula
+        </div>
+        <div class="nav-tab" onclick="showPage('step-formula')" id="tab-step-formula">
+          <i class="ti ti-stairs"></i>Step-by-Step
+        </div>
+        <div class="nav-tab" onclick="showPage('earn-events')" id="tab-earn-events">
+          <i class="ti ti-gift"></i>Earn Events (17)
+        </div>
+        <div class="nav-tab" onclick="showPage('tier-upgrade')" id="tab-tier-upgrade">
+          <i class="ti ti-arrow-up-circle"></i>Tier Upgrade
+        </div>
+        <div class="nav-tab" onclick="showPage('redemption')" id="tab-redemption">
+          <i class="ti ti-coin"></i>Redemption
+        </div>
+        <div class="nav-tab" onclick="showPage('engagement')" id="tab-engagement">
+          <i class="ti ti-heart"></i>Engagement
+        </div>
+        <div class="nav-tab" onclick="showPage('renewal')" id="tab-renewal">
+          <i class="ti ti-refresh"></i>Renewal
+        </div>
+      </div>
+      
+      <!-- Theme toggle inside topbar -->
+      <div class="topbar-controls">
+        <button id="theme-toggle" class="btn-theme" title="Toggle Light/Dark Theme">
+          <i class="ti ti-sun-moon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary viewport container -->
+  <main class="viewport">
+    
+    <!-- 0. PRESENTER DECK PAGE (B2C Customer Journey) -->
+    <div class="page active" id="page-tech-presentation">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-slideshow"></i></div>
+        <div>
+          <div class="ph-title">Presenter Deck — B2C Customer Journey</div>
+          <div class="ph-sub">Manoj Kumar ke end-to-end user actions aur points flows ko step-by-step presentation view mein samjhein.</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="presentation-wrap"></div>
+    </div>
+
+    <!-- 1. CUSTOMER JOURNEY PAGE -->
+    <div class="page" id="page-journey">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-route"></i></div>
+        <div>
+          <div class="ph-title">Customer Journey — End to End</div>
+          <div class="ph-sub">Customer aata hai — 11 systems kaise kaam karte hain saath mein (Hindi/English)</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="journey-wrap"></div>
+    </div>
+
+    <!-- 2. POINTS FORMULA CALCULATOR PAGE -->
+    <div class="page" id="page-formula">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-calculator"></i></div>
+        <div>
+          <div class="ph-title">Points Formula Calculator</div>
+          <div class="ph-sub">Live formula — order amount, rate, multiplier se points calculate karo</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="formula-wrap"></div>
+    </div>
+
+    <!-- 3. STEP-BY-STEP BREAKDOWN PAGE -->
+    <div class="page" id="page-step-formula">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-stairs"></i></div>
+        <div>
+          <div class="ph-title">Points Formula — Step by Step Hindi</div>
+          <div class="ph-sub">Ek ek step mein samjho — order se points tak ka poora safar</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="step-formula-wrap"></div>
+    </div>
+
+    <!-- 4. 17 EARN EVENTS EXPLORER PAGE -->
+    <div class="page" id="page-earn-events">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-gift"></i></div>
+        <div>
+          <div class="ph-title">All 17 Earn Events — End to End</div>
+          <div class="ph-sub">Har earn event ka flow, formula aur systems — Hindi mein examine karo</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="earn-wrap"></div>
+    </div>
+
+    <!-- 5. TIER UPGRADE FLOW PAGE -->
+    <div class="page" id="page-tier-upgrade">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-arrow-up-circle"></i></div>
+        <div>
+          <div class="ph-title">Tier Upgrade Flow — Hindi</div>
+          <div class="ph-sub">Bronze → Silver → Gold → Platinum — 5 steps evaluation walkthrough</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="tier-wrap"></div>
+    </div>
+
+    <!-- 6. REDEMPTION PAGE -->
+    <div class="page" id="page-redemption">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-coin"></i></div>
+        <div>
+          <div class="ph-title">Redemption + Tier Upgrade — Hindi</div>
+          <div class="ph-sub">Points redeem karna aur tier upgrade — dono flows live calculator aur order cancellations refund ke saath</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="redemption-wrap"></div>
+    </div>
+
+    <!-- 7. CUSTOMER ENGAGEMENT STRATEGIES PAGE -->
+    <div class="page" id="page-engagement">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-heart"></i></div>
+        <div>
+          <div class="ph-title">Customer Engagement & Gamification</div>
+          <div class="ph-sub">8 strategies — Gamification, Personalization, Community, Surprise, Churn prevent</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="engagement-wrap"></div>
+    </div>
+
+    <!-- 8. RENEWAL & EXPIRY SCENARIOS PAGE -->
+    <div class="page" id="page-renewal">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-refresh"></i></div>
+        <div>
+          <div class="ph-title">Renewal & Expiry Flow — Hindi</div>
+          <div class="ph-sub">Points expiry, Tier renewal, Membership renewal — teeno scenarios</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="renewal-wrap"></div>
+    </div>
+
+  </main>
+
+  <!-- Rebuilt Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
