@@ -1555,120 +1555,381 @@ window.tlpRunRenewal = () => {
 // PAGE 1: CUSTOMER JOURNEY
 // ==========================================================================
 function initJourney() {
-  const ALL_SYS = [
-    '1 Entry Points', '2 Customer 360', '3 Segmentation', '4 Enrollment', 
-    '5 Points Engine', '6 Tier Engine', '7 Rewards Catalog', '8 Automation', 
-    '9 Campaigns', '10 Analytics', '11 Settings & Configuration'
-  ];
-
   const steps = [
     {
-      icon: '📱',
-      iconBg: '#E6F1FB',
-      title: 'Customer discovers the loyalty program',
-      sub: 'Entry Point & Acquisition (Module 1)',
-      userSees: 'Priya brand ke mobile app page pe Instagram refer link ke throug land karti hai. She sees: "Join our loyalty program — get 100 welcome points on registration!" Woh Join now pe tap karti hai.',
-      active: ['1 Entry Points'],
-      note: 'Entry point channel source ko session context data mein save karta hai. CAC (Customer Acquisition Cost) trace karne ke liye is segment source ko link kiya jata hai.'
+      num: "1",
+      name: "Entry Point & Acquisition",
+      what: "This is the door. Customer finds us.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Ad / Referral Link Scan</strong><br><span style="font-size:8px; color:var(--text-muted);">Instagram / WhatsApp / QR</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Session Context Check</strong><br><span style="font-size:8px; color:var(--color-cyan);">Save Channel Source</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>CAC Attribution</strong><br><span style="font-size:8px; color:var(--text-muted);">ROI Tracked per Channel</span>
+          </div>
+        </div>
+      `,
+      formula: "CAC = Total Marketing Spend ÷ Total New Customers Acquired",
+      lbl: [
+        "Customer clicks referral link",
+        "System saves WHERE they came from (Instagram, Google, WhatsApp)",
+        "This source is tagged to their profile forever",
+        "Analytics team tracks which channel gives best customers"
+      ],
+      script: "When a customer enters our loyalty system, 11 modules work like a ladder — each one passes data to the next. Let me walk through each rung. Rung 1: Entry Point & Acquisition. This is the door where the customer finds us. The customer clicks a referral link, the system saves where they came from (like Instagram or WhatsApp), and tags this source to their profile forever. The marketing team tracks this via the CAC formula: Marketing Spend divided by Customers Acquired."
     },
     {
-      icon: '👤',
-      iconBg: '#E1F5EE',
-      title: 'Customer signs up — profile is created',
-      sub: 'Customer 360 & Profile Builder (Module 2)',
-      userSees: 'Priya apna Name, Mobile Number aur Birthdate fill karti hai. Sign up submit hotey hi use unique Loyalty ID generate hoke dikhti hai: LYL-00482. Starting tier badge Bronze confirm hota hai.',
-      active: ['1 Entry Points', '2 Customer 360', '4 Enrollment', '11 Settings & Configuration'],
-      note: 'Customer 360 database relational entry banata hai. Enrollment microservice status ko "ACTIVE" set karti hai aur base signup settings load karti hai.'
+      num: "2",
+      name: "Customer 360",
+      what: "Customer registers — a full 360 profile is created.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Demographics Submission</strong><br><span style="font-size:8px; color:var(--text-muted);">Name, Phone, DOB, Address</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Unique Customer ID</strong><br><span style="font-size:8px; color:var(--color-cyan);">LYL-MK998 Created</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Unified Profile Sync</strong><br><span style="font-size:8px; color:var(--text-muted);">Customer 360 Database Write</span>
+          </div>
+        </div>
+      `,
+      formula: "Profile Score = Basic (40%) + DOB (+20%) + Phone (+20%) + Addr (+20%)",
+      lbl: [
+        "Every field Manoj fills = richer profile",
+        "DOB stored → Birthday earn event enabled",
+        "Phone verified → SMS campaigns enabled",
+        "100% profile → Profile Complete earn event fires → points credited"
+      ],
+      script: "Rung 2: Customer 360. When Manoj registers, a full 360 profile is created in our system. Every field Manoj fills makes a richer profile. The DOB is stored to enable birthday earn events, the phone number is verified to enable SMS campaigns, and once the profile completeness score reaches 100%, a profile completion bonus is triggered."
     },
     {
-      icon: '📊',
-      iconBg: '#EEEDFE',
-      title: 'System silently segments her',
-      sub: 'Segmentation Engine (Module 3)',
-      userSees: 'Priya ke loyalty dashboard pe aur koi changes nahi dikhte, par system use silently segment kar deta hai. First-signup timestamp evaluate karke segment tag "New Customer" update hota hai.',
-      active: ['2 Customer 360', '3 Segmentation', '8 Automation'],
-      note: 'RFM segmentation trigger runs. Customer status New set hotey hi Automation logic trigger events fire karne ke liye subscribe hota hai.'
+      num: "3",
+      name: "Segmentation Engine",
+      what: "System puts Manoj in the right bucket immediately.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>New Profile Created</strong><br><span style="font-size:8px; color:var(--text-muted);">Triggers Cohort Scanner</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Evaluate Cohorts</strong><br><span style="font-size:8px; color:var(--color-cyan);">Read channel, device, location</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Cohort Segment Assigned</strong><br><span style="font-size:8px; color:var(--text-muted);">'Social Referral' Bucket</span>
+          </div>
+        </div>
+      `,
+      formula: "Segment Score = Entry Channel + Behaviour Tags + Purchase History",
+      lbl: [
+        "Manoj came via Instagram → tagged as 'Social Referral' segment",
+        "This segment gets a special welcome campaign",
+        "As Manoj shops more → segment updates automatically",
+        "Segments feed into Campaign Engine (Module 9)"
+      ],
+      script: "Rung 3: Segmentation Engine. The system silently puts Manoj into the right segment immediately based on his entry channel, location, and device type. Since Manoj came via Instagram, he is tagged as 'Social Referral' segment, which gets a special welcome campaign. As he shops more, his segment will update dynamically."
     },
     {
-      icon: '💬',
-      iconBg: '#EEEDFE',
-      title: 'Welcome automation fires',
-      sub: 'Automation Rules & Campaign sends (Modules 8 & 9)',
-      userSees: 'Registration ke 30 seconds ke andar Priya ko WhatsApp/SMS aata hai: "Welcome Priya! Aapke wallet mein 100 points credit kar diye gaye hain." Dashboard open karte hi balance 100 points balance reflect hota hai.',
-      active: ['8 Automation', '9 Campaigns', '5 Points Engine', '10 Analytics'],
-      note: 'Automation Engine "CustomerEnrolled" event verify karke welcome rule fire karta hai. Points engine ledger table check karke 100 points deposit register karta hai.'
+      num: "4",
+      name: "Enrollment Engine",
+      what: "Manoj officially joins the loyalty program.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Enrollment Trigger</strong><br><span style="font-size:8px; color:var(--text-muted);">Segment & Profile validated</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(16, 185, 129, 0.08); border:1px solid var(--color-teal); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Welcome Credit</strong><br><span style="font-size:8px; color:var(--color-teal);">+100 welcome points credited</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Active Bronze Level</strong><br><span style="font-size:8px; color:var(--text-muted);">Initial Wallet Activated</span>
+          </div>
+        </div>
+      `,
+      formula: "Welcome Points = Config Setting (default: 100 pts)\nTier Default = Bronze (0 pts required)",
+      lbl: [
+        "Enrollment creates Manoj's loyalty wallet",
+        "100 welcome points auto-credited",
+        "Bronze tier assigned",
+        "Welcome email sent with loyalty card / QR code",
+        "Manoj is now officially in the program"
+      ],
+      script: "Rung 4: Enrollment Engine. Manoj officially joins the program. Enrollment creates his loyalty wallet, credits 100 welcome points automatically, assigns him the default Bronze tier, and dispatches a welcome notification containing his new loyalty card."
     },
     {
-      icon: '🛒',
-      iconBg: '#FAEEDA',
-      title: 'Customer places her first order',
-      sub: 'Points Engine & Wallet ledger (Modules 5 & 6)',
-      userSees: 'Priya skincare pack cart mein add karti hai jiski value RM 150 hai. Checkout page pe message: "Earn 150 points on checkout". Subtotal payment hotey hi wallet points instantly badhkar 250 points ho jaata hai.',
-      active: ['5 Points Engine', '2 Customer 360', '6 Tier Engine', '10 Analytics', '11 Settings & Configuration'],
-      note: 'Calculation logic: RM 150 order × 1 pt/RM base rate × 1.0x Bronze multiplier = 150 points. Wallet ledger update and cumulative lifetime counter sync completed.'
+      num: "5",
+      name: "Points Engine",
+      what: "The calculator — every rupee Manoj spends becomes points.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Capture Subtotal</strong><br><span style="font-size:8px; color:var(--text-muted);">Exclude tax & delivery</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Apply Formulas</strong><br><span style="font-size:8px; color:var(--color-cyan);">Subtotal × Rate × Multiplier</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Write to Wallet Ledger</strong><br><span style="font-size:8px; color:var(--text-muted);">Instant point credit sync</span>
+          </div>
+        </div>
+      `,
+      formula: "Points = Order Amount (RM) × Points Rate × Tier Multiplier",
+      lbl: [
+        "Order placed → subtotal captured (NO tax, NO delivery)",
+        "Points rate applied (configured by admin)",
+        "Tier multiplier applied based on current tier (Bronze: 1x, Silver: 1.5x, Gold: 2x, Platinum: 3x)",
+        "Points land in wallet instantly and ledger records transaction"
+      ],
+      script: "Rung 5: Points Engine. The points engine is the calculator: every dollar spent is converted into points. It captures the subtotal of the order, applies the base points rate and Manoj's tier multiplier, and credits his wallet instantly while recording the transaction in the ledger."
     },
     {
-      icon: '⭐',
-      iconBg: '#FAEEDA',
-      title: 'Customer writes a product review',
-      sub: 'Non-purchase earn event trigger',
-      userSees: 'Skincare use karne ke baad Priya app pe 5-star rating aur review submit karti hai. Push alert: "Thanks! Review completed. +50 bonus points added." Balance now: 300 points.',
-      active: ['5 Points Engine', '2 Customer 360', '8 Automation', '10 Analytics'],
-      note: 'ECA (Event-Condition-Action) workflow check: event is "review_submitted". Condition check passes. Wallet ledger entries updated.'
+      num: "6",
+      name: "Tier Engine",
+      what: "Checks if Manoj deserves a promotion — every single time he earns.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Read Lifetime Points</strong><br><span style="font-size:8px; color:var(--text-muted);">Ignore redemptions</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Threshold check</strong><br><span style="font-size:8px; color:var(--color-cyan);">Silver: 500 | Gold: 2000 | Plat: 5000</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Upgraded Status DB write</strong><br><span style="font-size:8px; color:var(--text-muted);">Activate multiplier & send alert</span>
+          </div>
+        </div>
+      `,
+      formula: "Lifetime Points = EARN ONLY | Wallet Points = Can go up and down",
+      lbl: [
+        "Runs automatically after EVERY points deposit",
+        "Checks lifetime points counter (which is never reduced by redemptions)",
+        "Upgrades tier status fields in database immediately when threshold crossed",
+        "Next transaction automatically uses the upgraded tier multiplier rate"
+      ],
+      script: "Rung 6: Tier Engine. Checks if Manoj deserves a promotion every single time he earns points. It reads his permanent Lifetime Points counter (which never decreases). If it crosses 500, he is upgraded to Silver, unlocking a 1.5x multiplier on his next orders."
     },
     {
-      icon: '👥',
-      iconBg: '#E1F5EE',
-      title: 'Referral made — friend joins',
-      sub: 'Acquisition & Referral trigger',
-      userSees: 'Priya app se referral link share karti hai. Uska friend Rahul registration complete karta hai. Priya ko automated message milta hai: "Rahul joined! Referral bonus credited. +100 points." Balance: 400 points.',
-      active: ['5 Points Engine', '8 Automation', '9 Campaigns', '2 Customer 360', '10 Analytics'],
-      note: 'Referral signup hook completes validation: referee is distinct customer. Credited 100 referral points. Notification engine delivers messaging payload.'
+      num: "7",
+      name: "Rewards Catalog",
+      what: "The menu — what can Manoj do with his points?",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Open Rewards Panel</strong><br><span style="font-size:8px; color:var(--text-muted);">Fetch eligible deals list</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Apply 20% capping rule</strong><br><span style="font-size:8px; color:var(--color-cyan);">Enforce safety margin caps</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Burn points at checkout</strong><br><span style="font-size:8px; color:var(--text-muted);">Debit wallet (Lifetime safe)</span>
+          </div>
+        </div>
+      `,
+      formula: "Max Redeemable = Order Subtotal × 20% cap\nPayable Amount = Subtotal - Discount Applied",
+      lbl: [
+        "Displays catalog filtered by Manoj's tier and wallet balance",
+        "Enforces the 20% order subtotal discount cap to protect profit margins",
+        "Reduces Wallet points balance only, keeping Lifetime points safe",
+        "Enables instant points burn discount at billing checkout"
+      ],
+      script: "Rung 7: Rewards Catalog. The menu of what rewards and discounts Manoj can redeem. During checkout, Manoj can choose to redeem his points. The system applies the 20% cap limit (e.g. max RM 40 off on a RM 200 bill), deducts the burned points from his wallet, but leaves his lifetime points untouched to preserve his tier status."
     },
     {
-      icon: '🏆',
-      iconBg: '#FAECE7',
-      title: 'Customer crosses Silver tier milestone',
-      sub: 'Tier evaluation & upgrades (Module 6)',
-      userSees: 'Priya RM 200 ki purchase aur karti hai. Points counter: 600 points. Dashboard badge Bronze se upgraded to Silver ho jaata hai. Notification: "Congrats! You are now Silver Elite. Enjoy 1.5x points earning multiplier."',
-      active: ['6 Tier Engine', '8 Automation', '9 Campaigns', '2 Customer 360', '10 Analytics'],
-      note: 'Tier evaluation runs on points ledger write. Cumulative points (600) cross Silver threshold (500). Update customer_tiers database status, triggers Slack alert.'
+      num: "8",
+      name: "Automation Engine",
+      what: "The robot — sends the right message at the right time automatically.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Listen to System Events</strong><br><span style="font-size:8px; color:var(--text-muted);">Points Earned, Tier Upgrade, DOB</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Match Automation Rules</strong><br><span style="font-size:8px; color:var(--color-cyan);">Select message template</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Trigger messaging send</strong><br><span style="font-size:8px; color:var(--text-muted);">WhatsApp / Email / App Push</span>
+          </div>
+        </div>
+      `,
+      formula: "Trigger Rules (e.g. Points expiring in 30 days → send Expiry Alert)",
+      lbl: [
+        "Listens for all events in real time",
+        "Selects the correct message templates dynamically",
+        "Personalizes messages with Manoj's name, points values, and dates",
+        "Sends via the most effective channel: App Push, WhatsApp, or SMS"
+      ],
+      script: "Rung 8: Automation Engine. The robot that sends the right messages at the right time. It listens for system triggers: when Manoj earns points, gets upgraded, is inactive for 30 days, or when his points are about to expire, it dispatches personalized alerts via WhatsApp, SMS, or Push notifications."
     },
     {
-      icon: '🎁',
-      iconBg: '#E1F5EE',
-      title: 'Customer redeems points at checkout',
-      sub: 'Rewards catalog validation & settlement (Module 7)',
-      userSees: 'Priya checkout cart value RM 100 pe points use tab select karti hai. Wallet se 500 points use karke RM 5 deduction complete ho jata hai. Remainder payable amount: RM 95. Remaining wallet points: 100.',
-      active: ['5 Points Engine', '7 Rewards Catalog', '2 Customer 360', '10 Analytics', '11 Settings & Configuration'],
-      note: 'Validates point balance, checks 20% order subtotal redemption cap rules. Deducts 500 points. Lifetime counter stays same so Tier level does NOT downgrade.'
+      num: "9",
+      name: "Campaigns Engine",
+      what: "Special promotions and bonus offers for Manoj.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Create Campaign rules</strong><br><span style="font-size:8px; color:var(--text-muted);">Double Points, Spend Milestones</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Match Segment Cohort</strong><br><span style="font-size:8px; color:var(--color-cyan);">Filter eligible users</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Apply Campaign bonus</strong><br><span style="font-size:8px; color:var(--text-muted);">Write promo ledger entries</span>
+          </div>
+        </div>
+      `,
+      formula: "Double Points: Points = Normal × 2 | Spend Milestone: IF spend >= RM 500 → +1,000 pts",
+      lbl: [
+        "Admin creates targeted marketing campaigns for segments",
+        "Double Points: base points multiplied by 2",
+        "Spend Milestones: flat rewards for crossing monthly targets",
+        "Referrals: dual reward points for both referrer and referee"
+      ],
+      script: "Rung 9: Campaigns Engine. Special marketing promotions. Admin can create 'Double Points Weekend' or birthday multiplier campaigns. When Manoj falls into the target segment and shops during the active campaign window, the system automatically awards him the promotional bonus points."
     },
     {
-      icon: '🎂',
-      iconBg: '#EEEDFE',
-      title: 'Birthday scheduler fires',
-      sub: 'Scheduled Campaign automation',
-      userSees: 'Priya ke birthday subah alert: "Happy Birthday Priya! Here is 100 bonus points as our gift. Celebration time!". Bina kisi checkout transaction ke wallet balance checks automatically points add ho jaata hai.',
-      active: ['8 Automation', '5 Points Engine', '9 Campaigns', '10 Analytics'],
-      note: 'Cron script runs daily check match on customer birthdate columns. Generates point credit payload and sends template message.'
+      num: "10",
+      name: "Analytics Engine",
+      what: "The brain — tracks everything, shows what's working.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Collect transaction logs</strong><br><span style="font-size:8px; color:var(--text-muted);">Pushes, points, upgrades, redemptions</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Calculate program metrics</strong><br><span style="font-size:8px; color:var(--color-cyan);">CLV, Redemption rate, Churn risk</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Update real-time dashboard</strong><br><span style="font-size:8px; color:var(--text-muted);">Insights for campaign creation</span>
+          </div>
+        </div>
+      `,
+      formula: "CLV = Average Spend × Frequency × Lifespan\nRedemption Rate = Points Redeemed ÷ Points Issued × 100",
+      lbl: [
+        "Aggregates system-wide data on points issuance and redemptions",
+        "Calculates Customer Lifetime Value (CLV) and retention percentages",
+        "Identifies churn risks by flagging inactive accounts",
+        "Feeds insights back to segmentation and campaign engines to close the loop"
+      ],
+      script: "Rung 10: Analytics Engine. The brain of the platform. It aggregates all purchase logs, wallet balances, and campaign results in real-time. It calculates key metrics like CLV and ROI, displays them on dashboard panels, and feeds churn risks back into the segmentation engine to prompt retention offers."
     },
     {
-      icon: '⏰',
-      iconBg: '#FCEBEB',
-      title: 'Customer goes quiet — Dormant alert',
-      sub: 'Dormancy evaluation & Churn prevention',
-      userSees: '45 days tak koi transaction nahi hone pe Priya ko critical alert push warning milti hai: "We miss you Priya! Reactivate your account with 15% discount coupon. Note: Your points will expire in 30 days!"',
-      active: ['3 Segmentation', '8 Automation', '9 Campaigns', '7 Rewards Catalog', '10 Analytics'],
-      note: 'Segmentation re-cohorts user. Expiry counter checks last active timestamp rules and triggers warning templates.'
+      num: "11",
+      name: "Settings & Configuration",
+      what: "The control panel — admin controls all rules from here.",
+      flow: `
+        <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Login to Control Panel</strong><br><span style="font-size:8px; color:var(--text-muted);">Admin settings UI</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
+            <strong>Update settings registry</strong><br><span style="font-size:8px; color:var(--color-cyan);">Modify values (rate, cap, thresholds)</span>
+          </div>
+          <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
+          <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
+            <strong>Instant execution update</strong><br><span style="font-size:8px; color:var(--text-muted);">Engines pull new variables</span>
+          </div>
+        </div>
+      `,
+      formula: "points_rate = 1.0 pt/RM | redemption_cap = 20% | silver_threshold = 500",
+      lbl: [
+        "Enables admins to configure points parameters in real time",
+        "Altering variables immediately propagates to all active services",
+        "Eliminates technical downtime: adjustments are instantly validated",
+        "Empowers marketing managers to self-serve rules without IT help"
+      ],
+      script: "Rung 11: Settings & Configuration. The control panel. Admins can log in and change rules like the welcome bonus amount, points rate, tier thresholds, or capping percentage. Once updated, all engines pull the new rules instantly without requiring developers or deployments."
     },
     {
-      icon: '📈',
-      iconBg: '#E6F1FB',
-      title: 'Continuous CRM Analytics telemetry',
-      sub: 'Program health & KPI tracking (Module 10)',
-      userSees: 'Priya loyalty benefits updates dekhti hai. Business admin view pe manager check karta hai: Total points liability, Retention rates (92%), Churn rate aur Campaign conversions.',
-      active: ['10 Analytics', '11 Settings & Configuration', '2 Customer 360', '3 Segmentation', '5 Points Engine', '6 Tier Engine'],
-      note: 'All transaction database triggers continuously pump event logs to data pipelines, feeding ROI models instantly.'
+      num: "",
+      name: "Complete Ladder Flow Map",
+      what: "Summary map of the 11 modules working as a unified flow.",
+      flow: `
+        <div style="max-height: 180px; overflow-y: auto; padding: 4px; display:flex; flex-direction:column; gap:4px; font-size:9.5px; text-align:left; width:100%;">
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">1. Entry Point:</strong> <span>Capture discovery channel & track CAC.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">2. Customer 360:</strong> <span>Initialize unified demographics record.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">3. Segmentation:</strong> <span>Cohort bucket mapping by behavior.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">4. Enrollment:</strong> <span>Loyalty wallet creation & welcome reward.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">5. Points Engine:</strong> <span>Accrual calculation: Spend × Rate × Multiplier.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">6. Tier Engine:</strong> <span>Compare lifetime points against thresholds.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">7. Rewards:</strong> <span>Checkout point burn & 20% capping rule.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">8. Automation:</strong> <span>Listen & dispatch transactional notifications.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">9. Campaigns:</strong> <span>Execute multipliers & targeted promotions.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">10. Analytics:</strong> <span>Real-time dashboard telemetry & CLV tracking.</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">11. Settings:</strong> <span>Control panel values registry rules settings.</span></div>
+        </div>
+      `,
+      formula: "Loop: Acquisition → Engagement → Retention → Upgraded Tiers → Higher CLV",
+      lbl: [
+        "11 systems link together like a cascade",
+        "Every output triggers the next system rung",
+        "Drives customer engagement automatically",
+        "Secures long term business profitability"
+      ],
+      script: "To summarize: when a customer enters our loyalty system, these 11 modules work like a ladder — each one passes data to the next, building a loops that drives customer lifecycle values."
+    },
+    {
+      num: "",
+      name: "Quick Summary Cheat Sheet",
+      what: "Cheat sheet overview of all systems for presentation reference.",
+      flow: `
+        <div style="max-height: 180px; overflow-y: auto; width:100%;">
+          <table style="width:100%; border-collapse:collapse; font-size:9px; text-align:left; line-height:1.2;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border-color); color:var(--color-cyan);">
+                <th style="padding:2px;">System</th>
+                <th style="padding:2px;">One Line Explanation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">1. Entry Point</td><td style="padding:2px; color:var(--text-muted);">Tracks which channel brought the customer</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">2. Customer 360</td><td style="padding:2px; color:var(--text-muted);">Full profile — name, DOB, phone, history</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">3. Segmentation</td><td style="padding:2px; color:var(--text-muted);">Groups customers by behaviour and source</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">4. Enrollment</td><td style="padding:2px; color:var(--text-muted);">Joins loyalty program, gets welcome points</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">5. Points Engine</td><td style="padding:2px; color:var(--text-muted);">Amount × Rate × Multiplier = Points</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">6. Tier Engine</td><td style="padding:2px; color:var(--text-muted);">Lifetime points → Bronze/Silver/Gold/Platinum</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">7. Rewards</td><td style="padding:2px; color:var(--text-muted);">What can I redeem? Max 20% cap per order</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">8. Automation</td><td style="padding:2px; color:var(--text-muted);">Right message, right time, automatically</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">9. Campaigns</td><td style="padding:2px; color:var(--text-muted);">Double points, bonus events, referral chains</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">10. Analytics</td><td style="padding:2px; color:var(--text-muted);">CLV, redemption rate, churn risk, ROI</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">11. Settings</td><td style="padding:2px; color:var(--text-muted);">Admin control panel for all rules</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      formula: "Complete 11 modules reference card",
+      lbl: [
+        "1. Entry Point, 2. Customer 360, 3. Segmentation",
+        "4. Enrollment, 5. Points Engine, 6. Tier Engine",
+        "7. Rewards, 8. Automation, 9. Campaigns",
+        "10. Analytics, 11. Settings & Config"
+      ],
+      script: "Here is a quick summary table of all 11 systems: from Entry Point to Settings & Configuration, for fast reference during QA."
     }
   ];
 
@@ -1677,51 +1938,104 @@ function initJourney() {
   function render() {
     const s = steps[cur];
     const total = steps.length;
-    const activeSysSet = new Set(s.active);
-    
-    const chipsHtml = ALL_SYS.map(sys => `
-      <span class="j-sys-chip ${activeSysSet.has(sys) ? 'sys-active' : 'sys-passive'}" style="${activeSysSet.has(sys) ? 'background:rgba(16,185,129,0.12); color:var(--color-teal); border-color:rgba(16,185,129,0.2)' : 'background:transparent; color:var(--text-muted); border-color:var(--border-color);'}">
-        ${sys}
-      </span>
-    `).join('');
 
-    document.getElementById('journey-wrap').innerHTML = `
-      <div class="prog">
-        ${steps.map((_, i) => `
-          <div class="prog-dot" style="background:${i < cur ? 'var(--color-teal)' : i === cur ? 'var(--color-primary)' : 'var(--border-color)'}" onclick="jJump(${i})">
-            ${i + 1}
+    const container = document.getElementById('journey-wrap');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="pres-layout">
+        <!-- Left slide navigator sidebar -->
+        <div class="pres-slide-nav" style="max-height: 520px;">
+          <div class="sect-label" style="margin-bottom:6px; padding-left:4px;">Ladder Rungs</div>
+          ${steps.map((st, idx) => `
+            <button class="pres-slide-link ${idx === cur ? 'active' : ''}" onclick="jJump(${idx})">
+              <span style="font-family:monospace; opacity:0.6;">${st.num ? String(st.num).padStart(2, '0') : 'M'}</span>
+              <span style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; flex:1;">${st.name}</span>
+            </button>
+          `).join('')}
+        </div>
+
+        <!-- Right Column: Active Slide Projector Screen -->
+        <div class="pres-slide-content">
+          <!-- Slide Projector Card Screen -->
+          <div class="pres-card" style="position:relative; overflow:hidden; background:linear-gradient(135deg, rgba(22, 28, 45, 0.8), rgba(15, 23, 42, 0.95)); border:2px solid rgba(6, 182, 212, 0.35); box-shadow:var(--glow-cyan), var(--shadow-main); padding:24px; min-height:420px; border-radius:16px; display:flex; flex-direction:column; justify-content:space-between; transition:all 0.3s ease;">
+            
+            <!-- Slide Top Header -->
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px; margin-bottom:12px;">
+              <span style="font-size:9px; font-weight:700; color:var(--color-cyan); text-transform:uppercase; letter-spacing:0.1em; background:rgba(6, 182, 212, 0.1); padding:3px 8px; border-radius:20px;">
+                11 SYSTEMS LADDER FLOW
+              </span>
+              <span style="font-size:10.5px; font-family:monospace; color:var(--text-muted);">
+                Rung ${cur + 1} of ${total}
+              </span>
+            </div>
+
+            <!-- Slide Content Split Screen Area -->
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:12px;">
+              <h2 style="font-family:var(--font-display); font-size:18px; font-weight:800; color:#fff; text-align:center; margin-bottom:6px;">
+                ${s.num ? s.num + '. ' : ''}${s.name}
+              </h2>
+              
+              <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:stretch;">
+                <!-- Left Side: Interactive Screen Mockup / Flow Chart -->
+                <div style="flex:1.2; min-width:270px; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:12px; padding:16px; display:flex; flex-direction:column; justify-content:center; gap:10px; min-height:180px;">
+                  <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+                    ${s.flow}
+                  </div>
+                  <div style="font-family:monospace; font-size:9.5px; color:var(--color-amber); background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.05); padding:6px 10px; border-radius:6px; text-align:center; white-space:pre-line;">
+                    ${s.formula}
+                  </div>
+                </div>
+                
+                <!-- Right Side: Professional Lifecycle Details -->
+                <div style="flex:1; min-width:230px; display:flex; flex-direction:column; gap:8px; text-align:left;">
+                  <div>
+                    <span style="font-size:8px; font-weight:700; color:var(--color-primary); text-transform:uppercase; letter-spacing:0.06em; background:rgba(99,102,241,0.1); padding:2px 6px; border-radius:10px; display:inline-block; margin-bottom:2px;">
+                      What it does
+                    </span>
+                    <div style="font-size:11px; font-weight:bold; color:#fff; line-height:1.4;">${s.what}</div>
+                  </div>
+                  
+                  <div>
+                    <span style="font-size:8px; font-weight:700; color:var(--color-teal); text-transform:uppercase; letter-spacing:0.06em; background:rgba(16,185,129,0.1); padding:2px 6px; border-radius:10px; display:inline-block; margin-bottom:2px;">
+                      Line-by-Line Operation
+                    </span>
+                    <ul style="font-size:10.5px; color:var(--text-muted); padding-left:14px; margin:0; line-height:1.45;">
+                      ${s.lbl.map(item => `<li style="margin-bottom:3px;">${item}</li>`).join('')}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide Navigation Controls -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; border-top:1px solid rgba(255,255,255,0.08); padding-top:10px;">
+              <button onclick="jGo(-1)" ${cur === 0 ? 'disabled' : ''} style="background-color:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; padding:6px 14px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; transition:all 0.2s;">
+                ← Previous
+              </button>
+              
+              <div style="display:flex; gap:6px;">
+                ${steps.map((_, idx) => `
+                  <span style="width:5px; height:5px; border-radius:50%; background:${idx === cur ? 'var(--color-cyan)' : 'rgba(255,255,255,0.15)'}; display:inline-block;"></span>
+                `).join('')}
+              </div>
+
+              <button class="pres-btn-accent" onclick="jGo(1)" style="background:var(--color-cyan) !important; color:#000 !important; font-weight:700; border:none; padding:6px 14px; border-radius:8px; font-size:11px; cursor:pointer; transition:all 0.2s;">
+                ${cur === total - 1 ? 'Start Over ↺' : 'Next Slide →'}
+              </button>
+            </div>
           </div>
-          ${i < total - 1 ? `<div class="prog-line ${i < cur ? 'done' : ''}"></div>` : ''}
-        `).join('')}
-      </div>
-      
-      <div class="journey-card">
-        <div class="j-badge" style="background:${s.iconBg}; color:#111;">
-          ${s.icon} &nbsp; <strong>${s.sub}</strong>
-        </div>
-        <div class="j-title">${s.title}</div>
-        
-        <div style="background:var(--bg-field); border-radius:var(--radius-md); padding:14px; margin:14px 0;">
-          <div style="font-size:9px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
-            Presentation Story (Customer Experience)
+
+          <!-- Presenter Script Notes (Visible only to the presenter) -->
+          <div class="pres-notes-box" style="background:rgba(99, 102, 241, 0.08); border-left:4px solid var(--color-primary); padding:12px; border-radius:12px; margin-top:8px;">
+            <div class="script-title" style="font-size:9px; font-weight:800; color:var(--color-primary); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+              <i class="ti ti-microphone" style="font-size:13px;"></i> Presenter Talk Script
+            </div>
+            <div class="script-text" style="font-size:11.5px; line-height:1.6; color:var(--text-main); font-style:italic;">
+              "${s.script}"
+            </div>
           </div>
-          <div style="font-size:12.5px; color:var(--text-main); line-height:1.6;">${s.userSees}</div>
         </div>
-        
-        <div class="sect-label">Systems Activated in this Step</div>
-        <div class="j-chips">${chipsHtml}</div>
-        
-        <div class="j-hl" style="background:rgba(255,255,255,0.02); border-color:var(--border-color); color:var(--text-muted);">
-          <strong style="color:var(--text-main)">Behind the Scenes Workflow:</strong> ${s.note}
-        </div>
-      </div>
-      
-      <div class="nav-row">
-        <button class="btn-prev" ${cur === 0 ? 'disabled' : ''} onclick="jGo(-1)">← Prev</button>
-        <span class="step-ctr">Step ${cur + 1} of ${total}</span>
-        <button class="btn-next" onclick="jGo(1)">
-          ${cur === total - 1 ? 'Finish ✓' : 'Next Step →'}
-        </button>
       </div>
     `;
   }
@@ -1730,11 +2044,16 @@ function initJourney() {
     if (cur + d >= 0 && cur + d < steps.length) {
       cur += d;
       render();
+    } else if (cur + d === steps.length) {
+      cur = 0;
+      render();
     }
   };
-  window.jJump = i => {
-    cur = i;
-    render();
+  window.jJump = idx => {
+    if (idx >= 0 && idx < steps.length) {
+      cur = idx;
+      render();
+    }
   };
   render();
 }
