@@ -117,7 +117,7 @@ const PRES_SLIDES = [
         <p style="font-size:12px; color:var(--text-muted); margin:0;">B2C Loyalty Lifecycle Framework</p>
       </div>
     `,
-    script: "Aaiye Manoj Kumar ki journey shuru karte hain. Hum dekhenge ki kaise ek customer register hone se lekar billing, referrals, reviews, tier upgrade, points redemption, cancellations aur refund tak hamare loyalty systems ke sath interact karta hai."
+    script: "Why are we building this? To increase CLV and retain customers long term."
   },
   {
     title: "Program Discovery (Entry Point Acquisition)",
@@ -142,11 +142,42 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Sabse pehle Manoj store par counter QR scan karta hai. Scan karte hi entry points service active hoti hai aur acquisition metrics save karti hai."
+    script: "Customer discovers our loyalty program — via Instagram, app, referral link."
+  },
+  {
+    title: "CAC — Customer Acquisition Cost",
+    short: "03. CAC Analysis",
+    category: "1. ACQUISITION METRICS",
+    objective: "Minimize Customer Acquisition Cost (CAC) and Maximize CLV Return",
+    cx: "Loyalty program reduces ad spend by turning existing customers into organic acquisition channels.",
+    description: "Loyalty module enables direct referrals, user-generated reviews, and organic social shares to cut down marketing CAC.",
+    math: "CAC = Spend ÷ New Customers | ROI = CLV (RM 9,600) ÷ CAC | Target: CLV > CAC",
+    html: `
+      <div style="display:flex; flex-direction:column; gap:6px; width:100%; max-width:340px; margin:0 auto;">
+        <div class="sect-label" style="margin-bottom:2px;">Interactive CAC & CLV Simulator</div>
+        <div class="ctrl-row" style="margin-bottom:4px;">
+          <label style="min-width:110px; font-size:11px; color:var(--text-main);">Marketing Spend</label>
+          <input type="range" id="sim-slideCAC-spend" min="1000" max="20000" step="500" value="10000" oninput="simSlideCACCalc()" style="flex:1;">
+          <span style="font-family:monospace; font-size:11px; font-weight:bold; color:var(--color-cyan); min-width:65px; text-align:right;" id="sim-slideCAC-spend-v">RM 10,000</span>
+        </div>
+        <div class="ctrl-row" style="margin-bottom:4px;">
+          <label style="min-width:110px; font-size:11px; color:var(--text-main);">New Customers</label>
+          <input type="range" id="sim-slideCAC-customers" min="10" max="500" step="10" value="100" oninput="simSlideCACCalc()" style="flex:1;">
+          <span style="font-family:monospace; font-size:11px; font-weight:bold; color:var(--color-cyan); min-width:65px; text-align:right;" id="sim-slideCAC-customers-v">100 custs</span>
+        </div>
+        <div class="sim-grid" style="grid-template-columns: 1fr 1fr; gap:6px; font-size:11px; margin-top:4px;">
+          <div class="sim-cell" style="padding:6px; background:var(--bg-main); border:1px solid var(--border-color);"><div class="sc-l" style="font-size:8px; margin-bottom:1px; color:var(--text-muted);">Average CAC</div><div class="sc-v" style="font-size:11px; color:var(--color-cyan); font-weight:bold;" id="sim-slideCAC-out-cac">RM 100</div></div>
+          <div class="sim-cell" style="padding:6px; background:var(--bg-main); border:1px solid var(--border-color);"><div class="sc-l" style="font-size:8px; margin-bottom:1px; color:var(--text-muted);">Manoj CLV</div><div class="sc-v" style="font-size:11px; color:#fff; font-weight:bold;">RM 9,600</div></div>
+          <div class="sim-cell" style="padding:6px; background:var(--bg-main); border:1px solid var(--border-color);"><div class="sc-l" style="font-size:8px; margin-bottom:1px; color:var(--text-muted);">ROI (CLV/CAC)</div><div class="sc-v" style="font-size:11px; color:var(--color-teal); font-weight:bold;" id="sim-slideCAC-out-roi">96.0x return</div></div>
+          <div class="sim-cell" style="padding:6px; background:var(--bg-main); border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center;" id="sim-slideCAC-status-wrap"><div id="sim-slideCAC-status" style="font-size:10px; font-weight:bold; color:var(--color-teal);">Profitable Business ✅</div></div>
+        </div>
+      </div>
+    `,
+    script: "CAC tells us how much we spend to acquire one customer — our loyalty module reduces CAC by turning existing customers into our best marketing channel through referrals, reviews and social sharing."
   },
   {
     title: "Manoj Registers & Customer 360 Card Creation",
-    short: "03. Profile Registration",
+    short: "04. Profile Registration",
     category: "2. ONBOARDING",
     objective: "Capture Zero-Party Demographics & Profile Creation",
     cx: "Manoj mobile par registration page par Name, Phone number aur Birthdate daal kar submit karta hai aur membership card pata hai.",
@@ -166,11 +197,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Manoj details submit karta hai. Customer 360 database profile create karta hai aur unique Loyalty Card number LYL-MK998 Bronze status ke sath lock kar deta hai."
+    script: "Customer registers — profile is created in our system."
   },
   {
     title: "Welcome Bonus Delights Manoj (Instant Hook)",
-    short: "04. Welcome Onboarding",
+    short: "05. Welcome Onboarding",
     category: "3. WELCOME CAMPAIGN",
     objective: "Increase App Open Rates & Drive Onboarding Loyalty Loop",
     cx: "Registration poora hote hi Manoj ko WhatsApp par welcome greeting aur account wallet mein instant +100 points milte hain.",
@@ -188,11 +219,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "System join check matching verify karke instantly wallet accounts mein welcome points deposit karta hai, aur campaigns engine automatic welcome WhatsApp nudge trigger karta hai."
+    script: "100 welcome points are credited automatically on registration."
   },
   {
     title: "Manoj's First Purchase (Points Calculation)",
-    short: "05. First Purchase",
+    short: "06. First Purchase",
     category: "4. POINTS ACCRUAL",
     objective: "Stimulate First Purchase Conversion & High Basket Size",
     cx: "Manoj skincare items billing counter par khareedta hai: subtotal RM 200. Bronze speed (1x) se calculations chalti hain.",
@@ -224,11 +255,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Manoj counter par RM 200 spent checkout order karta hai. Earning engine Bronze 1x rules coordinate calculations run karke +200 points ledger entry add karta hai."
+    script: "First order placed — points earned instantly via earn engine."
   },
   {
     title: "Manoj refers friend Rahul (Organic Acquisition)",
-    short: "06. Friend Referral",
+    short: "07. Friend Referral",
     category: "5. ADVOCACY REFERRAL",
     objective: "Drive Viral Organic Signup Loops to Minimize Ad Spends",
     cx: "Manoj app referral link link WhatsApp par dost Rahul ko share karta hai. Rahul register hote hi Manoj ko +50 points bonus milte hain.",
@@ -252,11 +283,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Advocacy programs verification checks run: Manoj link share karta hai, Rahul joins, system checks pass, Manoj ko +50 points referral bonus active milta hai, balance gets 350."
+    script: "Manoj refers a friend — both get bonus points."
   },
   {
     title: "Product Review Submission (Engagement)",
-    short: "07. Product Review",
+    short: "08. Product Review",
     category: "6. APP ENGAGEMENT",
     objective: "Generate Authentic User Reviews & Enrich User Profiles",
     cx: "Manoj purchase cosmetics par app mein 5-star comments feedback post reviews complete submit karta hai.",
@@ -274,11 +305,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Manoj app par verified products par product reviews feedback details submit karta hai. Anti-spam checks verify parameters pass hotey hi system use +20 points reward deta hai."
+    script: "Manoj writes a review — earn event triggered, points credited."
   },
   {
     title: "Instagram Product Share (Social Integration)",
-    short: "08. Social Share",
+    short: "09. Social Share",
     category: "7. SOCIAL ADVOCACY",
     objective: "Acquire Secondary Organic Exposure via Customer Networks",
     cx: "Manoj app ke unique hooks share target click Instagram post tag complete karta hai.",
@@ -299,11 +330,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Manoj app button click social media share complete verifies. listen events points engine process trigger karke +15 points adds, wallet updates to 385."
+    script: "Manoj shares on social media — social share earn event fires."
   },
   {
     title: "Cumulative 500+ Points: Silver Status Upgrade",
-    short: "09. Silver Upgrade",
+    short: "10. Silver Upgrade",
     category: "8. TIER UPGRADE",
     objective: "Drive Customer Loyalty Lock-in & Elevate Retention Metrics",
     cx: "Manoj RM 150 ka aur checkout spent karta hai (earns 150 points). Lifetime points 535 cross hotey hi Tier upgraded to Silver.",
@@ -326,11 +357,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Manoj spends RM 150 purchase, lifetime points touch 535. Tier engine detects upgrade milestones settings automatically updates Silver status badge."
+    script: "Manoj crosses 500 lifetime points — tier engine upgrades him to Silver."
   },
   {
     title: "Shopping as a Silver Member (Earning Boost)",
-    short: "10. Silver Earning",
+    short: "11. Silver Earning",
     category: "9. ACCRUAL SPEED BOOST",
     objective: "Leverage Multipliers to Drive Customer Lifetime Value (CLV)",
     cx: "Manoj skincare products RM 100 spent check complete karta hai. Multipliers speed 1.5x active hone se +150 points credit active.",
@@ -371,11 +402,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Manoj Silver members status checks active, RM 100 purchase checkout spent triggers 1.5x speed multiplier, earning +150 points, wallet updates to 685."
+    script: "Now Manoj earns at 1.5x multiplier instead of 1x."
   },
   {
     title: "Points Redemption (Checkout Discount)",
-    short: "11. Redemption Start",
+    short: "12. Redemption Start",
     category: "10. POINTS REDEMPTION",
     objective: "Promote Point Burning to Decrease Financial Accrued Liabilities",
     cx: "Manoj checkout cart order subtotal value RM 100 load checks. Wallet has 685 points. Manoj options tick select.",
@@ -399,11 +430,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Manoj has accumulated points. Checkout time points checkout apply select option ticks, triggers redemption cash discount options validations."
+    script: "Manoj redeems points at checkout — discount applied."
   },
   {
     title: "Applying the 20% Redemption Capping Guardrail",
-    short: "12. Redemption Cap",
+    short: "13. Redemption Cap",
     category: "11. REDEMPTION LIMITS",
     objective: "Protect Brand Gross Margin via Cart Redemption Caps",
     cx: "System enforces 20% max cart discount limit. Manoj redeems 600 points (RM 6.00 off). Payable bill drops to RM 94.00.",
@@ -430,11 +461,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Margin protection rules apply: 20% cart cap limit check runs. Manoj redeems 600 points (RM 6 discount value) payable drops RM 94.00, wallet balance is 85 points."
+    script: "Max 20% of order value can be redeemed — cap enforced."
   },
   {
     title: "Stockout Order Cancellation: Points Refund",
-    short: "13. Cancel & Refund",
+    short: "14. Cancel & Refund",
     category: "12. ERROR COMPENSATIONS",
     objective: "Preserve Customer Trust & Guarantee Seamless Error Recoveries",
     cx: "Item out-of-stock hotey hi system order cancel completes. Wallet automatically receives points refund: +600 points back.",
@@ -460,11 +491,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Billing cancellation checks run: catalog out of stock error occurs. points engine compensation trigger automatically refunds points back to wallet."
+    script: "Manoj cancels order — redeemed points auto-refunded to wallet."
   },
   {
     title: "Weekly Missions & Challenges (Gamification)",
-    short: "14. Mission Bonus",
+    short: "15. Mission Bonus",
     category: "13. GAMIFICATION",
     objective: "Drive Recurring Habits & Elevate Purchase Frequencies",
     cx: "Manoj weekly mission completes: 'Make 2 orders of RM 50+ in a week.' Gets +200 bonus points. Balance goes to 885.",
@@ -479,11 +510,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Gamified mission sweeps: Manoj week target complete, mission engine signals points engine, credits +200 bonus, wallet registers 885."
+    script: "Manoj completes a weekly challenge — bonus points credited."
   },
   {
     title: "Birthday celebration & Surprise Drops",
-    short: "15. Birthday & Surprise",
+    short: "16. Birthday & Surprise",
     category: "14. SURPRISE & DELIGHT",
     objective: "Improve Brand Sentiment & Emotional Customer Retention",
     cx: "Manoj gets automatically +100 points on birthday and +50 points as a surprise weekend drop. Wallet: 1035 points.",
@@ -498,11 +529,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Birthday scan matching matches DOB columns, credits 100 points. Separately, weekend campaign drops 50 points, wallet becomes 1035."
+    script: "On Manoj's birthday — double earning rate activated automatically."
   },
   {
     title: "Manoj goes Inactive: Dormancy Tagging",
-    short: "16. Dormancy Warning",
+    short: "17. Dormancy Warning",
     category: "15. CHURN PREVENT",
     objective: "Track Churn Indicators & Automate Reactivation Triggers",
     cx: "Manoj 45 din tak shopping nahi karta. Segmentation tag automatically updates from ACTIVE to DORMANT.",
@@ -521,11 +552,11 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "Manoj shopping gap touches 45 days. system tags profile segment to DORMANT, triggering re-engagement automated queues."
+    script: "Manoj inactive for X days — win-back campaign triggered."
   },
   {
     title: "Points Expiry Warnings (WhatsApp Nudge)",
-    short: "17. Expiry Nudge",
+    short: "18. Expiry Nudge",
     category: "16. LOSS AVERSION",
     objective: "Use Loss-Aversion Messaging to Drive Reactivations",
     cx: "Manoj ko WhatsApp nudge warning milti hai: 'Manoj, RM 10.35 cash equivalent values points expire hone wale hain, shop now!'",
@@ -537,11 +568,11 @@ const PRES_SLIDES = [
         "Urgent: Manoj! ⏰ Your 1035 points (value RM 10.35) are expiring in 30 days. Use them on your next order before they disappear!"
       </div>
     `,
-    script: "Points expiry settings trigger reminder notifications, showing Manoj the cash value RM 10.35 at risk of being lost."
+    script: "Manoj's points about to expire — urgent notification sent."
   },
   {
     title: "Points Expired & Tier Status Grace Buffer",
-    short: "18. Expiry & Grace",
+    short: "19. Expiry & Grace",
     category: "17. EXPIRY & GRACE",
     objective: "Clean Financial Liabilities while Protecting Tier Status Value",
     cx: "12 mahine tak shopping na hone par points zero ho jate hain. Par Silver tier status 30-day grace protection period mein chala jata hai.",
@@ -559,7 +590,7 @@ const PRES_SLIDES = [
         </div>
       </div>
     `,
-    script: "1 saal hone par points zero ho jate hain points clean sweep trigger hone se. Par uski status level system immediate down nahi karta, use 30-day grace period status retention period milta."
+    script: "Points expired — grace period given before final cancellation."
   }
 ];
 
@@ -683,7 +714,27 @@ function renderSlide() {
   `;
 
   // Bind dynamic interactive simulators instantly if matching
-  if (presSlideIndex === 4) {
+  if (presSlideIndex === 2) {
+    window.simSlideCACCalc = () => {
+      const spend = parseInt(document.getElementById('sim-slideCAC-spend').value);
+      const customers = parseInt(document.getElementById('sim-slideCAC-customers').value);
+      document.getElementById('sim-slideCAC-spend-v').textContent = 'RM ' + spend.toLocaleString();
+      document.getElementById('sim-slideCAC-customers-v').textContent = customers + ' customers';
+      const cac = Math.round(spend / customers);
+      document.getElementById('sim-slideCAC-out-cac').textContent = 'RM ' + cac;
+      const clv = 9600;
+      const roi = (clv / cac).toFixed(1);
+      document.getElementById('sim-slideCAC-out-roi').textContent = roi + 'x return';
+      const statusEl = document.getElementById('sim-slideCAC-status');
+      if (clv > cac) {
+        statusEl.innerHTML = '<span style="color:var(--color-teal); font-weight:bold;">Profitable Business ✅</span>';
+      } else {
+        statusEl.innerHTML = '<span style="color:var(--color-coral); font-weight:bold;">Losing Money ❌</span>';
+      }
+    };
+    window.simSlideCACCalc();
+  }
+  if (presSlideIndex === 5) {
     window.simSlide5Calc = () => {
       const val = parseInt(document.getElementById('sim-slide5-spend').value);
       document.getElementById('sim-slide5-spend-v').textContent = 'RM ' + val;
@@ -692,7 +743,7 @@ function renderSlide() {
     };
     window.simSlide5Calc();
   }
-  if (presSlideIndex === 8) {
+  if (presSlideIndex === 9) {
     window.simSlide9Calc = () => {
       const val = parseInt(document.getElementById('sim-slide9-points').value);
       document.getElementById('sim-slide9-points-v').textContent = val + ' pts';
@@ -717,7 +768,7 @@ function renderSlide() {
     };
     window.simSlide9Calc();
   }
-  if (presSlideIndex === 9) {
+  if (presSlideIndex === 10) {
     window.simSlide10Calc = () => {
       const val = parseInt(document.getElementById('sim-slide10-spend').value);
       const tier = document.getElementById('sim-slide10-tier').value;
@@ -730,7 +781,7 @@ function renderSlide() {
     };
     window.simSlide10Calc();
   }
-  if (presSlideIndex === 11) {
+  if (presSlideIndex === 12) {
     window.simSlide11Calc = () => {
       const total = parseInt(document.getElementById('sim-slide11-total').value);
       const wallet = parseInt(document.getElementById('sim-slide11-wallet').value);
@@ -749,6 +800,7 @@ function renderSlide() {
     window.simSlide11Calc();
   }
 }
+
 
 window.presGo = (d) => {
   if (presSlideIndex + d >= 0 && presSlideIndex + d < PRES_SLIDES.length) {
