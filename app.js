@@ -2066,382 +2066,358 @@ window.tlpRunRenewal = () => {
 // ==========================================================================
 function initJourney() {
   const b2cSteps = [
-      {
-        num: "1",
-        name: "Entry Point & Acquisition",
-        what: "This is the door. Customer finds us.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Ad / Referral Link Scan</strong><br><span style="font-size:8px; color:var(--text-muted);">Instagram / WhatsApp / QR</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Session Context Check</strong><br><span style="font-size:8px; color:var(--color-cyan);">Save Channel Source</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>CAC Attribution</strong><br><span style="font-size:8px; color:var(--text-muted);">ROI Tracked per Channel</span>
-            </div>
-          </div>
-        `,
-        formula: "CAC = Total Marketing Spend ÷ Total New Customers Acquired",
-        lbl: [
-          "Customer clicks referral link",
-          "System saves WHERE they came from (Instagram, Google, WhatsApp)",
-          "This source is tagged to their profile forever",
-          "Analytics team tracks which channel gives best customers"
-        ],
-        script: "When a customer enters our loyalty system, 11 modules work like a ladder — each one passes data to the next. Let me walk through each rung. Rung 1: Entry Point & Acquisition. This is the door where the customer finds us. The customer clicks a referral link, the system saves where they came from (like Instagram or WhatsApp), and tags this source to their profile forever. The marketing team tracks this via the CAC formula: Marketing Spend divided by Customers Acquired."
-      },
-      {
-        num: "2",
-        name: "Customer 360",
-        what: "Customer registers — a full 360 profile is created.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Demographics Submission</strong><br><span style="font-size:8px; color:var(--text-muted);">Name, Phone, DOB, Address</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Unique Customer ID</strong><br><span style="font-size:8px; color:var(--color-cyan);">LYL-MK998 Created</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Unified Profile Sync</strong><br><span style="font-size:8px; color:var(--text-muted);">Customer 360 Database Write</span>
-            </div>
-          </div>
-        `,
-        formula: "Profile Score = Basic (40%) + DOB (+20%) + Phone (+20%) + Addr (+20%)",
-        lbl: [
-          "Every field Manoj fills = richer profile",
-          "DOB stored → Birthday earn event enabled",
-          "Phone verified → SMS campaigns enabled",
-          "100% profile → Profile Complete earn event fires → points credited"
-        ],
-        script: "Rung 2: Customer 360. When Manoj registers, a full 360 profile is created in our system. Every field Manoj fills makes a richer profile. The DOB is stored to enable birthday earn events, the phone number is verified to enable SMS campaigns, and once the profile completeness score reaches 100%, a profile completion bonus is triggered."
-      },
-      {
-        num: "3",
-        name: "Segmentation Engine",
-        what: "System puts Manoj in the right bucket immediately.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>New Profile Created</strong><br><span style="font-size:8px; color:var(--text-muted);">Triggers Cohort Scanner</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Evaluate Cohorts</strong><br><span style="font-size:8px; color:var(--color-cyan);">Read channel, device, location</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Cohort Segment Assigned</strong><br><span style="font-size:8px; color:var(--text-muted);">'Social Referral' Bucket</span>
-            </div>
-          </div>
-        `,
-        formula: "Segment Score = Entry Channel + Behaviour Tags + Purchase History",
-        lbl: [
-          "Manoj came via Instagram → tagged as 'Social Referral' segment",
-          "This segment gets a special welcome campaign",
-          "As Manoj shops more → segment updates automatically",
-          "Segments feed into Campaign Engine (Module 9)"
-        ],
-        script: "Rung 3: Segmentation Engine. The system silently puts Manoj into the right segment immediately based on his entry channel, location, and device type. Since Manoj came via Instagram, he is tagged as 'Social Referral' segment, which gets a special welcome campaign. As he shops more, his segment will update dynamically."
-      },
-      {
-        num: "4",
-        name: "Enrollment Engine",
-        what: "Manoj officially joins the loyalty program.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Enrollment Trigger</strong><br><span style="font-size:8px; color:var(--text-muted);">Segment & Profile validated</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(16, 185, 129, 0.08); border:1px solid var(--color-teal); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Welcome Credit</strong><br><span style="font-size:8px; color:var(--color-teal);">+100 welcome points credited</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Active Bronze Level</strong><br><span style="font-size:8px; color:var(--text-muted);">Initial Wallet Activated</span>
-            </div>
-          </div>
-        `,
-        formula: "Welcome Points = Config Setting (default: 100 pts)\nTier Default = Bronze (0 pts required)",
-        lbl: [
-          "Enrollment creates Manoj's loyalty wallet",
-          "100 welcome points auto-credited",
-          "Bronze tier assigned",
-          "Welcome email sent with loyalty card / QR code",
-          "Manoj is now officially in the program"
-        ],
-        script: "Rung 4: Enrollment Engine. Manoj officially joins the program. Enrollment creates his loyalty wallet, credits 100 welcome points automatically, assigns him the default Bronze tier, and dispatches a welcome notification containing his new loyalty card."
-      },
-      {
-        num: "5",
-        name: "Points Engine",
-        what: "The calculator — every rupee Manoj spends becomes points.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Capture Subtotal</strong><br><span style="font-size:8px; color:var(--text-muted);">Exclude tax & delivery</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Apply Formulas</strong><br><span style="font-size:8px; color:var(--color-cyan);">Subtotal × Rate × Multiplier</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Write to Wallet Ledger</strong><br><span style="font-size:8px; color:var(--text-muted);">Instant point credit sync</span>
-            </div>
-          </div>
-        `,
-        formula: "Points = Order Amount (RM) × Points Rate × Tier Multiplier",
-        lbl: [
-          "Order placed → subtotal captured (NO tax, NO delivery)",
-          "Points rate applied (configured by admin)",
-          "Tier multiplier applied based on current tier (Bronze: 1x, Silver: 1.5x, Gold: 2x, Platinum: 3x)",
-          "Points land in wallet instantly and ledger records transaction"
-        ],
-        script: "Rung 5: Points Engine. The points engine is the calculator: every dollar spent is converted into points. It captures the subtotal of the order, applies the base points rate and Manoj's tier multiplier, and credits his wallet instantly while recording the transaction in the ledger."
-      },
-      {
-        num: "6",
-        name: "Tier Engine",
-        what: "Checks if Manoj deserves a promotion — every single time he earns.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Read Lifetime Points</strong><br><span style="font-size:8px; color:var(--text-muted);">Ignore redemptions</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Threshold check</strong><br><span style="font-size:8px; color:var(--color-cyan);">Silver: 500 | Gold: 2000 | Plat: 5000</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Upgraded Status DB write</strong><br><span style="font-size:8px; color:var(--text-muted);">Activate multiplier & send alert</span>
-            </div>
-          </div>
-        `,
-        formula: "Lifetime Points = EARN ONLY | Wallet Points = Can go up and down",
-        lbl: [
-          "Runs automatically after EVERY points deposit",
-          "Checks lifetime points counter (which is never reduced by redemptions)",
-          "Upgrades tier status fields in database immediately when threshold crossed",
-          "Next transaction automatically uses the upgraded tier multiplier rate"
-        ],
-        script: "Rung 6: Tier Engine. Checks if Manoj deserves a promotion every single time he earns points. It reads his permanent Lifetime Points counter (which never decreases). If it crosses 500, he is upgraded to Silver, unlocking a 1.5x multiplier on his next orders."
-      },
-      {
-        num: "7",
-        name: "Rewards Catalog",
-        what: "The menu — what can Manoj do with his points?",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Open Rewards Panel</strong><br><span style="font-size:8px; color:var(--text-muted);">Fetch eligible deals list</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Apply 20% capping rule</strong><br><span style="font-size:8px; color:var(--color-cyan);">Enforce safety margin caps</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Burn points at checkout</strong><br><span style="font-size:8px; color:var(--text-muted);">Debit wallet (Lifetime safe)</span>
-            </div>
-          </div>
-        `,
-        formula: "Max Redeemable = Order Subtotal × 20% cap\nPayable Amount = Subtotal - Discount Applied",
-        lbl: [
-          "Displays catalog filtered by Manoj's tier and wallet balance",
-          "Enforces the 20% order subtotal discount cap to protect profit margins",
-          "Reduces Wallet points balance only, keeping Lifetime points safe",
-          "Enables instant points burn discount at billing checkout"
-        ],
-        script: "Rung 7: Rewards Catalog. The menu of what rewards and discounts Manoj can redeem. During checkout, Manoj can choose to redeem his points. The system applies the 20% cap limit (e.g. max RM 40 off on a RM 200 bill), deducts the burned points from his wallet, but leaves his lifetime points untouched to preserve his tier status."
-      },
-      {
-        num: "8",
-        name: "Automation Engine",
-        what: "The robot — sends the right message at the right time automatically.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Listen to System Events</strong><br><span style="font-size:8px; color:var(--text-muted);">Points Earned, Tier Upgrade, DOB</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Match Automation Rules</strong><br><span style="font-size:8px; color:var(--color-cyan);">Select message template</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Trigger messaging send</strong><br><span style="font-size:8px; color:var(--text-muted);">WhatsApp / Email / App Push</span>
-            </div>
-          </div>
-        `,
-        formula: "Trigger Rules (e.g. Points expiring in 30 days → send Expiry Alert)",
-        lbl: [
-          "Listens for all events in real time",
-          "Selects the correct message templates dynamically",
-          "Personalizes messages with Manoj's name, points values, and dates",
-          "Sends via the most effective channel: App Push, WhatsApp, or SMS"
-        ],
-        script: "Rung 8: Automation Engine. The robot that sends the right messages at the right time. It listens for system triggers: when Manoj earns points, gets upgraded, is inactive for 30 days, or when his points are about to expire, it dispatches personalized alerts via WhatsApp, SMS, or Push notifications."
-      },
-      {
-        num: "9",
-        name: "Campaigns Engine",
-        what: "Special promotions and bonus offers for Manoj.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Create Campaign rules</strong><br><span style="font-size:8px; color:var(--text-muted);">Double Points, Spend Milestones</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Match Segment Cohort</strong><br><span style="font-size:8px; color:var(--color-cyan);">Filter eligible users</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Apply Campaign bonus</strong><br><span style="font-size:8px; color:var(--text-muted);">Write promo ledger entries</span>
-            </div>
-          </div>
-        `,
-        formula: "Double Points: Points = Normal × 2 | Spend Milestone: IF spend >= RM 500 → +1,000 pts",
-        lbl: [
-          "Admin creates targeted marketing campaigns for segments",
-          "Double Points: base points multiplied by 2",
-          "Spend Milestones: flat rewards for crossing monthly targets",
-          "Referrals: dual reward points for both referrer and referee"
-        ],
-        script: "Rung 9: Campaigns Engine. Special marketing promotions. Admin can create 'Double Points Weekend' or birthday multiplier campaigns. When Manoj falls into the target segment and shops during the active campaign window, the system automatically awards him the promotional bonus points."
-      },
-      {
-        num: "10",
-        name: "Analytics Engine",
-        what: "The brain — tracks everything, shows what's working.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Collect transaction logs</strong><br><span style="font-size:8px; color:var(--text-muted);">Pushes, points, upgrades, redemptions</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Calculate program metrics</strong><br><span style="font-size:8px; color:var(--color-cyan);">CLV, Redemption rate, Churn risk</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Update real-time dashboard</strong><br><span style="font-size:8px; color:var(--text-muted);">Insights for campaign creation</span>
-            </div>
-          </div>
-        `,
-        formula: "CLV = Average Spend × Frequency × Lifespan\nRedemption Rate = Points Redeemed ÷ Points Issued × 100",
-        lbl: [
-          "Aggregates system-wide data on points issuance and redemptions",
-          "Calculates Customer Lifetime Value (CLV) and retention percentages",
-          "Identifies churn risks by flagging inactive accounts",
-          "Feeds insights back to segmentation and campaign engines to close the loop"
-        ],
-        script: "Rung 10: Analytics Engine. The brain of the platform. It aggregates all purchase logs, wallet balances, and campaign results in real-time. It calculates key metrics like CLV and ROI, displays them on dashboard panels, and feeds churn risks back into the segmentation engine to prompt retention offers."
-      },
-      {
-        num: "11",
-        name: "Settings & Configuration",
-        what: "The control panel — admin controls all rules from here.",
-        flow: `
-          <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Login to Control Panel</strong><br><span style="font-size:8px; color:var(--text-muted);">Admin settings UI</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-              <strong>Update settings registry</strong><br><span style="font-size:8px; color:var(--color-cyan);">Modify values (rate, cap, thresholds)</span>
-            </div>
-            <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
-            <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-              <strong>Instant execution update</strong><br><span style="font-size:8px; color:var(--text-muted);">Engines pull new variables</span>
-            </div>
-          </div>
-        `,
-        formula: "points_rate = 1.0 pt/RM | redemption_cap = 20% | silver_threshold = 500",
-        lbl: [
-          "Enables admins to configure points parameters in real time",
-          "Altering variables immediately propagates to all active services",
-          "Eliminates technical downtime: adjustments are instantly validated",
-          "Empowers marketing managers to self-serve rules without IT help"
-        ],
-        script: "Rung 11: Settings & Configuration. The control panel. Admins can log in and change rules like the welcome bonus amount, points rate, tier thresholds, or capping percentage. Once updated, all engines pull the new rules instantly without requiring developers or deployments."
-      },
-      {
-        num: "",
-        name: "Complete Ladder Flow Map",
-        what: "Summary map of the 11 modules working as a unified flow.",
-        flow: `
-          <div style="max-height: 180px; overflow-y: auto; padding: 4px; display:flex; flex-direction:column; gap:4px; font-size:9.5px; text-align:left; width:100%;">
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">1. Entry Point:</strong> <span>Capture discovery channel & track CAC.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">2. Customer 360:</strong> <span>Initialize unified demographics record.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">3. Segmentation:</strong> <span>Cohort bucket mapping by behavior.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">4. Enrollment:</strong> <span>Loyalty wallet creation & welcome reward.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">5. Points Engine:</strong> <span>Accrual calculation: Spend × Rate × Multiplier.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">6. Tier Engine:</strong> <span>Compare lifetime points against thresholds.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">7. Rewards:</strong> <span>Checkout point burn & 20% capping rule.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">8. Automation:</strong> <span>Listen & dispatch transactional notifications.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">9. Campaigns:</strong> <span>Execute multipliers & targeted promotions.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">10. Analytics:</strong> <span>Real-time dashboard telemetry & CLV tracking.</span></div>
-            <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">11. Settings:</strong> <span>Control panel values registry rules settings.</span></div>
-          </div>
-        `,
-        formula: "Loop: Acquisition → Engagement → Retention → Upgraded Tiers → Higher CLV",
-        lbl: [
-          "11 systems link together like a cascade",
-          "Every output triggers the next system rung",
-          "Drives customer engagement automatically",
-          "Secures long term business profitability"
-        ],
-        script: "To summarize: when a customer enters our loyalty system, these 11 modules work like a ladder — each one passes data to the next, building a loops that drives customer lifecycle values."
-      },
-      {
-        num: "",
-        name: "Quick Summary Cheat Sheet",
-        what: "Cheat sheet overview of all systems for presentation reference.",
-        flow: `
-          <div style="max-height: 180px; overflow-y: auto; width:100%;">
-            <table style="width:100%; border-collapse:collapse; font-size:9px; text-align:left; line-height:1.2;">
-              <thead>
-                <tr style="border-bottom:1px solid var(--border-color); color:var(--color-cyan);">
-                  <th style="padding:2px;">System</th>
-                  <th style="padding:2px;">One Line Explanation</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">1. Entry Point</td><td style="padding:2px; color:var(--text-muted);">Tracks which channel brought the customer</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">2. Customer 360</td><td style="padding:2px; color:var(--text-muted);">Full profile — name, DOB, phone, history</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">3. Segmentation</td><td style="padding:2px; color:var(--text-muted);">Groups customers by behaviour and source</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">4. Enrollment</td><td style="padding:2px; color:var(--text-muted);">Joins loyalty program, gets welcome points</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">5. Points Engine</td><td style="padding:2px; color:var(--text-muted);">Amount × Rate × Multiplier = Points</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">6. Tier Engine</td><td style="padding:2px; color:var(--text-muted);">Lifetime points → Bronze/Silver/Gold/Platinum</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">7. Rewards</td><td style="padding:2px; color:var(--text-muted);">What can I redeem? Max 20% cap per order</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">8. Automation</td><td style="padding:2px; color:var(--text-muted);">Right message, right time, automatically</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">9. Campaigns</td><td style="padding:2px; color:var(--text-muted);">Double points, bonus events, referral chains</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">10. Analytics</td><td style="padding:2px; color:var(--text-muted);">CLV, redemption rate, churn risk, ROI</td></tr>
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">11. Settings</td><td style="padding:2px; color:var(--text-muted);">Admin control panel for all rules</td></tr>
-              </tbody>
-            </table>
-          </div>
-        `,
-        formula: "Complete 11 modules reference card",
-        lbl: [
-          "1. Entry Point, 2. Customer 360, 3. Segmentation",
-          "4. Enrollment, 5. Points Engine, 6. Tier Engine",
-          "7. Rewards, 8. Automation, 9. Campaigns",
-          "10. Analytics, 11. Settings & Config"
-        ],
-        script: "Here is a quick summary table of all 11 systems: from Entry Point to Settings & Configuration, for fast reference during QA."
-      }
-    ];
+    {
+      num: "",
+      name: "B2C Loyalty System Map",
+      what: "Complete loyalty program system overview map.",
+      transform: "scale(1) translate(0%, 0%)",
+      lbl: [
+        "14 engines working together in real time",
+        "Covers Acquisition, Profile, Tiers, & Settings",
+        "Includes end-to-end Instagram tag scenario",
+        "Saves all demographic & interaction ledgers"
+      ],
+      script: "Aapke loyalty program ka complete overview map. Isme entry points, custom profiles, points calculators, tiers, promotions, aur integration layers ek sath integrated hain."
+    },
+    {
+      num: "01",
+      name: "Entry Point & Acquisition",
+      what: "Customer counter QR, referral link, ya ad scan karta hai.",
+      transform: "scale(3.4) translate(37.5%, 16%)",
+      lbl: [
+        "Inbound Channels: App, Web, Social, QR, Referral",
+        "Formula: CAC = Total Marketing Spend ÷ New Customers Acquired",
+        "Attributes signup source to profile forever",
+        "Helps marketing measure CAC vs CLV ROI"
+      ],
+      script: "Rung 1: Entry Point & Acquisition. Customer counter QR ya referral link scan karke join karta hai. CAC cost structure monitor hota hai."
+    },
+    {
+      num: "02",
+      name: "Customer 360 Profile",
+      what: "Unified customer details sheet aggregation.",
+      transform: "scale(3.4) translate(22.5%, 16%)",
+      lbl: [
+        "Unified data sources: Name, Mobile, Email, History, Preferences",
+        "Formula: Engagement Score = (Orders x 40%) + (Logins x 20%) + (Rewards x 20%) + (Campaigns x 20%)",
+        "Enables contact verification & social handles linking",
+        "Richer profile completes onboarding events"
+      ],
+      script: "Rung 2: Customer 360. Saara customer database, demographics, phone verify aur Instagram links unified profile state check mein store hota hai."
+    },
+    {
+      num: "03",
+      name: "Segmentation Engine",
+      what: "Dynamic user cohorts sorting by customer behavior.",
+      transform: "scale(3.4) translate(7.5%, 16%)",
+      lbl: [
+        "RFM Model: Recency, Frequency, Monetary value evaluation",
+        "User groups: New, Loyal, At-Risk, Dormant, VIP",
+        "Feeds direct cohorts targeting into campaigns",
+        "Updates segments in real time on behavior changes"
+      ],
+      script: "Rung 3: Segmentation. Recency, Frequency aur Monetary value tag se segment cohorts form hote hain."
+    },
+    {
+      num: "04",
+      name: "Enrollment Engine",
+      what: "Verification validation check karke welcome bonus trigger.",
+      transform: "scale(3.4) translate(-7.5%, 16%)",
+      lbl: [
+        "Registers customer, validates email & duplicate check",
+        "Welcome bonus: +100 Points credited automatically",
+        "Base Status: Bronze (0 Points) assigned on signup",
+        "Triggers onboarding auto-responder campaigns"
+      ],
+      script: "Rung 4: Enrollment. New customer validation verify hotey hi active Bronze tier aur welcome points disburse hotey hain."
+    },
+    {
+      num: "05",
+      name: "Points Engine",
+      what: "Accrual engine points calculations run karta hai.",
+      transform: "scale(3.4) translate(-22.5%, 16%)",
+      lbl: [
+        "Final Points = (Order Amount x Rate x Tier Multiplier) + Bonuses",
+        "Base conversion: RM 1 = 100 Points",
+        "Triggers: Purchase, referral, review, check-in, birthday",
+        "Includes UGC Tag (+45 pts) & App Install (+40 pts)"
+      ],
+      script: "Rung 5: Points Engine. Conversion formula: Spend × 100 × Tier multiplier + active campaign bonuses."
+    },
+    {
+      num: "06",
+      name: "Tier Engine",
+      what: "Monitors and upgrades customer status thresholds.",
+      transform: "scale(3.4) translate(-37.5%, 16%)",
+      lbl: [
+        "Bronze (0-999), Silver (1000-4999), Gold (5000-14999), Platinum (15000+)",
+        "Based on Lifetime Points counters (which never decreases)",
+        "Protects status upgrades from redemptions or cancellations",
+        "Triggers instant status upgrade badges & multipliers"
+      ],
+      script: "Rung 6: Tier Engine. Lifetime earned counters status levels monitor karta hai. Tiers are safe from redemption points spends."
+    },
+    {
+      num: "07",
+      name: "Rewards Catalog",
+      what: "Check out redemption and vouchers directory.",
+      transform: "scale(3.4) translate(40.5%, -11%)",
+      lbl: [
+        "Max Redemption = Order Subtotal x 20% cap limit",
+        "Wallet Balance = Earned - Redeemed - Expired",
+        "Types: Cashback, Vouchers, Products, Experiences",
+        "Enforces profit margin safety caps automatically"
+      ],
+      script: "Rung 7: Rewards Catalog. Checkout point discount redemption rules: maximum 20% cap limit enforces to protect retail profit margins."
+    },
+    {
+      num: "08",
+      name: "Automation Engine",
+      what: "System automatic alerts aur triggers run karta hai.",
+      transform: "scale(3.4) translate(29%, -11%)",
+      lbl: [
+        "Triggers: Tier upgrade, Expiry warning (30d), Dormancy (90d), Birthday",
+        "IF-THEN-ELSE workflow builder configurations",
+        "Integrated messaging templates personalization",
+        "Runs batch scans and event listeners in background"
+      ],
+      script: "Rung 8: Automation. WhatsApp campaigns, buffer reminders, birthday alerts dynamic variables scan se trigger hote hain."
+    },
+    {
+      num: "09",
+      name: "Campaigns Engine",
+      what: "Gamified activities, streaks aur double points events.",
+      transform: "scale(3.4) translate(17.5%, -11%)",
+      lbl: [
+        "Types: Triggered, Scheduled, Behavioural campaigns",
+        "Gamification: Leaderboards, Badges, Challenges, Spin-wheel",
+        "A/B testing workflows and ROI performance check",
+        "Drives purchase frequency with consecutive streaks"
+      ],
+      script: "Rung 9: Campaigns. Multipliers, streaks, gamification aur targeted bonus rules check here."
+    },
+    {
+      num: "10",
+      name: "Analytics Engine",
+      what: "Program ROI analysis metrics dashboard tracking.",
+      transform: "scale(3.4) translate(6%, -11%)",
+      lbl: [
+        "CLV = AOV x Purchase Frequency x Lifespan",
+        "KPIs: Retention rate, Redemption rate, Churn, ROI",
+        "Cohort analysis & sales funnel performance metrics",
+        "Flags dormant segment users to trigger win-back promotions"
+      ],
+      script: "Rung 10: Analytics. Systems tracking dashboard: Average values, ROI calculations, redemption ratios aur customer behavior records."
+    },
+    {
+      num: "11",
+      name: "Communication Engine",
+      what: "Customer messaging channels routing middleware.",
+      transform: "scale(3.4) translate(-5.5%, -11%)",
+      lbl: [
+        "Channels: Email, SMS, WhatsApp, Push Notification, In-App, Call Center",
+        "Routes template messages dynamically to active devices",
+        "Monitors messaging delivery status and click-through rates",
+        "Reduces messaging costs by prioritizing push alerts over SMS"
+      ],
+      script: "Rung 11: Communication Engine. Multi-channel message delivery routes (Email, WhatsApp, Push notification, SMS) ko prioritize karta hai."
+    },
+    {
+      num: "12",
+      name: "Fraud & Risk Management",
+      what: "Real-time verification audit patterns checking.",
+      transform: "scale(3.4) translate(-17%, -11%)",
+      lbl: [
+        "Detects duplicate accounts, abnormal points redemptions",
+        "Monitors anomalous transaction patterns in real time",
+        "Flags policy violations and auto-freezes suspicious accounts",
+        "Maintains system integrity and protects reward payouts"
+      ],
+      script: "Rung 12: Fraud & Risk. Abnormal redemptions, duplicate signups aur script actions audit karke security alerts fire karta hai."
+    },
+    {
+      num: "13",
+      name: "Integration Layer",
+      what: "System connectors and database middleware connections.",
+      transform: "scale(3.4) translate(-28.5%, -11%)",
+      lbl: [
+        "Connectors: E-commerce, CRM (Salesforce), Payment Gateways, Retail POS",
+        "Synchronizes sales orders, member profiles, and ledger logs",
+        "Handles data validation, payload transformations, and retries",
+        "Exposes secure API routes for checkout integrations"
+      ],
+      script: "Rung 13: Integration. E-commerce platforms, payment gateways aur checkout POS registers ko API gateways se sync karta hai."
+    },
+    {
+      num: "14",
+      name: "Settings & Configuration",
+      what: "Admin control dashboard settings values rules editing.",
+      transform: "scale(3.4) translate(-40%, -11%)",
+      lbl: [
+        "Configurable items: Points earning rate, Tier limits, caps, TTL",
+        "Enables instant zero-downtime policy overrides propagation",
+        "Logs administrative audit logs for role-based edits",
+        "Allows marketing teams to customize program values self-serve"
+      ],
+      script: "Rung 14: Settings & Configuration. System properties database rules configurations setup for rates, multipliers, caps, and periods."
+    },
+    {
+      num: "",
+      name: "Instagram Tagging Flow — Overview",
+      what: "How Instagram tags are converted to points end-to-end.",
+      transform: "scale(1.5) translate(0%, -25%)",
+      lbl: [
+        "Real-life simulation of social earning loop",
+        "Steps showing data flows across Mulesoft, Salesforce, & CRM",
+        "Calculates points and triggers automated WhatsApp congratulation",
+        "Follow along step-by-step from customer post to wallet credit"
+      ],
+      script: "Chaliye ab B2C ka real life flow samjhein: jab customer Instagram par brand ko tag karta hai toh backend systems mein kiya-kiya hota hai."
+    },
+    {
+      num: "1",
+      name: "Customer Instagram Post",
+      what: "Customer social media post tagging brand handles.",
+      transform: "scale(4.5) translate(42%, -34%)",
+      lbl: [
+        "Rahul buys coffee, posts a photo, and tags handle (@MyCoffeeBrand)",
+        "Post contains hashtags like #MyCoffeeBrand & #CoffeeLover",
+        "Acts as organic user-generated content (UGC) for brand reach",
+        "Initiates the social earn reward pipeline"
+      ],
+      script: "Step 1: Rahul ne Instagram par coffee photo click karke @MyCoffeeBrand tag karke post kiya."
+    },
+    {
+      num: "2",
+      name: "Social Media Platform Detect",
+      what: "Social network webhooks capture brand mention details.",
+      transform: "scale(4.5) translate(34%, -34%)",
+      lbl: [
+        "Instagram Graph API listening gateway catches the mention event",
+        "Extracts metadata: post_id, username, tag details, and timestamp",
+        "Filters out private posts to comply with privacy rules",
+        "Fires alert hook to brand integration server"
+      ],
+      script: "Step 2: Instagram Graph API gateway mention detect karke JSON payload bundle load karta hai."
+    },
+    {
+      num: "3",
+      name: "API / Webhook Event Send",
+      what: "API webhook dispatches raw JSON transaction payload.",
+      transform: "scale(4.5) translate(25.5%, -34%)",
+      lbl: [
+        "Webhook dispatches JSON payload with user ID, post link, and tag content",
+        "Authenticates payload signature to block fraudulent requests",
+        "Logs inbound payload trace inside integration server logs",
+        "Enters integration layer queue"
+      ],
+      script: "Step 3: Webhook event payload (user_id, post_id, tag info) brand integration gateway par trigger hota hai."
+    },
+    {
+      num: "4",
+      name: "Integration Layer (Middleware)",
+      what: "API middleware handles validation, parsing, and routing.",
+      transform: "scale(4.5) translate(17%, -34%)",
+      lbl: [
+        "MuleSoft / API Gateway transforms raw event JSON to structured schema",
+        "Validates parameter formatting and removes duplicate transactions",
+        "Publishes event message to queue (Kafka / AWS EventBridge)",
+        "Ensures transaction reliability and prevents data loss"
+      ],
+      script: "Step 4: MuleSoft middleware API event parse, validate, aur CRM standard schema format mein transform karta hai."
+    },
+    {
+      num: "5",
+      name: "Salesforce Data Cloud / CRM",
+      what: "Store transaction log inside corporate database ledger.",
+      transform: "scale(4.5) translate(8.5%, -34%)",
+      lbl: [
+        "Salesforce Data Cloud ingests structured social interaction record",
+        "Saves post details, image link, and social handle to data lake",
+        "Makes interaction ledger ready for identity resolution",
+        "Links social activity record to customer profile metrics"
+      ],
+      script: "Step 5: Event logs Salesforce Data Cloud database registers mein persist (write) ho jata hai."
+    },
+    {
+      num: "6",
+      name: "Identity Resolution",
+      what: "Matches social handle to active membership record.",
+      transform: "scale(4.5) translate(0%, -34%)",
+      lbl: [
+        "Identity engine matches Instagram handle to verified loyalty profile",
+        "Scans contact registry: matches social handle, email, or phone number",
+        "If profile matches -> links social transaction to member profile",
+        "Ensures points are awarded to the correct person"
+      ],
+      script: "Step 6: Identity Resolution engine social handle list check karke Rahul ki member registry identify karta hai."
+    },
+    {
+      num: "7",
+      name: "Loyalty Member Lookup",
+      what: "Lookup member account details inside active catalog.",
+      transform: "scale(4.5) translate(-8.5%, -34%)",
+      lbl: [
+        "Queries central database for Member ID (e.g. LM-10001)",
+        "Retrieves current status (Silver), wallet balance, and country settings",
+        "Verifies that membership is active and not frozen/suspended",
+        "Passes member profile context to the rule validation engine"
+      ],
+      script: "Step 7: Database lookup engine Rahul ke active Member ID (LM-10001) ki profile status parameters load karta hai."
+    },
+    {
+      num: "8",
+      name: "Rule Engine Check",
+      what: "Verify campaign limits, fraud locks, and transaction validity.",
+      transform: "scale(4.5) translate(-17%, -34%)",
+      lbl: [
+        "Rule validation: Checks if UGC campaign is active and post is approved",
+        "Enforces limits cap (e.g. max 1 social photo reward per day)",
+        "Runs spam/anti-fraud filters to verify post authenticity",
+        "Approves point reward: sets transaction status to 'APPROVED'"
+      ],
+      script: "Step 8: Rule engine checks limit caps (jaise max 1 UGC reward per day) aur spam filters verify karta hai."
+    },
+    {
+      num: "9",
+      name: "Points Engine (Points Add)",
+      what: "Accrual engine deposits point reward inside member wallet.",
+      transform: "scale(4.5) translate(-25.5%, -34%)",
+      lbl: [
+        "Calculates points: UGC tag fixed reward (+45 Points)",
+        "Adds +45 points to available spendable wallet balance",
+        "Increments lifetime earned points total (+45 points)",
+        "Logs transaction detail row in wallet ledger database"
+      ],
+      script: "Step 9: Points Engine credit record trigger karta hai: available balance +45 aur lifetime progress update hota hai."
+    },
+    {
+      num: "10",
+      name: "Tier Engine",
+      what: "Check if lifetime points cross promotion threshold.",
+      transform: "scale(4.5) translate(-34%, -34%)",
+      lbl: [
+        "Reads updated lifetime earned points total",
+        "Compares total against status thresholds (Silver: 1000, Gold: 5000, Plat: 15000)",
+        "If threshold is crossed -> upgrades status level and active multiplier",
+        "If not met -> locks current tier status for next evaluation"
+      ],
+      script: "Step 10: Tier Engine check run karta hai, new lifetime total check karke tier update validation confirm hota hai."
+    },
+    {
+      num: "11",
+      name: "Notification & Analytics",
+      what: "System sends congratulation alert and updates metrics.",
+      transform: "scale(4.5) translate(-42%, -34%)",
+      lbl: [
+        "Triggers Automation Engine to dispatch upgrade/reward WhatsApp alert",
+        "Sends thank you message: 'You earned +45 points for sharing your post!'",
+        "Updates analytics database: registers social campaign ROI",
+        "Completes the end-to-end B2C social points loop successfully"
+      ],
+      script: "Step 11: Automation alerts trigger hote hain, Rahul ko WhatsApp/SMS update jata hai aur analytics dashboard status update ho jata hai."
+    }
+  ];
 
   const b2bSteps = [
     {
@@ -2851,10 +2827,10 @@ function initJourney() {
             <!-- Slide Top Header -->
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px; margin-bottom:12px;">
               <span style="font-size:9px; font-weight:700; color:var(--color-cyan); text-transform:uppercase; letter-spacing:0.1em; background:rgba(6, 182, 212, 0.1); padding:3px 8px; border-radius:20px;">
-                ${activeMode === 'b2c' ? '11 SYSTEMS LADDER FLOW' : '11 PARTNER SYSTEMS LADDER FLOW'}
+                ${activeMode === 'b2c' ? 'B2C LOYALTY SYSTEM ARCHITECTURE' : '11 PARTNER SYSTEMS LADDER FLOW'}
               </span>
               <span style="font-size:10.5px; font-family:monospace; color:var(--text-muted);">
-                Rung ${cur + 1} of ${total}
+                Step ${cur + 1} of ${total}
               </span>
             </div>
 
@@ -2865,14 +2841,18 @@ function initJourney() {
               </h2>
               
               <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:stretch;">
-                <!-- Left Side: Interactive Screen Mockup / Flow Chart -->
-                <div style="flex:1.2; min-width:270px; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:12px; padding:16px; display:flex; flex-direction:column; justify-content:center; gap:10px; min-height:180px;">
-                  <div style="flex:1; display:flex; align-items:center; justify-content:center;">
-                    ${s.flow}
+                <!-- Left Side: Interactive Screen Mockup / Flow Chart / Image Zoom -->
+                <div style="flex:1.2; min-width:270px; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:12px; padding:12px; display:flex; flex-direction:column; justify-content:center; gap:10px; min-height:280px;">
+                  <div style="flex:1; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; border-radius:8px; background:#0b0f19; border:1px solid rgba(255,255,255,0.05); width:100%; height:240px;">
+                    ${activeMode === 'b2c' ? `
+                      <img src="b2c_master_overview.jpg" style="width:100%; height:100%; object-fit:contain; transform:${s.transform}; transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); position:absolute; left:0; top:0; transform-origin:center;">
+                    ` : s.flow}
                   </div>
-                  <div style="font-family:monospace; font-size:9.5px; color:var(--color-amber); background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.05); padding:6px 10px; border-radius:6px; text-align:center; white-space:pre-line;">
-                    ${s.formula}
-                  </div>
+                  ${s.formula ? `
+                    <div style="font-family:monospace; font-size:9.5px; color:var(--color-amber); background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.05); padding:6px 10px; border-radius:6px; text-align:center; white-space:pre-line;">
+                      ${s.formula}
+                    </div>
+                  ` : ''}
                 </div>
                 
                 <!-- Right Side: Professional Lifecycle Details -->
@@ -3502,75 +3482,99 @@ function initStepFormula() {
 
     const getSteps = (t) => {
       const T = TIERS[t];
-      const basePts = 200;
-      const final = Math.round(basePts * T.mult);
+      const basePts = 250;
+      const final = Math.round(basePts * 100 * T.mult);
 
       return [
         {
-          color: '#378ADD',
-          bbg: 'rgba(55, 138, 221, 0.15)',
-          btc: '#0C447C',
-          badge: 'Step 1 — Order place hua',
-          title: 'Subtotal mil gaya',
-          eng: 'Order placed',
-          body: 'Customer ne **RM 200** ka order checkout kiya. System ko sirf subtotal chahiye — tax aur delivery charge count nahi hote.',
-          hl: `Base amount: RM 200 (tax/delivery exclude)`,
-          chips: ['Order Placed trigger', 'Subtotal capture']
+          color: '#818CF8', bbg: 'rgba(129, 140, 248, 0.15)', btc: '#312E81',
+          badge: 'Overview',
+          title: 'Points Calculation & Social Tagging Flow',
+          eng: 'Complete system blueprints overview',
+          body: 'Yeh tab mein points calculation aur social tagging rules ko visual steps mein samjhaya gaya hai. Left side points calculation chart hai, right side social tagging flow hai.',
+          hl: 'Left Column: Points Rules | Right Column: Social Tag steps',
+          chips: ['RM 1 = 100 Points', 'UGC Tag = +50 Points'],
+          transform: 'scale(1) translate(0%, 0%)'
         },
         {
-          color: '#1D9E75',
-          bbg: 'rgba(29, 158, 117, 0.15)',
-          btc: '#085041',
-          badge: 'Step 2 — Base points calculate hue',
-          title: 'RM × Rate = base points',
-          eng: 'Subtotal × points_per_RM rate',
-          body: 'Points engine database config load karta hai. Base formula execute hota hai: **RM 200 × 1.0 pt/RM = 200 base points**.',
-          hl: `RM 200 × 1.0 rate = 200 base points`,
-          chips: ['Config: 1.0 pt/RM', 'Base counter set']
+          color: '#378ADD', bbg: 'rgba(55, 138, 221, 0.15)', btc: '#0C447C',
+          badge: 'Step 1 — Purchase Event',
+          title: 'Order placed & base captured',
+          eng: 'Subtotal captures to calculate points',
+          body: 'Customer ne **RM 250** spend kiya. Base calculation is: **RM 250 × 100 = 25,000 points**.',
+          hl: 'Base Points: 25,000 | Multiplier status match',
+          chips: ['RM 1 = 100 points', 'Subtotal captured'],
+          transform: 'scale(3.2) translate(30%, 15%)'
         },
         {
-          color: '#BA7517',
-          bbg: 'rgba(186, 117, 23, 0.15)',
-          btc: '#633806',
-          badge: 'Step 3 — Tier multiplier laga',
-          title: `${T.mult}x multiplier (${t.toUpperCase()})`,
-          eng: 'Base points × Active tier multiplier',
-          body: `Customer profile status fetches ${t.toUpperCase()} tier records. Earning rate boost: **200 base × ${T.mult}x multiplier = ${final} points** update.`,
-          hl: `200 Base Points × ${T.mult}x multiplier = ${final} Points`,
-          chips: [`Status: ${t.toUpperCase()}`, `Multiplier: ${T.mult}x`]
+          color: '#BA7517', bbg: 'rgba(186, 117, 23, 0.15)', btc: '#633806',
+          badge: 'Step 2 — Status Multiplier Applied',
+          title: `${T.mult}x Multiplier (${t.toUpperCase()})`,
+          eng: 'Base points × active status multiplier',
+          body: `Rahul active tier level is **${t.toUpperCase()}** (${T.mult}x multiplier). points: **25,000 × ${T.mult} = ${Math.round(25000*T.mult).toLocaleString()} points**.`,
+          hl: `Multiplier: ${T.mult}x | Points: ${Math.round(25000*T.mult).toLocaleString()}`,
+          chips: [`Tier: ${t.toUpperCase()}`, `Multiplier: ${T.mult}x`],
+          transform: 'scale(3.2) translate(30%, 15%)'
         },
         {
-          color: '#534AB7',
-          bbg: 'rgba(83, 74, 183, 0.15)',
-          btc: '#3C3489',
-          badge: 'Step 4 — Points wallet mein credit hue',
-          title: `${final} pts wallet mein credited`,
-          eng: 'Points credited instantly',
-          body: `Final **${final} points** wallet mein credit ho gaye. Saath mein **Lifetime Points Earned** bhi +${final} hua (tier check ke liye).`,
-          hl: `Available points incremented: +${final} pts | RM ${(final/100).toFixed(2)} value`,
-          chips: [`Ledger ID: LYL-TX-98`, `Cash equivalent: RM ${(final/100).toFixed(2)}`]
+          color: '#1D9E75', bbg: 'rgba(29, 158, 117, 0.15)', btc: '#085041',
+          badge: 'Step 3 — Social UGC Tag',
+          title: 'Flat +50 Points rewarded',
+          eng: 'Fixed reward points credit check',
+          body: 'Instagram brand handle photo tag post is approved. Rahul gains a flat **+50 points** in wallet balance.',
+          hl: 'UGC Tag Points: +50 Points',
+          chips: ['Fixed Reward', 'Admin Moderation Approval'],
+          transform: 'scale(3.2) translate(30%, -3%)'
         },
         {
-          color: '#712B13',
-          bbg: 'rgba(113, 43, 19, 0.15)',
-          btc: '#712B13',
-          badge: 'Step 5 — Redemption cap check',
-          title: '20% cap limit verify kiya',
-          eng: 'Max redemption = 20% of order value',
-          body: 'Next orders checkout transaction pe points claim rule check: **Maximum 20% value pay ho sakti hai**. Redemptions se lifetime progress decrement nahi hota.',
-          hl: `Max redeemable limit is 20% of cart value`,
-          chips: ['20% checkout cap', 'Status limits safe']
+          color: '#F59E0B', bbg: 'rgba(245, 158, 11, 0.15)', btc: '#78350F',
+          badge: 'Step 4 — Product Review',
+          title: 'Flat +50 Points credit',
+          eng: 'Review validation & points credit',
+          body: 'Product review completes validation. Rahul gets **+50 points**.',
+          hl: 'Review Points: +50 Points',
+          chips: ['Anti-Spam pass', 'Wallet credited'],
+          transform: 'scale(3.2) translate(30%, -20%)'
         },
         {
-          color: '#639922',
-          bbg: 'rgba(99, 153, 34, 0.15)',
-          btc: '#27500A',
-          badge: 'Step 6 — Tier check (Upgrade trigger)',
-          title: 'Tier Engine trigger aur threshold check',
-          eng: 'Check lifetime points against tier thresholds',
-          body: `Lifetime counter: **${final} pts** check. Silver threshold (500 pts) ke parameters analyze hue. Target thresholds: 500, 2000, 5000.`,
-          hl: final >= 500 ? `Congrats! Upgrade threshold passed.` : `Silver ke liye ${500 - final} pts aur chahiye.`,
-          chips: ['Tier Engine audit', 'Automatic upgrade check']
+          color: '#EC4899', bbg: 'rgba(236, 72, 153, 0.15)', btc: '#831843',
+          badge: 'Step 5 — Friend Referral',
+          title: 'Flat +500 Points credit',
+          eng: 'New dealer onboarded reward check',
+          body: 'Friend joins and activates account. Rahul receives a referral credit of **+500 points**.',
+          hl: 'Referral Points: +500 Points',
+          chips: ['Referral code matched', 'Referee gets +100'],
+          transform: 'scale(3.2) translate(30%, -38%)'
+        },
+        {
+          color: '#10B981', bbg: 'rgba(16, 185, 129, 0.15)', btc: '#064E3B',
+          badge: 'Step 6 — Social Media Ingestion',
+          title: 'Post -> Detect -> Webhook -> MuleSoft',
+          eng: 'Inbound social event capturing pipeline',
+          body: 'Rahul posts brand photo on Instagram. Graph API detects mention, triggers webhook API call, and MuleSoft API Gateway validates raw data.',
+          hl: 'Instagram mention detected and event transformed',
+          chips: ['Graph API mention', 'API Gateway validation'],
+          transform: 'scale(3.2) translate(-30%, 25%)'
+        },
+        {
+          color: '#3B82F6', bbg: 'rgba(59, 130, 246, 0.15)', btc: '#1E3A8A',
+          badge: 'Step 7 — Identity resolution & Rules',
+          title: 'CRM Store -> Identify -> Lookup -> Rule',
+          eng: 'Customer lookup and validation filters',
+          body: 'Event writes to Salesforce Data Cloud. Identity match finds member Rahul (LM-10001). Rules engine runs limits check (max 1 tag/day).',
+          hl: 'Rahul matched to active Member ID and anti-spam pass',
+          chips: ['Salesforce Data Cloud', 'Identity Resolution pass'],
+          transform: 'scale(3.2) translate(-30%, -10%)'
+        },
+        {
+          color: '#10B981', bbg: 'rgba(16, 185, 129, 0.15)', btc: '#064E3B',
+          badge: 'Step 8 — Wallet Credit & Update',
+          title: 'Credit points -> Upgrade check -> Alerts',
+          eng: 'Final ledger commit & messaging alert',
+          body: 'Points engine credits **+50 points** to wallet. Tier check verifies threshold limit. Automation engine dispatches upgrade WhatsApp message.',
+          hl: 'Points credited, Tier audited, and WhatsApp alert sent',
+          chips: ['Wallet credit +50', 'WhatsApp alert sent'],
+          transform: 'scale(3.2) translate(-30%, -45%)'
         }
       ];
     };
@@ -3600,16 +3604,24 @@ function initStepFormula() {
           `).join('')}
         </div>
 
-        <div class="scard-wrap">
-          <div class="step-badge" style="background:${s.bbg}; color:${s.btc}">${s.badge}</div>
-          <div class="step-title">${s.title}</div>
-          <div class="step-eng">${s.eng}</div>
-          <div class="step-body">${s.body}</div>
-          
-          <div class="step-hl" style="background:rgba(6, 182, 212, 0.08); border-left:3px solid var(--color-cyan); color:var(--text-main);">
-            ${s.hl}
+        <div class="scard-layout" style="display:flex; gap:20px; flex-wrap:wrap; align-items:stretch; margin-top:16px;">
+          <!-- Left side: Image viewport -->
+          <div style="flex:1.2; min-width:270px; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:12px; padding:12px; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; min-height:300px; background:#0b0f19;">
+            <img src="b2c_master_points_tagging.jpg" style="width:100%; height:100%; object-fit:contain; transform:${s.transform || 'scale(1)'}; transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); position:absolute; left:0; top:0; transform-origin:center;">
           </div>
-          <div class="step-chips">${chipsHtml}</div>
+          
+          <!-- Right side: Step details -->
+          <div class="scard-wrap" style="flex:1; min-width:230px; margin-top:0; display:flex; flex-direction:column; justify-content:center; gap:8px;">
+            <div class="step-badge" style="background:${s.bbg}; color:${s.btc}">${s.badge}</div>
+            <div class="step-title" style="margin-top:4px;">${s.title}</div>
+            <div class="step-eng">${s.eng}</div>
+            <div class="step-body">${s.body}</div>
+            
+            <div class="step-hl" style="background:rgba(6, 182, 212, 0.08); border-left:3px solid var(--color-cyan); color:var(--text-main); margin-top:8px;">
+              ${s.hl}
+            </div>
+            <div class="step-chips" style="margin-top:8px;">${chipsHtml}</div>
+          </div>
         </div>
 
         <div class="nav-row">
