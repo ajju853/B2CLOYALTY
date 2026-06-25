@@ -785,9 +785,9 @@ const PRES_SLIDES_B2B = [
     short: "04. Scoring Formula",
     category: "SCORE CARD",
     objective: "Align Partner Rewards with Comprehensive Purchase & Behavior KPIs",
-    cx: "System aggregates revenue, growth, frequency, payment, and training scores every quarter.",
+    cx: "System aggregates revenue, growth, frequency, and payment scores every quarter.",
     description: "Weighted components translate to a single partner score, deciding the tier for next quarter.",
-    math: "Score = (Rev × 400) + (Growth × 200) + (Freq × 150) + (Pay × 150) + (Train × 100)",
+    math: "Score = (Rev × 400) + (Growth × 200) + (Freq × 200) + (Pay × 200)",
     html: `
       <div style="display:flex; flex-direction:column; gap:5px; font-size:10.5px; width:100%;">
         <div style="display:flex; justify-content:space-between; background:rgba(6,182,212,0.06); padding:4px 8px; border-radius:4px; border-left:2px solid var(--color-cyan);">
@@ -797,17 +797,14 @@ const PRES_SLIDES_B2B = [
           <span>YoY Growth (20% Weight):</span><strong style="color:var(--color-teal);">Max 200 pts</strong>
         </div>
         <div style="display:flex; justify-content:space-between; background:rgba(245,158,11,0.06); padding:4px 8px; border-radius:4px; border-left:2px solid var(--color-amber);">
-          <span>Order Frequency (15% Weight):</span><strong style="color:var(--color-amber);">Max 150 pts</strong>
+          <span>Order Frequency (20% Weight):</span><strong style="color:var(--color-amber);">Max 200 pts</strong>
         </div>
         <div style="display:flex; justify-content:space-between; background:rgba(99,102,241,0.06); padding:4px 8px; border-radius:4px; border-left:2px solid var(--color-primary);">
-          <span>Payment Discipline (15% Weight):</span><strong style="color:var(--color-primary);">Max 150 pts</strong>
-        </div>
-        <div style="display:flex; justify-content:space-between; background:rgba(244,63,94,0.06); padding:4px 8px; border-radius:4px; border-left:2px solid var(--color-coral);">
-          <span>Training Completion (10% Weight):</span><strong style="color:var(--color-coral);">Max 100 pts</strong>
+          <span>Payment Discipline (20% Weight):</span><strong style="color:var(--color-primary);">Max 200 pts</strong>
         </div>
       </div>
     `,
-    script: "Partner Score sirf sales par depend nahi karta. Isme YoY growth, order frequency, bill time par pay karna (Payment discipline), aur staff product training modules poora karna bhi shamil hai."
+    script: "Partner Score sirf sales par depend nahi karta. Isme YoY growth, order frequency, aur bill time par pay karna (Payment discipline) shamil hai. Training component ko remove kar diya gaya hai."
   },
   {
     title: "Partner 1: RizTech Solutions — Inactive to Silver",
@@ -815,15 +812,15 @@ const PRES_SLIDES_B2B = [
     category: "INACTIVE TO SILVER",
     objective: "Re-Engage Dormant Partners and Incentivize Baseline Purchase Targets",
     cx: "RizTech increases quarterly purchases, YoY growth explodes +50%, upgrading from Inactive to Silver.",
-    description: "Evaluation Score reaches 602. Silver status unlocked, earning a 1% rebate of RM 560.",
-    math: "Score = 373 (Rev) + 100 (Growth) + 114 (Freq) + 140 (Pay) + 75 (Train) = 602 pts | Rebate = RM 42,000 × 1% + (Welcome silver credit) = RM 560",
+    description: "Evaluation Score reaches 812. Silver status unlocked, earning a 1% rebate of RM 560.",
+    math: "Score = 373 (Rev) + 100 (Growth) + 152 (Freq) + 187 (Pay) = 812 pts | Rebate = RM 42,000 × 1% + (Welcome silver credit) = RM 560",
     html: `
       <div style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; padding:10px; font-size:10.5px; text-align:left; width:100%;">
         <div style="font-weight:bold; color:var(--color-cyan); margin-bottom:4px; display:flex; justify-content:space-between;">
           <span>RizTech Solutions Sdn Bhd</span>
           <span style="color:#888780;">Silver Tier 🥈</span>
         </div>
-        <div style="font-size:9.5px; color:var(--text-muted); margin-bottom:6px;">IT Reseller — Kuala Lumpur | Score: 602 / 1,000</div>
+        <div style="font-size:9.5px; color:var(--text-muted); margin-bottom:6px;">IT Reseller — Kuala Lumpur | Score: 812 / 1,000</div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-bottom:6px;">
           <div style="background:rgba(255,255,255,0.02); padding:3px 6px; border-radius:4px;">Sales: RM 42,000</div>
           <div style="background:rgba(255,255,255,0.02); padding:3px 6px; border-radius:4px;">Growth: +50%</div>
@@ -835,7 +832,7 @@ const PRES_SLIDES_B2B = [
         </div>
       </div>
     `,
-    script: "Humara pehla partner journey hai RizTech Solutions. Yeh pehle Inactive stage pe the. Q1 evaluation mein inka total score 602 aaya jiski wajah se inko Silver tier par upgrade kiya gaya aur RM 560 ka cash rebate mila."
+    script: "Humara pehla partner journey hai RizTech Solutions. Yeh pehle Inactive stage pe the. Q1 evaluation mein inka total score 812 aaya jiski wajah se inko Silver tier par upgrade kiya gaya aur RM 560 ka cash rebate mila."
   },
   {
     title: "Partner 2: Mega Distributors — Silver Maintained",
@@ -843,49 +840,49 @@ const PRES_SLIDES_B2B = [
     category: "SILVER MAINTAINED",
     objective: "Identify Growth Obstacles & Formulate Action Plans to Unlock Next Tier",
     cx: "Mega Distributors stable at Silver tier, but slower YoY growth (+8.3%) blocks Gold upgrade.",
-    description: "Score: 679/1,000 (Needed 700+ for Gold). System triggers warning alerts and staff training reminders.",
-    math: "Score = 367 (Rev) + 17 (Growth) + 119 (Freq) + 126 (Pay) + 50 (Train) = 679 pts | Rebate = RM 78,000 × 1% + loyalty bonus = RM 840",
+    description: "Score: 710/1,000 (Needed 700+ for Gold). System triggers warning alerts and sales growth reminders.",
+    math: "Score = 367 (Rev) + 17 (Growth) + 158 (Freq) + 168 (Pay) = 710 pts | Rebate = RM 78,000 × 1% = RM 780",
     html: `
       <div style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; padding:10px; font-size:10.5px; text-align:left; width:100%;">
         <div style="font-weight:bold; color:var(--color-cyan); margin-bottom:4px; display:flex; justify-content:space-between;">
           <span>Mega Distributors Bhd</span>
           <span style="color:#888780;">Silver Tier (Stable) 🥈</span>
         </div>
-        <div style="font-size:9.5px; color:var(--text-muted); margin-bottom:6px;">Penang Electronics | Score: 679 / 1,000 (Gold: 700+)</div>
+        <div style="font-size:9.5px; color:var(--text-muted); margin-bottom:6px;">Penang Electronics | Score: 710 / 1,000 (Gold: 700+ but Sales under 125k)</div>
         <div style="background:rgba(245,158,11,0.08); border:1px solid var(--color-amber); padding:5px 8px; border-radius:6px; font-size:9.5px; color:var(--color-amber); margin-bottom:6px;">
-          ⚠️ Blockers: Growth too slow (+8.3%) & Low training completion (5/10).
+          ⚠️ Blockers: Sales revenue (RM 78k) is below RM 125,000 required for Gold upgrade.
         </div>
         <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); color:#fff; padding:4px 8px; border-radius:6px; font-weight:bold; font-size:11px; text-align:center;">
-          Rebate Paid: RM 840 | Training Alert Sent!
+          Rebate Paid: RM 780 | Sales Target Alert Sent!
         </div>
       </div>
     `,
-    script: "Mega Distributors stable hain Silver tier par. Inka score 679 hai. Inko Gold tier ke liye sirf 21 points aur chahiye the. Problem growth slow hona aur staff training incomplete hona hai."
+    script: "Mega Distributors stable hain Silver tier par. Inka score 710 hai. Inko Gold tier ke liye RM 125,000 quarterly sales target achieve karna hoga."
   },
   {
     title: "Partner 3: ProBuild Supply — Gold to Platinum",
     short: "07. ProBuild Journey",
     category: "GOLD TO PLATINUM",
     objective: "Reward Elite Performance and Partner Co-Investment",
-    cx: "ProBuild Supply hits consecutive strong quarters (Q2: 921, Q3: 978), securing Platinum upgrade.",
-    description: "Earns 3% rebate (RM 10,200) + RM 5,000 MDF marketing budget + Concierge VIP Support.",
-    math: "Score = 400 (Rev) + 182 (Growth) + 148 (Freq) + 148 (Pay) + 100 (Train) = 978 pts | Rebate = RM 340,000 × 3% = RM 10,200",
+    cx: "ProBuild Supply hits consecutive strong quarters (Q2: 921, Q3: 977), securing Platinum upgrade.",
+    description: "Earns 3.5% rebate (RM 10,850) + RM 5,000 MDF marketing budget + Concierge VIP Support.",
+    math: "Score = 400 (Rev) + 182 (Growth) + 198 (Freq) + 197 (Pay) = 977 pts | Rebate = RM 310,000 × 3.5% = RM 10,850",
     html: `
       <div style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; padding:10px; font-size:10.5px; text-align:left; width:100%;">
         <div style="font-weight:bold; color:#6d28d9; margin-bottom:4px; display:flex; justify-content:space-between;">
           <span>ProBuild Supply Sdn Bhd</span>
           <span style="color:#6d28d9;">Platinum Tier 💎</span>
         </div>
-        <div style="font-size:9.5px; color:var(--text-muted); margin-bottom:6px;">Johor Bahru Construction | Score: 978 / 1,000</div>
+        <div style="font-size:9.5px; color:var(--text-muted); margin-bottom:6px;">Johor Bahru Construction | Score: 977 / 1,000</div>
         <div style="background:rgba(109,40,217,0.08); border:1px solid #6d28d9; padding:6px; border-radius:6px; font-size:9.5px; color:#c084fc; margin-bottom:6px;">
           💎 Elite Privileges Activated: Concierge support + VIP events access.
         </div>
         <div style="background:rgba(16, 185, 129, 0.08); border:1px solid var(--color-teal); color:var(--color-teal); padding:4px 8px; border-radius:6px; font-weight:bold; font-size:10.5px; text-align:center;">
-          Rebate: RM 10,200 | MDF Fund Allocated: RM 5,000
+          Rebate: RM 10,850 | MDF Fund Allocated: RM 5,000
         </div>
       </div>
     `,
-    script: "ProBuild Supply ne outstanding performance show kiya. Q2 aur Q3 dono quarters mein 900+ score kiya, isliye 2-quarter rule se ye Platinum tier par upgrade ho gaye. Inhe RM 10,200 rebate aur RM 5,000 co-marketing budget (MDF) mila."
+    script: "ProBuild Supply ne outstanding performance show kiya. Q2 aur Q3 dono quarters mein 900+ score kiya, isliye 2-quarter rule se ye Platinum tier par upgrade ho gaye. Inhe RM 10,850 rebate aur RM 5,000 co-marketing budget (MDF) mila."
   },
   {
     title: "Partner 4: SwiftTrade Corp — Gold to Silver",
@@ -893,15 +890,15 @@ const PRES_SLIDES_B2B = [
     category: "GOLD TO SILVER",
     objective: "Trigger Automated Early Alerts on Credit and Engagement Failures",
     cx: "SwiftTrade sales drop, payment discipline collapses (46.7% paid on time), triggering a downgrade.",
-    description: "Consecutive misses (Q3: 511, Q4: 442) lead to tier drop. Lost MDF, rebate rate reduced to 1%.",
-    math: "Score = 281 (Rev) + 0 (Growth) + 71 (Freq) + 70 (Pay) + 20 (Train) = 442 pts | Rebate = RM 95,000 × 1% = RM 950",
+    description: "Consecutive misses (Q3: 511, Q4: 469) lead to tier drop. Lost MDF, rebate rate reduced to 1%.",
+    math: "Score = 281 (Rev) + 0 (Growth) + 95 (Freq) + 93 (Pay) = 469 pts | Rebate = RM 95,000 × 1% = RM 950",
     html: `
       <div style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; padding:10px; font-size:10.5px; text-align:left; width:100%;">
         <div style="font-weight:bold; color:var(--color-coral); margin-bottom:4px; display:flex; justify-content:space-between;">
           <span>SwiftTrade Corp Sdn Bhd</span>
           <span style="color:var(--color-coral);">Downgraded to Silver 🥈</span>
         </div>
-        <div style="font-size:9.5px; color:var(--text-muted); margin-bottom:6px;">Selangor FMCG | Score: 442 / 1,000</div>
+        <div style="font-size:9.5px; color:var(--text-muted); margin-bottom:6px;">Selangor FMCG | Score: 469 / 1,000</div>
         <div style="background:rgba(244,63,94,0.08); border:1px solid var(--color-coral); padding:6px; border-radius:6px; font-size:9.5px; color:var(--color-coral); margin-bottom:6px;">
           ❌ Penalties: Priority support removed. MDF RM 2,000 lost. Rebate rate dropped.
         </div>
@@ -919,7 +916,7 @@ const PRES_SLIDES_B2B = [
     objective: "Audit and Optimize Overall Program Health and ROI",
     cx: "Compare partner scores, tier transitions, and quarterly payouts side by side.",
     description: "Visual matrix showing 2 upgrades, 1 maintained, and 1 downgrade across different business domains.",
-    math: "Total Payout = sum(RM 560 + RM 840 + RM 10,200 + RM 950) = RM 12,550",
+    math: "Total Payout = sum(RM 560 + RM 780 + RM 10,850 + RM 950) = RM 13,140",
     html: `
       <div style="overflow-x:auto; width:100%;">
         <table style="width:100%; border-collapse:collapse; font-size:9.5px; text-align:left; color:#fff;">
@@ -937,28 +934,28 @@ const PRES_SLIDES_B2B = [
               <td style="padding:4px;">RizTech</td>
               <td style="padding:4px; color:var(--color-coral);">Inactive</td>
               <td style="padding:4px; color:#888780;">Silver</td>
-              <td style="padding:4px;">602</td>
+              <td style="padding:4px;">812</td>
               <td style="padding:4px; color:var(--color-teal);">RM 560</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
               <td style="padding:4px;">Mega Dist</td>
               <td style="padding:4px; color:#888780;">Silver</td>
               <td style="padding:4px; color:#888780;">Silver</td>
-              <td style="padding:4px;">679</td>
-              <td style="padding:4px; color:var(--color-teal);">RM 840</td>
+              <td style="padding:4px;">710</td>
+              <td style="padding:4px; color:var(--color-teal);">RM 780</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
               <td style="padding:4px;">ProBuild</td>
               <td style="padding:4px; color:#b45309;">Gold</td>
               <td style="padding:4px; color:#6d28d9;">Platinum</td>
-              <td style="padding:4px;">978</td>
-              <td style="padding:4px; color:var(--color-teal);">RM 10,200</td>
+              <td style="padding:4px;">977</td>
+              <td style="padding:4px; color:var(--color-teal);">RM 10,850</td>
             </tr>
             <tr>
               <td style="padding:4px;">SwiftTrade</td>
               <td style="padding:4px; color:#b45309;">Gold</td>
               <td style="padding:4px; color:#888780;">Silver</td>
-              <td style="padding:4px;">442</td>
+              <td style="padding:4px;">469</td>
               <td style="padding:4px; color:var(--color-teal);">RM 950</td>
             </tr>
           </tbody>
@@ -1024,8 +1021,8 @@ const PRES_SLIDES_B2B = [
     category: "PROGRAM DASHBOARD",
     objective: "Gain Real-Time Visibility on Loyalty Program Expenses & Partner Tiers",
     cx: "View all partner performances at a single glance with smart recommendations.",
-    description: "Program metrics: 4 total partners, average performance score 675, quarterly payout RM 12,550.",
-    math: "Avg Score = 675 | Total MDF = RM 5,000 (ProBuild) | Total Rebates = RM 12,550",
+    description: "Program metrics: 4 total partners, average performance score 742, quarterly payout RM 13,140.",
+    math: "Avg Score = 742 | Total MDF = RM 5,000 (ProBuild) | Total Rebates = RM 13,140",
     html: `
       <div style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; padding:10px; font-size:10px; text-align:left; width:100%;">
         <div style="font-weight:bold; color:#fff; border-bottom:1px solid var(--border-color); padding-bottom:4px; margin-bottom:6px; display:flex; justify-content:space-between;">
@@ -1039,11 +1036,11 @@ const PRES_SLIDES_B2B = [
           </div>
           <div style="background:rgba(255,255,255,0.02); padding:5px; border-radius:4px; text-align:center;">
             <span style="font-size:7px; color:var(--text-muted); display:block;">Average Score</span>
-            <strong>675 / 1000</strong>
+            <strong>742 / 1000</strong>
           </div>
           <div style="background:rgba(255,255,255,0.02); padding:5px; border-radius:4px; text-align:center;">
             <span style="font-size:7px; color:var(--text-muted); display:block;">Quarterly Rebates</span>
-            <strong>RM 12,550</strong>
+            <strong>RM 13,140</strong>
           </div>
           <div style="background:rgba(255,255,255,0.02); padding:5px; border-radius:4px; text-align:center;">
             <span style="font-size:7px; color:var(--text-muted); display:block;">Total MDF Allocation</span>
@@ -1066,7 +1063,7 @@ const PRES_SLIDES_B2B = [
     html: `
       <div style="display:flex; flex-direction:column; gap:4px; font-size:10px; text-align:left; width:100%;">
         <div style="padding:4px; background:rgba(6,182,212,0.05); border:1px solid rgba(6,182,212,0.15); border-radius:4px;">
-          <strong style="color:var(--color-cyan);">Performance Score:</strong> (Rev×40%) + (Growth×20%) + (Freq×15%) + (Pay×15%) + (Train×10%)
+          <strong style="color:var(--color-cyan);">Performance Score:</strong> (Rev×40%) + (Growth×20%) + (Freq×20%) + (Pay×20%)
         </div>
         <div style="padding:4px; background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.15); border-radius:4px;">
           <strong style="color:var(--color-teal);">Disbursed Rebate:</strong> Net Sales × Tier Base% (+ 0.5% bonus if Score >= 900)
@@ -2566,26 +2563,26 @@ function initJourney() {
       flow: `
         <div class="flow-chart" style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;">
           <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-            <strong>Collect KPI Metrics</strong><br><span style="font-size:8px; color:var(--text-muted);">Revenue, Growth, Freq, Pay, Train</span>
+            <strong>Collect KPI Metrics</strong><br><span style="font-size:8px; color:var(--text-muted);">Revenue, Growth, Freq, Pay</span>
           </div>
           <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
           <div style="background:rgba(6, 182, 212, 0.08); border:1px solid var(--color-cyan); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center; box-shadow:var(--glow-cyan);">
-            <strong>Scoring Formula Run</strong><br><span style="font-size:8px; color:var(--color-cyan);">Weights applied (Revenue 40%, Growth 20%)</span>
+            <strong>Scoring Formula Run</strong><br><span style="font-size:8px; color:var(--color-cyan);">Weights applied (Revenue 40%, Growth 20%, Freq 20%, Pay 20%)</span>
           </div>
           <div style="color:var(--color-cyan); font-size:10px;"><i class="ti ti-arrow-down"></i></div>
           <div style="background:var(--bg-main); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; font-size:10px; width:220px; text-align:center;">
-            <strong>Quarterly Performance Score</strong><br><span style="font-size:8px; color:var(--text-muted);">Score recorded (e.g. 978 / 1,000)</span>
+            <strong>Quarterly Performance Score</strong><br><span style="font-size:8px; color:var(--text-muted);">Score recorded (e.g. 977 / 1,000)</span>
           </div>
         </div>
       `,
-      formula: "Score = (Rev×400) + (Growth×200) + (Freq×150) + (Pay×150) + (Train×100)",
+      formula: "Score = (Rev×400) + (Growth×200) + (Freq×200) + (Pay×200)",
       lbl: [
         "Tracks actual revenue vs quarterly target",
         "Computes Year-over-Year revenue growth",
-        "Monitors order frequency, payment timeliness, and training certifications",
-        "Combines these 5 metrics into a single score out of 1000"
+        "Monitors order frequency and payment timeliness",
+        "Combines these 4 metrics into a single score out of 1000"
       ],
-      script: "Rung 5: Performance Scoring. Quarterly evaluation run hone par 5 params evaluate hote hain: Revenue, growth, frequency, payment ontime record, aur training completed modules."
+      script: "Rung 5: Performance Scoring. Quarterly evaluation run hone par 4 params evaluate hote hain: Revenue, growth, frequency, aur payment ontime record. Training component ko remove kar diya gaya hai."
     },
     {
       num: "6",
@@ -2765,7 +2762,7 @@ function initJourney() {
           <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">2. Partner 360:</strong> <span>Initialize verified demographics & credit info.</span></div>
           <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">3. Segmentation:</strong> <span>Volume & industry vertical dynamic segment tags.</span></div>
           <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">4. Enrollment:</strong> <span>Wallet ledger setup & digital agreement sign active.</span></div>
-          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">5. Scoring:</strong> <span>Compute score based on 5 KPIs (Revenue, Growth, Freq, Pay, Train).</span></div>
+          <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">5. Scoring:</strong> <span>Compute score based on 4 KPIs (Revenue, Growth, Freq, Pay).</span></div>
           <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">6. Tier Engine:</strong> <span>Compare score and revenue limits over consecutive quarters.</span></div>
           <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">7. Rebates:</strong> <span>Disburse rebate % (+0.5% score bonus) & allocate MDF funds.</span></div>
           <div style="display:flex; gap:8px;"><strong style="color:var(--color-cyan); min-width:80px;">8. Returns Saga:</strong> <span>Rollback calculations clawback paid rebates on inventory returns.</span></div>
@@ -2801,7 +2798,7 @@ function initJourney() {
               <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">2. Partner 360</td><td style="padding:2px; color:var(--text-muted);">KYC verified company profile - credit limit, bank details</td></tr>
               <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; color:var(--text-muted);">Groups partners dynamically by vertical & volume cohort</td></tr>
               <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">4. Enrollment</td><td style="padding:2px; color:var(--text-muted);">Agreement signed, wallet created, status sets active</td></tr>
-              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">5. Scoring</td><td style="padding:2px; color:var(--text-muted);">Quarterly score out of 1000 based on 5 KPIs</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">5. Scoring</td><td style="padding:2px; color:var(--text-muted);">Quarterly score out of 1000 based on 4 KPIs</td></tr>
               <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">6. Tier Engine</td><td style="padding:2px; color:var(--text-muted);">Promotes/demotes tier based on score & revenue over 2 quarters</td></tr>
               <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">7. Rebates & MDF</td><td style="padding:2px; color:var(--text-muted);">Disburses net sales rebate (+score bonus) & credits MDF</td></tr>
               <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:2px; font-weight:bold;">8. Returns Saga</td><td style="padding:2px; color:var(--text-muted);">Rolls back disbursed rebates if inventory is returned</td></tr>
@@ -3055,6 +3052,59 @@ function initFormula() {
     };
 
     document.getElementById('formula-wrap').innerHTML = `
+      <div class="formula-card-container" style="background:var(--bg-field); border:1px solid var(--border-color); border-radius:12px; padding:16px; margin-bottom:20px; font-family:inherit;">
+        <div style="text-align:center; margin-bottom:14px;">
+          <h3 style="color:var(--color-primary); font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; margin:0 0 4px 0; font-family:var(--font-display);">
+            Points Calculation Formula
+          </h3>
+          <div style="font-size:12px; font-weight:bold; color:var(--color-teal); margin-top:4px;">
+            Points = (Order Amount × Points Rate) × Tier Multiplier + Bonus
+          </div>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; border-bottom:1px solid var(--border-color); padding-bottom:14px; margin-bottom:14px; font-size:10px;">
+          <!-- Col 1 -->
+          <div style="border-right:1px solid var(--border-color); padding-right:8px;">
+            <div style="display:flex; align-items:center; gap:4px; font-weight:bold; margin-bottom:4px; color:#fff;">
+              <span style="background:var(--color-teal); color:#000; border-radius:50%; width:12px; height:12px; display:inline-flex; align-items:center; justify-content:center; font-size:8px;">$</span>
+              1. Order Amount
+            </div>
+            <div style="color:var(--text-muted); font-size:9px;">Subtotal value in RM (tax/delivery charges excluded)</div>
+          </div>
+          
+          <!-- Col 2 -->
+          <div style="border-right:1px solid var(--border-color); padding-right:8px;">
+            <div style="display:flex; align-items:center; gap:4px; font-weight:bold; margin-bottom:4px; color:#fff;">
+              <span style="background:var(--color-cyan); color:#000; border-radius:50%; width:12px; height:12px; display:inline-flex; align-items:center; justify-content:center; font-size:8px;"><i class="ti ti-star"></i></span>
+              2. Points Rate
+            </div>
+            <div style="color:var(--text-muted); font-size:9px;">Base points per RM spent (Default: 1.0 pt/RM)</div>
+          </div>
+          
+          <!-- Col 3 -->
+          <div style="border-right:1px solid var(--border-color); padding-right:8px;">
+            <div style="display:flex; align-items:center; gap:4px; font-weight:bold; margin-bottom:4px; color:#fff;">
+              <span style="background:var(--color-primary); color:#fff; border-radius:50%; width:12px; height:12px; display:inline-flex; align-items:center; justify-content:center; font-size:8px;"><i class="ti ti-arrow-up"></i></span>
+              3. Tier Multiplier
+            </div>
+            <div style="color:var(--text-muted); font-size:9px;">Bronze 1.0x | Silver 1.5x | Gold 2.0x | Plat 3.0x</div>
+          </div>
+          
+          <!-- Col 4 -->
+          <div>
+            <div style="display:flex; align-items:center; gap:4px; font-weight:bold; margin-bottom:4px; color:#fff;">
+              <span style="background:var(--color-amber); color:#000; border-radius:50%; width:12px; height:12px; display:inline-flex; align-items:center; justify-content:center; font-size:8px;"><i class="ti ti-gift"></i></span>
+              4. Extra Bonus
+            </div>
+            <div style="color:var(--text-muted); font-size:9px;">Special Campaign or Activity base points added flat</div>
+          </div>
+        </div>
+
+        <div style="font-size:9px; color:var(--text-muted); line-height:1.4;">
+          💡 <strong>Redemption Rule:</strong> 100 points = RM 1.00 Cash Discount. Maximum redemption discount limit is capped at **20%** of order subtotal.
+        </div>
+      </div>
+
       ${makeTierCtrl('f', 'fSetTier', 'bronze')}
       
       <div class="sect-label">Earning Activity Choose Karo</div>
@@ -3162,7 +3212,7 @@ function initFormula() {
     `;
     calc();
   } else {
-    // B2B Scorecard Mode
+    // B2B Scorecard Mode (4-Component matching user screenshot)
     function calcB2B() {
       const targetRev = parseInt(document.getElementById('f-b2b-rev-target').value);
       const actualRev = parseInt(document.getElementById('f-b2b-rev-actual').value);
@@ -3171,17 +3221,11 @@ function initFormula() {
       const placedOrders = parseInt(document.getElementById('f-b2b-freq-placed').value);
       const totalInvoices = parseInt(document.getElementById('f-b2b-pay-total').value);
       let ontimeInvoices = parseInt(document.getElementById('f-b2b-pay-ontime').value);
-      const assignedTrain = parseInt(document.getElementById('f-b2b-train-assigned').value);
-      let completedTrain = parseInt(document.getElementById('f-b2b-train-completed').value);
 
       // Constraints checks
       if (ontimeInvoices > totalInvoices) {
         ontimeInvoices = totalInvoices;
         document.getElementById('f-b2b-pay-ontime').value = ontimeInvoices;
-      }
-      if (completedTrain > assignedTrain) {
-        completedTrain = assignedTrain;
-        document.getElementById('f-b2b-train-completed').value = completedTrain;
       }
 
       // Update values labels
@@ -3192,24 +3236,20 @@ function initFormula() {
       document.getElementById('f-b2b-freq-placed-v').textContent = placedOrders;
       document.getElementById('f-b2b-pay-total-v').textContent = totalInvoices;
       document.getElementById('f-b2b-pay-ontime-v').textContent = ontimeInvoices;
-      document.getElementById('f-b2b-train-assigned-v').textContent = assignedTrain;
-      document.getElementById('f-b2b-train-completed-v').textContent = completedTrain;
 
       // Component Scores
       const revScore = Math.min(400, Math.round((actualRev / targetRev) * 400));
       const growthScore = growthPct > 0 ? Math.min(200, Math.round((growthPct / 100) * 200)) : 0;
-      const freqScore = Math.min(150, Math.round((placedOrders / expOrders) * 150));
-      const payScore = Math.min(150, Math.round((ontimeInvoices / totalInvoices) * 150));
-      const trainScore = Math.min(100, Math.round((completedTrain / assignedTrain) * 100));
+      const freqScore = Math.min(200, Math.round((placedOrders / expOrders) * 200));
+      const payScore = Math.min(200, Math.round((ontimeInvoices / totalInvoices) * 200));
 
-      const totalScore = revScore + growthScore + freqScore + payScore + trainScore;
+      const totalScore = revScore + growthScore + freqScore + payScore;
 
       // Outputs inside UI
       document.getElementById('f-b2b-out-rev').textContent = `${revScore} / 400`;
       document.getElementById('f-b2b-out-growth').textContent = `${growthScore} / 200`;
-      document.getElementById('f-b2b-out-freq').textContent = `${freqScore} / 150`;
-      document.getElementById('f-b2b-out-pay').textContent = `${payScore} / 150`;
-      document.getElementById('f-b2b-out-train').textContent = `${trainScore} / 100`;
+      document.getElementById('f-b2b-out-freq').textContent = `${freqScore} / 200`;
+      document.getElementById('f-b2b-out-pay').textContent = `${payScore} / 200`;
 
       // Tier criteria lookup
       let tierKey = 'inactive';
@@ -3245,8 +3285,7 @@ function initFormula() {
         <span class="f-val" style="color:var(--color-cyan);">${revScore}</span> +
         <span class="f-val" style="color:var(--color-primary);">${growthScore}</span> +
         <span class="f-val" style="color:var(--color-amber);">${freqScore}</span> +
-        <span class="f-val" style="color:var(--color-teal);">${payScore}</span> +
-        <span class="f-val" style="color:var(--color-primary);">${trainScore}</span> =
+        <span class="f-val" style="color:var(--color-teal);">${payScore}</span> =
         <span class="f-res">${totalScore} Points</span>
       `;
       document.getElementById('f-note').textContent = `Rebate rate is ${totalRebateRate.toFixed(1)}% (Base: ${baseRebate}% + Bonus: ${bonusRebate}%). MDF claims wallet is allocated: RM ${mdfAmt.toLocaleString()}.`;
@@ -3288,6 +3327,82 @@ function initFormula() {
     window.fCalc = calcB2B;
 
     document.getElementById('formula-wrap').innerHTML = `
+      <div class="formula-card-container" style="background:var(--bg-field); border:1px solid var(--border-color); border-radius:12px; padding:16px; margin-bottom:20px; font-family:inherit;">
+        <div style="text-align:center; margin-bottom:14px;">
+          <h3 style="color:var(--color-primary); font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; margin:0 0 4px 0; font-family:var(--font-display);">
+            Performance Score Calculation Formula <span style="font-size:10px; color:var(--text-muted); text-transform:none;">(Max Score = 1000)</span>
+          </h3>
+          <div style="font-size:12px; font-weight:bold; color:var(--color-teal); margin-top:4px;">
+            Partner Score = (Revenue × 40%) + (Growth × 20%) + (Frequency × 20%) + (Payment × 20%)
+          </div>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:10px; border-bottom:1px solid var(--border-color); padding-bottom:14px; margin-bottom:14px; font-size:10px;">
+          <!-- Col 1 -->
+          <div style="border-right:1px solid var(--border-color); padding-right:8px;">
+            <div style="display:flex; align-items:center; gap:4px; font-weight:bold; margin-bottom:4px; color:#fff;">
+              <span style="background:var(--color-teal); color:#000; border-radius:50%; width:12px; height:12px; display:inline-flex; align-items:center; justify-content:center; font-size:8px;">$</span>
+              1. Revenue
+            </div>
+            <div style="color:var(--text-muted); font-size:9px; margin-bottom:4px;">Weight: 40%</div>
+            <div style="font-family:monospace; color:var(--color-cyan); margin-bottom:4px; font-size:9px;">Score = (Actual / Target) × 400</div>
+            <div style="font-weight:bold; color:var(--text-muted);">(Max 400)</div>
+          </div>
+          
+          <!-- Col 2 -->
+          <div style="border-right:1px solid var(--border-color); padding-right:8px;">
+            <div style="display:flex; align-items:center; gap:4px; font-weight:bold; margin-bottom:4px; color:#fff;">
+              <span style="background:var(--color-primary); color:#fff; border-radius:50%; width:12px; height:12px; display:inline-flex; align-items:center; justify-content:center; font-size:8px;"><i class="ti ti-trending-up"></i></span>
+              2. Growth
+            </div>
+            <div style="color:var(--text-muted); font-size:9px; margin-bottom:4px;">Weight: 20%</div>
+            <div style="font-family:monospace; color:var(--color-primary); margin-bottom:4px; font-size:8px;">Score = (YoY Growth %) × 200</div>
+            <div style="font-weight:bold; color:var(--text-muted);">(Max 200)</div>
+          </div>
+          
+          <!-- Col 3 -->
+          <div style="border-right:1px solid var(--border-color); padding-right:8px;">
+            <div style="display:flex; align-items:center; gap:4px; font-weight:bold; margin-bottom:4px; color:#fff;">
+              <span style="background:var(--color-amber); color:#000; border-radius:50%; width:12px; height:12px; display:inline-flex; align-items:center; justify-content:center; font-size:8px;"><i class="ti ti-shopping-cart"></i></span>
+              3. Frequency
+            </div>
+            <div style="color:var(--text-muted); font-size:9px; margin-bottom:4px;">Weight: 20%</div>
+            <div style="font-family:monospace; color:var(--color-amber); margin-bottom:4px; font-size:9px;">Score = (Placed / Expected) × 200</div>
+            <div style="font-weight:bold; color:var(--text-muted);">(Max 200)</div>
+          </div>
+          
+          <!-- Col 4 -->
+          <div style="border-right:1px solid var(--border-color); padding-right:8px;">
+            <div style="display:flex; align-items:center; gap:4px; font-weight:bold; margin-bottom:4px; color:#fff;">
+              <span style="background:var(--color-teal); color:#fff; border-radius:50%; width:12px; height:12px; display:inline-flex; align-items:center; justify-content:center; font-size:8px;"><i class="ti ti-credit-card"></i></span>
+              4. Payment
+            </div>
+            <div style="color:var(--text-muted); font-size:9px; margin-bottom:4px;">Weight: 20%</div>
+            <div style="font-family:monospace; color:var(--color-teal); margin-bottom:4px; font-size:9px;">Score = (On-time / Total) × 200</div>
+            <div style="font-weight:bold; color:var(--text-muted);">(Max 200)</div>
+          </div>
+          
+          <!-- Col 5 -->
+          <div>
+            <div style="font-weight:bold; color:var(--color-cyan); margin-bottom:4px; text-transform:uppercase; font-size:9px; letter-spacing:0.02em;">Normalization Rules</div>
+            <ul style="margin:0; padding:0 0 0 10px; color:var(--text-muted); font-size:8px; line-height:1.35; list-style-type:disc;">
+              <li>Component capped at max limit</li>
+              <li>Active partner min score is 50</li>
+              <li>Recalculated quarterly</li>
+              <li>Upgrade/downgrade based on score</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 80px 1fr 1fr 1fr 1fr; gap:10px; font-size:9px; background:rgba(255,255,255,0.02); padding:8px; border-radius:8px; align-items:center; border:1px dashed var(--border-color);">
+          <div style="font-weight:bold; color:var(--color-teal); text-transform:uppercase; font-size:8px; letter-spacing:0.04em;">Example Calc:</div>
+          <div style="color:var(--text-muted);">Rev Score = <span style="color:#fff; font-weight:bold;">360/400</span> (90%)</div>
+          <div style="color:var(--text-muted);">Growth Score = <span style="color:#fff; font-weight:bold;">180/200</span> (90%)</div>
+          <div style="color:var(--text-muted);">Freq Score = <span style="color:#fff; font-weight:bold;">140/200</span> (70%)</div>
+          <div style="color:var(--text-muted);">Payment Score = <span style="color:#fff; font-weight:bold;">180/200</span> (90%)</div>
+        </div>
+      </div>
+
       <div class="slider-box" style="margin-top:0;">
         <div class="sect-label" style="margin-top:0; margin-bottom:8px;">1. Sales & Revenue KPIs</div>
         <div class="ctrl-row">
@@ -3306,7 +3421,7 @@ function initFormula() {
           <span class="ctrl-val"><span id="f-b2b-growth-v">+40%</span></span>
         </div>
 
-        <div class="sect-label" style="margin-top:12px; margin-bottom:8px;">2. Operational & Training KPIs</div>
+        <div class="sect-label" style="margin-top:12px; margin-bottom:8px;">2. Operational & Payment KPIs</div>
         <div class="ctrl-row">
           <label>Expected Order Freq</label>
           <input type="range" id="f-b2b-freq-exp" min="10" max="500" step="10" value="180" oninput="fCalc()">
@@ -3327,25 +3442,14 @@ function initFormula() {
           <input type="range" id="f-b2b-pay-ontime" min="0" max="200" step="1" value="148" oninput="fCalc()">
           <span class="ctrl-val"><span id="f-b2b-pay-ontime-v">148</span> on-time</span>
         </div>
-        <div class="ctrl-row">
-          <label>Assigned Training</label>
-          <input type="range" id="f-b2b-train-assigned" min="5" max="20" step="1" value="10" oninput="fCalc()">
-          <span class="ctrl-val"><span id="f-b2b-train-assigned-v">10</span> assigned</span>
-        </div>
-        <div class="ctrl-row">
-          <label>Completed Training</label>
-          <input type="range" id="f-b2b-train-completed" min="0" max="20" step="1" value="10" oninput="fCalc()">
-          <span class="ctrl-val"><span id="f-b2b-train-completed-v">10</span> completed</span>
-        </div>
       </div>
 
       <div class="sect-label">Performance Scoring Breakdown</div>
-      <div class="sim-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom:14px; text-align:center;">
+      <div class="sim-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom:14px; text-align:center;">
         <div class="sim-cell" style="padding:6px;"><div class="sc-l" style="font-size:8px;">Revenue Score</div><div class="sc-v" style="font-size:12px; color:var(--color-cyan); font-weight:bold;" id="f-b2b-out-rev">—</div></div>
         <div class="sim-cell" style="padding:6px;"><div class="sc-l" style="font-size:8px;">Growth Score</div><div class="sc-v" style="font-size:12px; color:var(--color-primary); font-weight:bold;" id="f-b2b-out-growth">—</div></div>
         <div class="sim-cell" style="padding:6px;"><div class="sc-l" style="font-size:8px;">Frequency Score</div><div class="sc-v" style="font-size:12px; color:var(--color-amber); font-weight:bold;" id="f-b2b-out-freq">—</div></div>
         <div class="sim-cell" style="padding:6px;"><div class="sc-l" style="font-size:8px;">Payment Score</div><div class="sc-v" style="font-size:12px; color:var(--color-teal); font-weight:bold;" id="f-b2b-out-pay">—</div></div>
-        <div class="sim-cell" style="padding:6px;"><div class="sc-l" style="font-size:8px;">Training Score</div><div class="sc-v" style="font-size:12px; color:var(--color-primary); font-weight:bold;" id="f-b2b-out-train">—</div></div>
       </div>
 
       <div class="sect-label">Live Formula Equation</div>
@@ -3538,10 +3642,10 @@ function initStepFormula() {
     // B2B Case Study Stepper
     let sfPartner = 'riztech';
     const partners = {
-      riztech: { name: 'RizTech Solutions', was: 'Inactive', now: 'Silver', target: 45000, actual: 42000, growth: 50, ordersExp: 50, ordersPl: 38, payTotal: 30, payOntime: 28, trainTotal: 8, trainDone: 6, score: 602, rebate: 560, mdf: 0, story: 'Small reseller re-engaging after dormant period' },
-      mega: { name: 'Mega Distributors', was: 'Silver', now: 'Silver', target: 85000, actual: 78000, growth: 8.3, ordersExp: 120, ordersPl: 95, payTotal: 50, payOntime: 42, trainTotal: 10, trainDone: 5, score: 679, rebate: 840, mdf: 0, story: 'Steady mid-size distributor, consistent but not growing fast enough for Gold' },
-      probuild: { name: 'ProBuild Supply', was: 'Gold', now: 'Platinum', target: 300000, actual: 310000, growth: 40.9, ordersExp: 180, ordersPl: 178, payTotal: 150, payOntime: 148, trainTotal: 10, trainDone: 10, score: 978, rebate: 10200, mdf: 5000, story: 'High-growth partner that pushed past the Platinum threshold in back-to-back quarters' },
-      swifttrade: { name: 'SwiftTrade Corp', was: 'Gold', now: 'Silver', target: 135000, actual: 95000, growth: -26.9, ordersExp: 110, ordersPl: 52, payTotal: 60, payOntime: 28, trainTotal: 10, trainDone: 2, score: 442, rebate: 950, mdf: 0, story: 'Struggling Gold partner — late payments, low orders. Downgraded.' }
+      riztech: { name: 'RizTech Solutions', was: 'Inactive', now: 'Silver', target: 45000, actual: 42000, growth: 50, ordersExp: 50, ordersPl: 38, payTotal: 30, payOntime: 28, score: 812, rebate: 560, mdf: 0, story: 'Small reseller re-engaging after dormant period' },
+      mega: { name: 'Mega Distributors', was: 'Silver', now: 'Silver', target: 85000, actual: 78000, growth: 8.3, ordersExp: 120, ordersPl: 95, payTotal: 50, payOntime: 42, score: 710, rebate: 780, mdf: 0, story: 'Steady mid-size distributor, consistent but not growing fast enough for Gold' },
+      probuild: { name: 'ProBuild Supply', was: 'Gold', now: 'Platinum', target: 300000, actual: 310000, growth: 40.9, ordersExp: 180, ordersPl: 178, payTotal: 150, payOntime: 148, score: 977, rebate: 10850, mdf: 5000, story: 'High-growth partner that pushed past the Platinum threshold in back-to-back quarters' },
+      swifttrade: { name: 'SwiftTrade Corp', was: 'Gold', now: 'Silver', target: 135000, actual: 95000, growth: -26.9, ordersExp: 110, ordersPl: 52, payTotal: 60, payOntime: 28, score: 469, rebate: 950, mdf: 0, story: 'Struggling Gold partner — late payments, low orders. Downgraded.' }
     };
 
     const getB2BSteps = (pKey) => {
@@ -3549,13 +3653,12 @@ function initStepFormula() {
       const revPct = ((p.actual / p.target) * 100).toFixed(1);
       const revScore = Math.min(400, Math.round((p.actual / p.target) * 400));
       const growthScore = p.growth > 0 ? Math.min(200, Math.round((p.growth / 100) * 200)) : 0;
-      const freqScore = Math.min(150, Math.round((p.ordersPl / p.ordersExp) * 150));
-      const payScore = Math.min(150, Math.round((p.payOntime / p.payTotal) * 150));
-      const trainScore = Math.min(100, Math.round((p.trainDone / p.trainTotal) * 100));
+      const freqScore = Math.min(200, Math.round((p.ordersPl / p.ordersExp) * 200));
+      const payScore = Math.min(200, Math.round((p.payOntime / p.payTotal) * 200));
 
       let finalGrowthScore = growthScore;
       if (pKey === 'probuild') finalGrowthScore = 182; // as per visual LaTeX dataset stories
-      const calculatedTotalScore = revScore + finalGrowthScore + freqScore + payScore + trainScore;
+      const calculatedTotalScore = revScore + finalGrowthScore + freqScore + payScore;
 
       return [
         {
@@ -3579,18 +3682,18 @@ function initStepFormula() {
         {
           color: '#BA7517', bbg: 'rgba(186, 117, 23, 0.15)', btc: '#633806',
           badge: 'Step 3 — Operational KPIs Scoring',
-          title: 'Freq, Payment, aur Training score cards calculated',
-          eng: 'Frequency (150 max) + Payment (150 max) + Training (100 max)',
-          body: `Order Freq: ${p.ordersPl}/${p.ordersExp} -> **${freqScore} pts**. Payments: ${p.payOntime}/${p.payTotal} -> **${payScore} pts**. Training completed: ${p.trainDone}/${p.trainTotal} -> **${trainScore} pts** update.`,
-          hl: `Freq: ${freqScore} | Payments: ${payScore} | Training: ${trainScore}`,
-          chips: [`Payments: ${((p.payOntime/p.payTotal)*100).toFixed(1)}% on-time`, `Training: ${((p.trainDone/p.trainTotal)*100).toFixed(1)}% complete`]
+          title: 'Freq, and Payment score cards calculated',
+          eng: 'Frequency (200 max) + Payment (200 max)',
+          body: `Order Freq: ${p.ordersPl}/${p.ordersExp} -> **${freqScore} pts**. Payments: ${p.payOntime}/${p.payTotal} -> **${payScore} pts** update.`,
+          hl: `Freq: ${freqScore} | Payments: ${payScore}`,
+          chips: [`Payments: ${((p.payOntime/p.payTotal)*100).toFixed(1)}% on-time`]
         },
         {
           color: '#534AB7', bbg: 'rgba(83, 74, 183, 0.15)', btc: '#3C3489',
           badge: 'Step 4 — Performance Score Aggregation',
           title: `Total performance score: ${calculatedTotalScore} / 1000`,
-          eng: 'Aggregation of all 5 KPI scores',
-          body: `System ne 5 components sum up kiye: **${revScore} + ${finalGrowthScore} + ${freqScore} + ${payScore} + ${trainScore} = ${calculatedTotalScore} / 1000**.`,
+          eng: 'Aggregation of all 4 KPI scores',
+          body: `System ne 4 components sum up kiye: **${revScore} + ${finalGrowthScore} + ${freqScore} + ${payScore} = ${calculatedTotalScore} / 1000**.`,
           hl: `Final Performance Score: ${calculatedTotalScore} / 1,000`,
           chips: [`Score: ${calculatedTotalScore}`, `Max possible: 1000`]
         },
@@ -3717,8 +3820,8 @@ function initEarnEvents() {
 
   const EVENTS_B2B = [
     { id: 'quarterly_target', cat: 'purchase', label: 'Quarterly Sales Target', icon: '📈', val: 1000, isNew: false, formula: 'Net Sales × Tier Rebate% (+0.5% bonus)', desc: 'Partner completes quarterly sales targets — primary rebate source', steps: ['1 Sales revenue checkout captured', '2 Target achievement verified', '3 Base rebate + growth calculated', '4 Wallet balance credited'], api: 'POST /v1/rebates/calculate', schema: 'partner_rebates, wallets' },
-    { id: 'ontime_payment', cat: 'engagement', label: 'On-Time Payments', icon: '💳', val: 150, isNew: false, formula: 'On-time Invoices ÷ Total Invoices × 150 pts', desc: 'Settles all quarterly invoices within agreed credit terms', steps: ['1 Invoices status daily batch scan', '2 On-time payment discipline verify', '3 Score updated in Partner 360', '4 WhatsApp alert sent to CFO'], api: 'POST /v1/finance/invoice-check', schema: 'partner_ledger, customer_360' },
-    { id: 'staff_certification', cat: 'milestone', label: 'Staff Training', icon: '🎓', val: 100, isNew: false, formula: 'Completed ÷ Assigned × 100 pts', desc: 'Staff completes certification courses and webinars', steps: ['1 Certification exam completed', '2 LMS results write to CRM', '3 Training score updated (+100 max)', '4 Portal badge unlocked'], api: 'POST /v1/lms/verify', schema: 'partner_training, customer_360' },
+    { id: 'ontime_payment', cat: 'engagement', label: 'On-Time Payments', icon: '💳', val: 200, isNew: false, formula: 'On-time Invoices ÷ Total Invoices × 200 pts', desc: 'Settles all quarterly invoices within agreed credit terms', steps: ['1 Invoices status daily batch scan', '2 On-time payment discipline verify', '3 Score updated in Partner 360', '4 WhatsApp alert sent to CFO'], api: 'POST /v1/finance/invoice-check', schema: 'partner_ledger, customer_360' },
+    { id: 'staff_certification', cat: 'milestone', label: 'Staff Training', icon: '🎓', val: 100, isNew: false, formula: 'Completed ÷ Assigned × 100 pts', desc: 'Staff completes certification courses and webinars (Milestone certificate reward)', steps: ['1 Certification exam completed', '2 LMS results write to CRM', '3 Portal badge and staff certificate unlocked'], api: 'POST /v1/lms/verify', schema: 'partner_training, customer_360' },
     { id: 'partner_referral', cat: 'engagement', label: 'Dealer Referral', icon: '🤝', val: 2000, isNew: false, formula: 'RM 2,000 flat bonus per dealer', desc: 'Refers a new sub-dealer who signs up and reaches Silver status', steps: ['1 Generate partner referral code', '2 Referred dealer signs contract', '3 Referred dealer reaches Silver tier', '4 Disburse RM 2,000 referral credit'], api: 'POST /v1/referrals/b2b-payout', schema: 'referral_ledger, partner_tiers' },
     { id: 'comarketing_event', cat: 'social', label: 'Co-Marketing Event', icon: '🎪', val: 500, isNew: true, formula: 'MDF reimbursement up to RM 5,000', desc: 'Host local roadshow or webinar utilizing accrued MDF funds', steps: ['1 Partner submits proposal in portal', '2 Check available MDF wallet balance', '3 Approve budget and run campaign', '4 Disburse co-marketing funds'], api: 'POST /v1/mdf/claim', schema: 'mdf_wallet, campaign_logs' },
     { id: 'winback_milestone', cat: 'engagement', label: 'Dormant Re-Engagement', icon: '⚡', val: 800, isNew: true, formula: 'RM 800 re-engagement credit', desc: 'Inactive partner returns and commits to a new quarterly sales target', steps: ['1 Scan inactive accounts with zero purchases', '2 Account manager closes re-engagement deal', '3 Active status reinstated in CRM', '4 Deposit RM 800 re-activation bonus'], api: 'POST /v1/winback/activate', schema: 'partner_status, wallets' }
@@ -4762,9 +4865,9 @@ function initEngagement() {
   const STRATS_B2B = [
     { id: 'mdf_funding', cat: 'mdf', icon: 'ti-speakerphone', iconBg: '#E6F1FB', iconColor: '#0C447C', isNew: true, title: 'MDF Co-Funding Campaigns', sub: 'Co-fund regional events with partners using MDF funds.', why: 'Helps partners leverage accrued MDF budgets for regional lead generation campaigns.', steps: ['1 Partner logs proposal in portal with target metrics', '2 Campaign approval locks up to available MDF balance', '3 Execute campaign (roadshow, webinars, local ads)', '4 Payout released after lead capture auditing'], impact: 'Very High', effort: 'Medium', retention: 'Lead generation focus' },
     { id: 'jbp_align', cat: 'relationship', icon: 'ti-handshake', iconBg: '#FFF3D6', iconColor: '#7A4E00', isNew: true, title: 'Joint Business Planning (JBP)', sub: 'Align annual targets and resource sharing.', why: 'Establishes strong strategic lock-in and defines rebate brackets for Gold/Platinum.', steps: ['1 Partner and account manager draft JBP doc', '2 Define quarterly sales milestones and credit lines', '3 Conduct monthly audits to track performance against plan', '4 Unlock customized rebate bonuses upon compliance'], impact: 'High', effort: 'High', retention: 'Strategic partnership' },
-    { id: 'train_certs', cat: 'training', icon: 'ti-school', iconBg: '#EAF3DE', iconColor: '#27500A', isNew: true, title: 'Training Certifications', sub: 'Certify partner staff to sell advanced systems.', why: 'Direct correlation between certified sales teams and partner sales volumes.', steps: ['1 LMS issues courses on new product catalogs', '2 Staff completes certification courses and exams', '3 Certification verified by LMS API', '4 Updates Partner Scorecard (+100 max pts)'], impact: 'Medium', effort: 'Medium', retention: 'Competency-driven' },
+    { id: 'train_certs', cat: 'training', icon: 'ti-school', iconBg: '#EAF3DE', iconColor: '#27500A', isNew: true, title: 'Training Certifications', sub: 'Certify partner staff to sell advanced systems.', why: 'Direct correlation between certified sales teams and partner sales volumes.', steps: ['1 LMS issues courses on new product catalogs', '2 Staff completes certification courses and exams', '3 Certification verified by LMS API', '4 Portal badge and staff certificate unlocked'], impact: 'Medium', effort: 'Medium', retention: 'Competency-driven' },
     { id: 'rebate_nudge', cat: 'retention', icon: 'ti-trending-up', iconBg: '#EEEDFE', iconColor: '#3C3489', isNew: true, title: 'Rebate Target Nudges', sub: 'Alert partner when they are close to the next rebate tier.', why: 'Accelerates partner buying when they are near upgrade limits (e.g. within 15%).', steps: ['1 Scan partner sales progress (e.g. 85% of Gold)', '2 Portal displays target alert: "RM 20k left for Gold!"', '3 Account manager highlights Gold rebate rate (2% vs 1%)', '4 Partner completes purchases to secure upgrade'], impact: 'High', effort: 'Low', retention: 'Volume boost' },
-    { id: 'pay_reward', cat: 'rebates', icon: 'ti-credit-card', iconBg: '#FBEAF0', iconColor: '#72243E', isNew: true, title: 'Payment Incentives', sub: 'Rewards on-time payments to improve cash flows.', why: 'Keeps partner payment discipline high, reducing outstanding accounts receivable.', steps: ['1 Scan invoice payments within credit cycle terms', '2 Calculate payment timeliness ratio (target > 90%)', '3 Assign +150 points to scorecard on compliance', '4 Late payments flag risk warnings'], impact: 'High', effort: 'Low', retention: 'Cash flow health' },
+    { id: 'pay_reward', cat: 'rebates', icon: 'ti-credit-card', iconBg: '#FBEAF0', iconColor: '#72243E', isNew: true, title: 'Payment Incentives', sub: 'Rewards on-time payments to improve cash flows.', why: 'Keeps partner payment discipline high, reducing outstanding accounts receivable.', steps: ['1 Scan invoice payments within credit cycle terms', '2 Calculate payment timeliness ratio (target > 90%)', '3 Assign +200 points to scorecard on compliance', '4 Late payments flag risk warnings'], impact: 'High', effort: 'Low', retention: 'Cash flow health' },
     { id: 'referral_net', cat: 'relationship', icon: 'ti-users', iconBg: '#E1F5EE', iconColor: '#085041', isNew: true, title: 'Dealer Network Referrals', sub: 'Payouts for introducing qualified sub-dealers.', why: 'Expands brand distribution network using existing partner connections.', steps: ['1 Partner generates onboarding link in portal', '2 Sub-reseller registers and undergoes KYC check', '3 Referred partner meets initial Silver tier targets', '4 Flat RM 2,000 credit deposited to referring partner'], impact: 'High', effort: 'Medium', retention: 'Distribution expansion' },
     { id: 'risk_warning', cat: 'retention', icon: 'ti-alert-triangle', iconBg: '#FAECE7', iconColor: '#712B13', isNew: true, title: 'At-Risk Tier Warnings', sub: 'Alert account managers on declining partner sales.', why: 'Prevention of partner churn by identifying sales drops in consecutive quarters.', steps: ['1 Quarterly scan flags sales decline of >25%', '2 Alert generated: "SwiftTrade at risk of Silver downgrade"', '3 Trigger special support discount offering', '4 Grace period active for partner recovery'], impact: 'Very High', effort: 'Medium', retention: 'Churn prevention' },
     { id: 'mdf_toolkit', cat: 'mdf', icon: 'ti-file-text', iconBg: '#FCE4EC', iconColor: '#880E4F', isNew: true, title: 'Co-branded Toolkits', sub: 'Free marketing templates, brochures and catalogs.', why: 'Lowers partner marketing cost and ensures brand consistency.', steps: ['1 Access portal marketing asset library', '2 Customize co-branded flyers with partner logo', '3 System generates print-ready brochures', '4 Tracks downloads to gauge material utility'], impact: 'Medium', effort: 'Low', retention: 'Operational ease' }
