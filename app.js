@@ -25,7 +25,7 @@ let activePage = 'tech-presentation';
 // Global tab routing
 function showPage(id) {
   activePage = id;
-  const PAGES = ['tech-presentation', 'blueprint-ppt', 'journey', 'formula', 'step-formula', 'earn-events', 'tier-upgrade', 'redemption', 'engagement', 'renewal'];
+  const PAGES = ['tech-presentation', 'blueprint-ppt', 'journey', 'formula', 'step-formula', 'earn-events', 'tier-upgrade', 'redemption', 'engagement', 'renewal', 'advanced-tier'];
   PAGES.forEach(p => {
     const pageEl = document.getElementById('page-' + p);
     const tabEl = document.getElementById('tab-' + p);
@@ -80,6 +80,10 @@ function updatePageHeaders(mode) {
     'renewal': {
       b2c: { title: "Renewal & Expiry Flow — Hindi", sub: "Points expiry, Tier renewal, Membership renewal — teeno scenarios" },
       b2b: { title: "Renewal & Expiry Flow — B2B", sub: "Rebate credits expiry, Annual tier validation, aur Contract renewal scenarios" }
+    },
+    'advanced-tier': {
+      b2c: { title: "Advanced Tier Score (DTS)", sub: "Observation lock, order frequency, aur behavior points ka interactive simulation" },
+      b2b: { title: "Advanced Tier Score (DTS)", sub: "Observation lock, order frequency, aur behavior points ka interactive simulation" }
     }
   };
 
@@ -149,6 +153,7 @@ function initPage(id) {
   else if (id === 'redemption') initRedemption();
   else if (id === 'engagement') initEngagement();
   else if (id === 'renewal') initRenewal();
+  else if (id === 'advanced-tier') initAdvancedTier();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -5624,6 +5629,164 @@ window.blueprintGo = (d) => {
   } else if (blueprintSlideIndex + d === total) {
     blueprintSlideIndex = 0;
     renderBlueprintSlide();
+  }
+};
+
+/* ==========================================================================
+   DYNAMIC TIER UPGRADE (DTS)
+   ========================================================================== */
+function initAdvancedTier() {
+  const container = document.getElementById('advanced-tier-wrap');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div style="background: rgba(99, 102, 241, 0.08); border-left: 4px solid var(--color-primary); padding: 14px; border-radius: var(--radius-md); margin-bottom: 20px;">
+      <h3 style="font-family: var(--font-display); font-size: 16px; color: #fff; margin-bottom: 6px;">Dynamic Tier Score (DTS) Formula</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Tier upgrade sirf paise kharch karne par nahi, balki behavior, cancellations, aur frequency par depend karta hai.</p>
+      <div style="font-family: monospace; font-size: 12.5px; color: var(--color-amber); background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; text-align: center;">
+        Score = [ (Confirmed Spend + Behavior Points) - Canceled Spend ] × Frequency Multiplier
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      <!-- Left: Interactive Controls -->
+      <div style="flex: 1; min-width: 300px; background: var(--bg-field); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px;">
+        <div class="sect-label">Customer Activity Simulation</div>
+        
+        <div class="ctrl-row" style="margin-bottom: 16px;">
+          <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Confirmed Spend (RM)</label>
+          <input type="range" id="dts-spend" min="0" max="10000" step="100" value="1500" oninput="simDtsCalc()">
+          <span class="ctrl-val" id="dts-spend-v">1500</span>
+        </div>
+
+        <div class="ctrl-row" style="margin-bottom: 16px;">
+          <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Behavior Points (Tags, etc.)</label>
+          <input type="range" id="dts-behavior" min="0" max="500" step="10" value="50" oninput="simDtsCalc()">
+          <span class="ctrl-val" id="dts-behavior-v" style="color: var(--color-primary);">+50</span>
+        </div>
+
+        <div class="ctrl-row" style="margin-bottom: 16px;">
+          <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Canceled Spend (RM)</label>
+          <input type="range" id="dts-cancel" min="0" max="2000" step="50" value="0" oninput="simDtsCalc()">
+          <span class="ctrl-val" id="dts-cancel-v" style="color: var(--color-coral);">-0</span>
+        </div>
+
+        <div class="ctrl-row" style="margin-bottom: 16px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
+          <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Order Frequency (12 months)</label>
+          <input type="range" id="dts-freq" min="1" max="10" step="1" value="1" oninput="simDtsCalc()">
+          <span class="ctrl-val" id="dts-freq-v">1 Order</span>
+        </div>
+        
+        <div style="font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 10px;">
+          * Rules: Requires minimum 2 orders to unlock Tiers (Observation Period). >= 3 orders grants 1.1x multiplier.
+        </div>
+      </div>
+
+      <!-- Right: Real-time Evaluation -->
+      <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px;">
+        
+        <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">Final Tier Score</div>
+          <div id="dts-out-score" style="font-family: var(--font-display); font-size: 42px; font-weight: 800; color: #fff; text-shadow: var(--glow-cyan); margin-bottom: 20px; transition: transform 0.15s;">0</div>
+          
+          <div id="dts-out-badge" style="display: inline-block; margin: 0 auto; padding: 10px 20px; border-radius: 30px; font-family: var(--font-display); font-size: 16px; font-weight: 700;">
+            Bronze Tier
+          </div>
+        </div>
+
+        <!-- Lock Warning -->
+        <div id="dts-out-lock" style="background: rgba(244, 63, 94, 0.1); border: 1px solid var(--color-coral); border-radius: var(--radius-md); padding: 16px; color: var(--color-coral); font-size: 12px; display: flex; align-items: flex-start; gap: 10px; display: none;">
+          <i class="ti ti-lock" style="font-size: 18px;"></i>
+          <div>
+            <strong>Observation Period Locked</strong><br>
+            <span style="opacity: 0.8;">Customer has only placed 1 order. Tier upgrades are blocked to prevent hit-and-run fraud. They must place their 2nd order to unlock tiers.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Wait for DOM to render then calculate
+  setTimeout(() => {
+    if (window.simDtsCalc) window.simDtsCalc();
+  }, 50);
+}
+
+window.simDtsCalc = function() {
+  const spendEl = document.getElementById('dts-spend');
+  if (!spendEl) return;
+
+  const spend = parseInt(spendEl.value);
+  const behavior = parseInt(document.getElementById('dts-behavior').value);
+  const cancel = parseInt(document.getElementById('dts-cancel').value);
+  const freq = parseInt(document.getElementById('dts-freq').value);
+
+  // Update UI values
+  document.getElementById('dts-spend-v').textContent = 'RM ' + spend;
+  document.getElementById('dts-behavior-v').textContent = '+' + behavior;
+  document.getElementById('dts-cancel-v').textContent = '-' + cancel;
+  document.getElementById('dts-freq-v').textContent = freq + (freq === 1 ? ' Order' : ' Orders');
+
+  // Math calculation
+  let baseScore = (spend + behavior) - cancel;
+  if (baseScore < 0) baseScore = 0;
+
+  let multiplier = 1.0;
+  if (freq >= 3) {
+    multiplier = 1.1; // 10% bonus for high frequency
+  }
+
+  const finalScore = Math.floor(baseScore * multiplier);
+  
+  // Animation on score
+  const scoreEl = document.getElementById('dts-out-score');
+  scoreEl.style.transform = 'scale(1.05)';
+  setTimeout(() => {
+    if (scoreEl) scoreEl.style.transform = 'scale(1)';
+  }, 150);
+  scoreEl.textContent = finalScore.toLocaleString();
+
+  // Determine Tier Status and Locks
+  const lockEl = document.getElementById('dts-out-lock');
+  const badgeEl = document.getElementById('dts-out-badge');
+
+  if (freq < 2) {
+    // Locked in probation
+    lockEl.style.display = 'flex';
+    badgeEl.textContent = 'Bronze (Probation)';
+    badgeEl.style.background = '#FDF3E8';
+    badgeEl.style.color = '#CD7F32';
+    badgeEl.style.border = '1px solid #CD7F32';
+    scoreEl.style.color = '#CD7F32';
+  } else {
+    // Unlocked
+    lockEl.style.display = 'none';
+    scoreEl.style.color = '#fff';
+
+    if (finalScore >= 5000) {
+      badgeEl.textContent = 'Platinum Tier';
+      badgeEl.style.background = '#EEF2FF';
+      badgeEl.style.color = '#185FA5';
+      badgeEl.style.border = '1px solid #185FA5';
+      scoreEl.style.color = '#185FA5';
+    } else if (finalScore >= 2000) {
+      badgeEl.textContent = 'Gold Tier';
+      badgeEl.style.background = '#FFF8DC';
+      badgeEl.style.color = '#BA7517';
+      badgeEl.style.border = '1px solid #BA7517';
+      scoreEl.style.color = '#BA7517';
+    } else if (finalScore >= 500) {
+      badgeEl.textContent = 'Silver Tier';
+      badgeEl.style.background = '#F5F5F5';
+      badgeEl.style.color = '#888780';
+      badgeEl.style.border = '1px solid #888780';
+      scoreEl.style.color = '#888780';
+    } else {
+      badgeEl.textContent = 'Bronze Tier';
+      badgeEl.style.background = '#FDF3E8';
+      badgeEl.style.color = '#CD7F32';
+      badgeEl.style.border = '1px solid #CD7F32';
+    }
   }
 };
 
