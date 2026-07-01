@@ -3,7 +3,7 @@
    B2C LOYALTY MASTER DECK - FRONTEND LOGIC
    ========================================================================== */
 
-const PAGES = ['journey', 'formulas', 'advanced-tier', 'red-ren', 'fraud', 'engagement', 'social-tech', 'personas'];
+const PAGES = ['journey', 'formulas', 'advanced-tier', 'red-ren', 'fraud', 'engagement', 'social-tech', 'p-bronze', 'p-silver', 'p-gold', 'p-plat', 'p-diamond'];
 
 document.addEventListener('DOMContentLoaded', () => {
   // Theme Toggle
@@ -49,7 +49,11 @@ function initPage(pageId) {
     case 'fraud': initFraudPrevention(); break;
     case 'engagement': initEngagement(); break;
     case 'social-tech': initTech(); break;
-    case 'personas': initPersonas(); break;
+    case 'p-bronze': initPersonaBronze(); break;
+    case 'p-silver': initPersonaSilver(); break;
+    case 'p-gold': initPersonaGold(); break;
+    case 'p-plat': initPersonaPlat(); break;
+    case 'p-diamond': initPersonaDiamond(); break;
   }
 }
 
@@ -68,12 +72,12 @@ function initJourney() {
     { num: 1, title: "Profile Creation & Registration", desc: "Customer sign up karta hai. Profile 100% complete karne par Welcome Points milte hain." },
     { num: 2, title: "Explore & Engage", desc: "Products browse karta hai, wishlist banata hai, aur app roz open karta hai (Daily Streaks). Isse Behavior Points milte hain." },
     { num: 3, title: "Place Order", desc: "Cart me items add karke pehla order place karta hai." },
-    { num: 4, title: "Points Earning (Calculation)", desc: "1 RM = 1 Point rule ke hisaab se points calculate hote hain. (e.g., RM 500 = 500 Points)." },
+    { num: 4, title: "Points Earning (Calculation)", desc: "<div style='background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; margin-bottom:5px;'><strong>Formula: Points = RM Spend &times; 1</strong></div>1 RM = 1 Point rule ke hisaab se points calculate hote hain. (e.g., RM 500 = 500 Points)." },
     { num: 5, title: "Pending Wallet (Lock Period)", desc: "Earn kiye gaye points turant use nahi ho sakte. 14-30 din (Return Window) tak Pending Wallet mein lock rehte hain." },
     { num: 6, title: "Active Wallet (Points Unlocked)", desc: "Return period safely khatam hone ke baad points Active Wallet mein aate hain." },
     { num: 7, title: "Second Purchase Unlock", desc: "Customer ke paas Active points hain, par Redeem button locked rehta hai. Jab wo apna 2nd Order place karta hai, tabhi redeem button unlock hota hai (Isse customer wapas aata hai!)." },
-    { num: 8, title: "Points Redemption (Convert to Cash)", desc: "Cash Value = Total Points ÷ 100 (1% cashback). Max 20% cap rule ke sath discount milta hai." },
-    { num: 9, title: "Tier Score Calculation", desc: "System check karta hai: (Spend + Behavior) - Canceled × Frequency Multiplier." },
+    { num: 8, title: "Points Redemption (Convert to Cash)", desc: "<div style='background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; margin-bottom:5px;'><strong>Formula 1: Cash = Points &divide; 100</strong><br><strong>Formula 2: Max Cap = Cart Total &times; 20%</strong></div>Cash Value = Total Points &divide; 100 (1% cashback). Max 20% cap rule ke sath discount milta hai." },
+    { num: 9, title: "Tier Score Calculation", desc: "<div style='background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; margin-bottom:5px;'><strong>Formula: DTS = [(Spend + Behavior) - Canceled] &times; Freq Multiplier</strong></div>System is formula se calculate karke user ki sacchi loyalty value nikalta hai." },
     { num: 10, title: "Tier Assignment & Benefits", desc: "DTS score ke hisaab se Bronze, Silver, Gold, Platinum ya Diamond tier assign hota hai." },
     { num: 11, title: "Enjoy Rewards & Renew", desc: "Har 12 mahine mein system review karta hai aur Expiry ya Soft Downgrade rules lagata hai." }
   ];
@@ -114,62 +118,65 @@ function initFormulas() {
   container.innerHTML = `
     <div style="display:flex; flex-direction:column; gap: 30px; padding: 20px;">
       
+      <div class="pres-slide" style="text-align:center;">
+        <h2 style="color:var(--color-primary); margin-bottom:10px;">B2C Loyalty System ke 4 Core Formulas</h2>
+        <p style="color:var(--text-muted); font-size:14px;">Is poore system ko chalane ke liye 4 main mathematical formulas use hote hain. Chaliye inhe Hindi mein detail mein samjhte hain.</p>
+      </div>
+
       <!-- 1. The Base Formula -->
       <div class="pres-slide">
-        <h3 style="color:var(--color-primary); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">1. The Base Earning Formula</h3>
-        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">Customer paise kharch karke points kaise kamata hai.</p>
-        <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px; font-family:monospace; color:#fff;">
-          <strong>Points Earned = Total Spend (RM) × Base Multiplier</strong><br><br>
-          <span style="color:var(--color-cyan);">Current Rule: RM 1.00 Spend = 1 Point</span>
+        <h3 style="color:var(--color-primary); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">Formula #1: Points Earning (Points Kaise Kamayein)</h3>
+        <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px; font-family:monospace; color:#fff; margin-bottom:10px;">
+          <strong>Points Earned = Total Spend (RM) × 1</strong>
         </div>
+        <p style="color:var(--text-muted); line-height:1.6;">
+          <strong>Explanation:</strong> Customer jo bhi paisa kharch karta hai, use utne hi points milte hain. Jaise agar customer ne RM 500 kharch kiya, toh usko exactly 500 Points milenge.
+        </p>
       </div>
 
       <!-- 2. Dynamic Tier Score -->
       <div class="pres-slide">
-        <h3 style="color:var(--color-teal); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">2. Dynamic Tier Score (DTS) Formula</h3>
-        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">System customer ki asli value kaise nikalta hai (Behavior, Cancel, Frequency ko milakar). for Tier upgrades, accounting for behavior, cancellations, and loyalty frequency.</p>
+        <h3 style="color:var(--color-teal); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">Formula #2: Dynamic Tier Score (DTS)</h3>
         <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px; font-family:monospace; color:#fff; margin-bottom: 15px;">
           <strong>DTS = [ (Confirmed Spend) + (Behavior Points) - (Canceled Spend) ] × Frequency Multiplier</strong>
         </div>
-        <ul style="color:var(--text-main); line-height:1.6; margin-left: 20px;">
-          <li><strong>Confirmed Spend:</strong> Total RM spent on completed orders.</li>
-          <li><strong>Behavior Points:</strong> Points awarded manually by the system for non-transactional actions.</li>
-          <li><strong>Canceled Spend:</strong> Refund ya Cancel hue order ka exact RM value minus ho jata hai taaki fraud na ho. (The Clawback Rule).</li>
-          <li><strong>Frequency Multiplier:</strong> Agar 12 mahine mein 3 ya usse zyada order hain, toh 10% bonus milta hai (Multiplier = 1.1). (A 10% bonus). Otherwise 1.0.</li>
+        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">
+          <strong>Explanation:</strong> Yeh formula decide karta hai ki customer Bronze banega ya Diamond. Sirf paisa nahi, balki customer ka poora behavior calculate hota hai:
+        </p>
+        <ul style="color:var(--text-main); line-height:1.6; margin-left: 20px; font-size:14px;">
+          <li><strong>Confirmed Spend:</strong> Order jo safely deliver ho gaye.</li>
+          <li><strong>Behavior Points:</strong> Reviews likhne ya Instagram par tag karne ke extra points.</li>
+          <li><strong>Canceled Spend:</strong> Refund ya Cancel hue order ka exact RM value minus ho jata hai taaki fraud na ho (Clawback).</li>
+          <li><strong>Frequency Multiplier:</strong> Agar 12 mahine mein 3 ya usse zyada order hain, toh 10% bonus milta hai (Multiplier = 1.1).</li>
         </ul>
       </div>
 
-      <!-- 3. Tier Thresholds -->
+      <!-- 3. Redemption -->
       <div class="pres-slide">
-        <h3 style="color:var(--color-amber); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">3. Tier Upgrade Logic & Thresholds</h3>
-        <p style="color:var(--color-coral); font-weight:bold; margin-bottom:10px;">Probation Lock Rule (Sabse Zaroori): IF (Total Orders < 2) THEN Tier = "Bronze (Probation)" REGARDLESS of DTS.</p>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
-          <div style="background:#FDF3E8; color:#CD7F32; padding:15px; border-radius:8px; text-align:center; font-weight:bold;">Bronze Tier<br>DTS: 0 - 499</div>
-          <div style="background:#F5F5F5; color:#888780; padding:15px; border-radius:8px; text-align:center; font-weight:bold;">Silver Tier<br>DTS: 500 - 1,999</div>
-          <div style="background:#FFF8DC; color:#BA7517; padding:15px; border-radius:8px; text-align:center; font-weight:bold;">Gold Tier<br>DTS: 2,000 - 4,999</div>
-          <div style="background:#EEF2FF; color:#185FA5; padding:15px; border-radius:8px; text-align:center; font-weight:bold;">Platinum Tier<br>DTS: 5,000 - 9,999</div>
-          <div style="background:linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%); color:#006064; padding:15px; border-radius:8px; text-align:center; font-weight:bold;">Diamond Tier<br>DTS: 10,000+</div>
+        <h3 style="color:var(--color-cyan); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">Formula #3: Cash Discount Conversion</h3>
+        <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px; font-family:monospace; color:#fff; margin-bottom: 15px;">
+          <strong>Discount Value (RM) = Points ÷ 100</strong>
         </div>
+        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">
+          <strong>Explanation:</strong> Jab customer points ko discount mein badalta hai, toh usko 1% flat cashback milta hai. 100 Points = RM 1.00. (e.g. 5,000 points = RM 50 ka discount).
+        </p>
       </div>
 
-      <!-- 4. Redemption -->
+      <!-- 4. Max Cap -->
       <div class="pres-slide">
-        <h3 style="color:var(--color-cyan); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">4. Point Redemption & Checkout Formula</h3>
-        <ul style="color:var(--text-main); line-height:1.6; margin-left: 20px;">
-          <li><strong>Cash Value Conversion:</strong> 100 points = RM 1.00 (1% Flat Cashback).</li>
-          <li><strong>Minimum Threshold Rule:</strong> IF (Wallet Balance < 500 points) THEN Redemption = LOCKED.</li>
-          <li><strong>The Max Cap Formula:</strong> Max Allowed Discount (RM) = Cart Total (RM) × Max Cap %</li>
-          <li><strong>Final Checkout Calculation:</strong> Out-of-Pocket Cash (RM) = Cart Total (RM) - Applied Discount (RM)</li>
-        </ul>
+        <h3 style="color:var(--color-coral); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">Formula #4: Max Allowed Cap (Company Protection)</h3>
+        <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px; font-family:monospace; color:#fff; margin-bottom: 15px;">
+          <strong>Max Allowed Discount = Cart Total × 20%</strong>
+        </div>
+        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">
+          <strong>Explanation:</strong> Company ka cashflow bachane ke liye, koi bhi customer apne pure points laga kar 100% free order nahi le sakta. Wo apne bill ka sirf max 20% hi discount le sakta hai. 
+        </p>
       </div>
 
     </div>
-  `;
+`;
 }
 
-/* ==========================================================================
-   2. DYNAMIC TIER UPGRADE (DTS)
-   ========================================================================== */
 function initAdvancedTier() {
   const container = document.getElementById('advanced-tier-wrap');
   if (!container) return;
@@ -769,104 +776,86 @@ function initTech() {
 /* ==========================================================================
    7. 5 PERSONAS PAGE (Bronze to Diamond)
    ========================================================================== */
-function initPersonas() {
-  const container = document.getElementById('personas-wrap');
+
+function initPersonaBronze() {
+  const container = document.getElementById('p-bronze-wrap');
   if (!container) return;
+  container.innerHTML = `<div style="padding:20px; background:var(--bg-field); border:1px solid #CD7F32; border-radius:var(--radius-lg);">
+    <h3 style="color:#fff; font-size:24px; margin-bottom:10px;">Rahul (The Beginner)</h3>
+    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Rahul naya customer hai. Usne Profile complete ki aur apna sabse pehla order kiya.</p>
+    <ul style="color:var(--text-main); font-size:14px; line-height:1.8; margin-left: 20px;">
+      <li><strong>Profile Setup:</strong> +100 Points</li>
+      <li><strong>Transactions:</strong> 1 Order placed (RM 150)</li>
+      <li><strong>Formula:</strong> DTS = (150 + 0) × 1.0 = 150</li>
+      <li><strong>Result:</strong> <span style="color:#CD7F32; font-weight:bold;">Bronze (Probation Lock)</span></li>
+    </ul>
+    <p style="margin-top:15px; font-size:13px; color:var(--text-muted);"><strong>Reason:</strong> Sirf 1 order hai, isliye probation par locked hai. Tier upgrade ke liye 2nd order chahiye.</p>
+  </div>`;
+}
 
-  const personas = [
-    {
-      name: "Rahul (The Beginner)", target: "Bronze",
-      color: "#CD7F32", bg: "#FDF3E8",
-      story: "Rahul naya customer hai. Usne Profile complete ki aur apna sabse pehla order kiya.",
-      profile: "+100 (Profile Creation)",
-      orders: "1 Order placed (RM 150 total)",
-      behavior: "None",
-      math: "DTS = (150 + 0) × 1.0 = 150",
-      tier: "Bronze (Probation Lock)",
-      reason: "Sirf 1 order hai, isliye probation par locked hai. Tier upgrade ke liye 2nd order chahiye."
-    },
-    {
-      name: "Priya (The Saver)", target: "Silver",
-      color: "#888780", bg: "#F5F5F5",
-      story: "Priya ko deals pasand hain. Usne 2 baar choti shopping ki.",
-      profile: "+100",
-      orders: "2 Orders placed (RM 300 total)",
-      behavior: "None",
-      math: "DTS = (300 + 0) × 1.0 = 300",
-      tier: "Silver Tier",
-      reason: "Usne 2nd order cross kar liya. Score 300 hai, Bronze (0-499) cross nahi kiya par probation open hone se wo naturally basic active tier me aa gayi. Wait, formula ke hisab se 300 par Bronze hi hona chahiye tha. Par chalo hum aage dekhte hain. Correction: Score 500 par silver milta hai. Priya spends RM 500 total.",
-      corrected_orders: "2 Orders placed (RM 600 total)",
-      corrected_math: "DTS = (600 + 0) × 1.0 = 600"
-    },
-    {
-      name: "Amit (The Engager)", target: "Gold",
-      color: "#BA7517", bg: "#FFF8DC",
-      story: "Amit ne orders lagaye, par usne website ko reviews aur Insta tags se bhar diya.",
-      profile: "+100",
-      orders: "3 Orders placed (RM 1,800 total)",
-      behavior: "+60 (3 Reviews) & +50 (Insta Tag) = +110 Behavior Points",
-      math: "DTS = (1,800 + 110) × 1.10 (Freq Bonus) = 2,101",
-      tier: "Gold Tier",
-      reason: "Score 2,000 cross kar gaya! 3 orders ke wajah se 10% Frequency Bonus bhi mila."
-    },
-    {
-      name: "Neha (The Brand Advocate)", target: "Platinum",
-      color: "#185FA5", bg: "#EEF2FF",
-      story: "Neha brand ko bahut pasand karti hai. Usne doston ko refer bhi kiya.",
-      profile: "+100",
-      orders: "5 Orders placed (RM 4,500 total). 1 Cancelled (-RM 200)",
-      behavior: "+500 (Referred a Friend)",
-      math: "DTS = (4,500 + 500 - 200) × 1.10 = 5,280",
-      tier: "Platinum Tier",
-      reason: "Cancel order ka penalty laga (Clawback), par uske 500 Referral points ne usko bacha liya. Score 5,000 cross karke Platinum."
-    },
-    {
-      name: "Vikram (The VIP Diamond)", target: "Diamond",
-      color: "#006064", bg: "linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%)",
-      story: "Vikram ek High Net-worth Individual (HNI) hai aur saal bhar heavy shopping karta hai.",
-      profile: "+100",
-      orders: "10 Orders placed (RM 9,500 total)",
-      behavior: "+1,000 (Beta Testing Co-Creation points)",
-      math: "DTS = (9,500 + 1,000) × 1.10 = 11,550",
-      tier: "Diamond Tier",
-      reason: "Spend (9.5k) se wo Diamond (10k) tak nahi pahonch raha tha, par Beta Testing (1000) aur 10% Bonus ne usko Diamond bana diya!"
-    }
-  ];
+function initPersonaSilver() {
+  const container = document.getElementById('p-silver-wrap');
+  if (!container) return;
+  container.innerHTML = `<div style="padding:20px; background:var(--bg-field); border:1px solid #888780; border-radius:var(--radius-lg);">
+    <h3 style="color:#fff; font-size:24px; margin-bottom:10px;">Priya (The Saver)</h3>
+    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Priya ko deals pasand hain. Usne 2 baar choti shopping ki.</p>
+    <ul style="color:var(--text-main); font-size:14px; line-height:1.8; margin-left: 20px;">
+      <li><strong>Profile Setup:</strong> +100 Points</li>
+      <li><strong>Transactions:</strong> 2 Orders placed (RM 600 total)</li>
+      <li><strong>Formula:</strong> DTS = (600 + 0) × 1.0 = 600</li>
+      <li><strong>Result:</strong> <span style="color:#888780; font-weight:bold;">Silver Tier</span></li>
+    </ul>
+    <p style="margin-top:15px; font-size:13px; color:var(--text-muted);"><strong>Reason:</strong> 2nd order cross kar liya aur DTS 500 cross kar gaya, toh Silver ban gayi.</p>
+  </div>`;
+}
 
-  let personaHtml = '<div style="display:flex; flex-direction:column; gap:20px; padding:20px;">';
-  
-  personas.forEach(p => {
-    let o = p.corrected_orders ? p.corrected_orders : p.orders;
-    let m = p.corrected_math ? p.corrected_math : p.math;
-    personaHtml += `
-      <div style="background:var(--bg-field); border:1px solid ${p.color}; border-radius:var(--radius-lg); padding:20px;">
-        <div style="display:flex; align-items:center; gap: 15px; margin-bottom: 15px;">
-          <div style="background:${p.bg}; color:${p.color}; font-weight:bold; padding: 10px 20px; border-radius:30px; font-family:var(--font-display);">
-            ${p.target} Persona
-          </div>
-          <h3 style="color:#fff; font-size:18px;">${p.name}</h3>
-        </div>
-        <p style="color:var(--text-muted); font-size:13px; margin-bottom:15px; font-style:italic;">${p.story}</p>
-        
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; font-size: 13px;">
-          <div><strong style="color:var(--text-main);">Profile Setup:</strong> <span style="color:var(--color-teal);">${p.profile}</span></div>
-          <div><strong style="color:var(--text-main);">Behavior Actions:</strong> <span style="color:var(--color-teal);">${p.behavior}</span></div>
-          <div style="grid-column: span 2;"><strong style="color:var(--text-main);">Transactions (Spend):</strong> <span style="color:var(--color-cyan);">${o}</span></div>
-        </div>
-        
-        <div style="background:rgba(0,0,0,0.3); padding:10px 15px; border-radius:var(--radius-md); font-family:monospace; margin-bottom:10px;">
-          <strong style="color:var(--text-main);">Formula Output:</strong> ${m}
-        </div>
-        
-        <div style="border-left: 3px solid ${p.color}; padding-left:15px; margin-top:10px;">
-          <strong style="color:${p.color};">${p.tier}</strong><br>
-          <span style="font-size:12px; color:var(--text-muted);">${p.reason}</span>
-        </div>
-      </div>
-    `;
-  });
+function initPersonaGold() {
+  const container = document.getElementById('p-gold-wrap');
+  if (!container) return;
+  container.innerHTML = `<div style="padding:20px; background:var(--bg-field); border:1px solid #BA7517; border-radius:var(--radius-lg);">
+    <h3 style="color:#fff; font-size:24px; margin-bottom:10px;">Amit (The Engager)</h3>
+    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Amit ne orders lagaye, par usne website ko reviews aur Insta tags se bhar diya.</p>
+    <ul style="color:var(--text-main); font-size:14px; line-height:1.8; margin-left: 20px;">
+      <li><strong>Profile Setup:</strong> +100 Points</li>
+      <li><strong>Transactions:</strong> 3 Orders placed (RM 1,800 total)</li>
+      <li><strong>Behavior:</strong> +60 (3 Reviews) & +50 (Insta Tag) = +110</li>
+      <li><strong>Formula:</strong> DTS = (1,800 + 110) × 1.10 = 2,101</li>
+      <li><strong>Result:</strong> <span style="color:#BA7517; font-weight:bold;">Gold Tier</span></li>
+    </ul>
+    <p style="margin-top:15px; font-size:13px; color:var(--text-muted);"><strong>Reason:</strong> Score 2,000 cross kar gaya! 3 orders ke wajah se 10% Frequency Bonus bhi mila.</p>
+  </div>`;
+}
 
-  personaHtml += '</div>';
+function initPersonaPlat() {
+  const container = document.getElementById('p-plat-wrap');
+  if (!container) return;
+  container.innerHTML = `<div style="padding:20px; background:var(--bg-field); border:1px solid #185FA5; border-radius:var(--radius-lg);">
+    <h3 style="color:#fff; font-size:24px; margin-bottom:10px;">Neha (The Brand Advocate)</h3>
+    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Neha brand ko bahut pasand karti hai. Usne doston ko refer bhi kiya.</p>
+    <ul style="color:var(--text-main); font-size:14px; line-height:1.8; margin-left: 20px;">
+      <li><strong>Profile Setup:</strong> +100 Points</li>
+      <li><strong>Transactions:</strong> 5 Orders placed (RM 4,500). 1 Cancelled (-RM 200)</li>
+      <li><strong>Behavior:</strong> +500 (Referred a Friend)</li>
+      <li><strong>Formula:</strong> DTS = (4,500 + 500 - 200) × 1.10 = 5,280</li>
+      <li><strong>Result:</strong> <span style="color:#185FA5; font-weight:bold;">Platinum Tier</span></li>
+    </ul>
+    <p style="margin-top:15px; font-size:13px; color:var(--text-muted);"><strong>Reason:</strong> Cancel order ka penalty laga (Clawback), par uske 500 Referral points ne usko bacha liya. Score 5,000 cross karke Platinum.</p>
+  </div>`;
+}
 
-  container.innerHTML = personaHtml;
+function initPersonaDiamond() {
+  const container = document.getElementById('p-diamond-wrap');
+  if (!container) return;
+  container.innerHTML = `<div style="padding:20px; background:var(--bg-field); border:1px solid #006064; border-radius:var(--radius-lg);">
+    <h3 style="color:#fff; font-size:24px; margin-bottom:10px;">Vikram (The VIP Diamond)</h3>
+    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Vikram ek High Net-worth Individual (HNI) hai aur saal bhar heavy shopping karta hai.</p>
+    <ul style="color:var(--text-main); font-size:14px; line-height:1.8; margin-left: 20px;">
+      <li><strong>Profile Setup:</strong> +100 Points</li>
+      <li><strong>Transactions:</strong> 10 Orders placed (RM 9,500)</li>
+      <li><strong>Behavior:</strong> +1,000 (Beta Testing Co-Creation points)</li>
+      <li><strong>Formula:</strong> DTS = (9,500 + 1,000) × 1.10 = 11,550</li>
+      <li><strong>Result:</strong> <span style="color:#006064; font-weight:bold;">Diamond Tier</span></li>
+    </ul>
+    <p style="margin-top:15px; font-size:13px; color:var(--text-muted);"><strong>Reason:</strong> Spend (9.5k) se wo Diamond (10k) tak nahi pahonch raha tha, par Beta Testing (1000) aur 10% Bonus ne usko Diamond bana diya!</p>
+  </div>`;
 }
