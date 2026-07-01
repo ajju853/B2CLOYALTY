@@ -3,7 +3,7 @@
    B2C LOYALTY MASTER DECK - FRONTEND LOGIC
    ========================================================================== */
 
-const PAGES = ['journey', 'formulas', 'advanced-tier', 'red-ren', 'fraud', 'engagement'];
+const PAGES = ['journey', 'formulas', 'advanced-tier', 'red-ren', 'fraud', 'engagement', 'social-tech', 'personas'];
 
 document.addEventListener('DOMContentLoaded', () => {
   // Theme Toggle
@@ -48,6 +48,8 @@ function initPage(pageId) {
     case 'red-ren': initRedRen(); break;
     case 'fraud': initFraudPrevention(); break;
     case 'engagement': initEngagement(); break;
+    case 'social-tech': initTech(); break;
+    case 'personas': initPersonas(); break;
   }
 }
 
@@ -698,4 +700,173 @@ function initEngagement() {
     </div>
     ${gridHtml}
   `;
+}
+
+
+/* ==========================================================================
+   6. SOCIAL TECH API PAGE (Tagging System)
+   ========================================================================== */
+function initTech() {
+  const container = document.getElementById('social-tech-wrap');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div style="padding: 20px; display:flex; flex-direction:column; gap: 30px;">
+      
+      <div class="pres-slide" style="border:none; box-shadow:none; text-align:center;">
+        <h2 style="font-size:24px; color:var(--color-primary); margin-bottom:10px;">Social Tagging System (How it Works)</h2>
+        <p style="font-size:14px; max-width:700px; margin: 0 auto; color:var(--text-muted); line-height:1.5;">
+          Customer jab Instagram/Facebook par brand ko tag karta hai (@Brand ya #Hashtag), toh usko automatically points kaise milte hain? Backend API Flow yahan samjhaya gaya hai.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="step-num" style="background:var(--color-cyan);">1</div>
+          <div class="step-content">
+            <div class="step-title">Profile Linking (Account Connect)</div>
+            <div class="step-desc">
+              Sabse pehle customer apni website profile mein jaakar apna <strong>Instagram Handle</strong> link karta hai (OAuth Login / Text input). System is handle ko uske User ID se map kar leta hai.
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-step">
+          <div class="step-num" style="background:var(--color-primary);">2</div>
+          <div class="step-content">
+            <div class="step-title">Graph API Webhooks (Listening)</div>
+            <div class="step-desc">
+              Hamara backend system Facebook Graph API (Instagram API) se connect hota hai. Jab bhi koi public user hamein <strong>@YourBrand</strong> se mention karta hai ya hamara specific <strong>#YourBrandStyle</strong> use karta hai, Instagram API turant hamare server par ek Webhook request (Alert) bhejta hai.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-num" style="background:var(--color-amber);">3</div>
+          <div class="step-content">
+            <div class="step-title">Validation & Match</div>
+            <div class="step-desc">
+              Server post ka data read karta hai. Phir check karta hai ki post karne wale ka username hamare database mein kisi Linked Account se match hota hai ya nahi. Agar match hota hai, toh rules check hote hain (e.g. Max 1 tag allowed per week to avoid spam).
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-num" style="background:var(--color-teal);">4</div>
+          <div class="step-content">
+            <div class="step-title">Automated Point Crediting</div>
+            <div class="step-desc">
+              Validation pass hone ke baad, system turant customer ke wallet me <strong>+50 Behavior Points</strong> credit kar deta hai aur app me notification bhejta hai: <em>"Thanks for tagging us! +50 Points earned."</em>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  `;
+}
+
+/* ==========================================================================
+   7. 5 PERSONAS PAGE (Bronze to Diamond)
+   ========================================================================== */
+function initPersonas() {
+  const container = document.getElementById('personas-wrap');
+  if (!container) return;
+
+  const personas = [
+    {
+      name: "Rahul (The Beginner)", target: "Bronze",
+      color: "#CD7F32", bg: "#FDF3E8",
+      story: "Rahul naya customer hai. Usne Profile complete ki aur apna sabse pehla order kiya.",
+      profile: "+100 (Profile Creation)",
+      orders: "1 Order placed (RM 150 total)",
+      behavior: "None",
+      math: "DTS = (150 + 0) × 1.0 = 150",
+      tier: "Bronze (Probation Lock)",
+      reason: "Sirf 1 order hai, isliye probation par locked hai. Tier upgrade ke liye 2nd order chahiye."
+    },
+    {
+      name: "Priya (The Saver)", target: "Silver",
+      color: "#888780", bg: "#F5F5F5",
+      story: "Priya ko deals pasand hain. Usne 2 baar choti shopping ki.",
+      profile: "+100",
+      orders: "2 Orders placed (RM 300 total)",
+      behavior: "None",
+      math: "DTS = (300 + 0) × 1.0 = 300",
+      tier: "Silver Tier",
+      reason: "Usne 2nd order cross kar liya. Score 300 hai, Bronze (0-499) cross nahi kiya par probation open hone se wo naturally basic active tier me aa gayi. Wait, formula ke hisab se 300 par Bronze hi hona chahiye tha. Par chalo hum aage dekhte hain. Correction: Score 500 par silver milta hai. Priya spends RM 500 total.",
+      corrected_orders: "2 Orders placed (RM 600 total)",
+      corrected_math: "DTS = (600 + 0) × 1.0 = 600"
+    },
+    {
+      name: "Amit (The Engager)", target: "Gold",
+      color: "#BA7517", bg: "#FFF8DC",
+      story: "Amit ne orders lagaye, par usne website ko reviews aur Insta tags se bhar diya.",
+      profile: "+100",
+      orders: "3 Orders placed (RM 1,800 total)",
+      behavior: "+60 (3 Reviews) & +50 (Insta Tag) = +110 Behavior Points",
+      math: "DTS = (1,800 + 110) × 1.10 (Freq Bonus) = 2,101",
+      tier: "Gold Tier",
+      reason: "Score 2,000 cross kar gaya! 3 orders ke wajah se 10% Frequency Bonus bhi mila."
+    },
+    {
+      name: "Neha (The Brand Advocate)", target: "Platinum",
+      color: "#185FA5", bg: "#EEF2FF",
+      story: "Neha brand ko bahut pasand karti hai. Usne doston ko refer bhi kiya.",
+      profile: "+100",
+      orders: "5 Orders placed (RM 4,500 total). 1 Cancelled (-RM 200)",
+      behavior: "+500 (Referred a Friend)",
+      math: "DTS = (4,500 + 500 - 200) × 1.10 = 5,280",
+      tier: "Platinum Tier",
+      reason: "Cancel order ka penalty laga (Clawback), par uske 500 Referral points ne usko bacha liya. Score 5,000 cross karke Platinum."
+    },
+    {
+      name: "Vikram (The VIP Diamond)", target: "Diamond",
+      color: "#006064", bg: "linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%)",
+      story: "Vikram ek High Net-worth Individual (HNI) hai aur saal bhar heavy shopping karta hai.",
+      profile: "+100",
+      orders: "10 Orders placed (RM 9,500 total)",
+      behavior: "+1,000 (Beta Testing Co-Creation points)",
+      math: "DTS = (9,500 + 1,000) × 1.10 = 11,550",
+      tier: "Diamond Tier",
+      reason: "Spend (9.5k) se wo Diamond (10k) tak nahi pahonch raha tha, par Beta Testing (1000) aur 10% Bonus ne usko Diamond bana diya!"
+    }
+  ];
+
+  let personaHtml = '<div style="display:flex; flex-direction:column; gap:20px; padding:20px;">';
+  
+  personas.forEach(p => {
+    let o = p.corrected_orders ? p.corrected_orders : p.orders;
+    let m = p.corrected_math ? p.corrected_math : p.math;
+    personaHtml += `
+      <div style="background:var(--bg-field); border:1px solid ${p.color}; border-radius:var(--radius-lg); padding:20px;">
+        <div style="display:flex; align-items:center; gap: 15px; margin-bottom: 15px;">
+          <div style="background:${p.bg}; color:${p.color}; font-weight:bold; padding: 10px 20px; border-radius:30px; font-family:var(--font-display);">
+            ${p.target} Persona
+          </div>
+          <h3 style="color:#fff; font-size:18px;">${p.name}</h3>
+        </div>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:15px; font-style:italic;">${p.story}</p>
+        
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; font-size: 13px;">
+          <div><strong style="color:var(--text-main);">Profile Setup:</strong> <span style="color:var(--color-teal);">${p.profile}</span></div>
+          <div><strong style="color:var(--text-main);">Behavior Actions:</strong> <span style="color:var(--color-teal);">${p.behavior}</span></div>
+          <div style="grid-column: span 2;"><strong style="color:var(--text-main);">Transactions (Spend):</strong> <span style="color:var(--color-cyan);">${o}</span></div>
+        </div>
+        
+        <div style="background:rgba(0,0,0,0.3); padding:10px 15px; border-radius:var(--radius-md); font-family:monospace; margin-bottom:10px;">
+          <strong style="color:var(--text-main);">Formula Output:</strong> ${m}
+        </div>
+        
+        <div style="border-left: 3px solid ${p.color}; padding-left:15px; margin-top:10px;">
+          <strong style="color:${p.color};">${p.tier}</strong><br>
+          <span style="font-size:12px; color:var(--text-muted);">${p.reason}</span>
+        </div>
+      </div>
+    `;
+  });
+
+  personaHtml += '</div>';
+
+  container.innerHTML = personaHtml;
 }
