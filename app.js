@@ -4042,7 +4042,11 @@ function initTierUpgrade() {
           color: '#378ADD', bbg: '#E6F1FB', btc: '#0C447C', badge: 'Shuruwaat',
           title: 'Har order ke baad check hota hai',
           eng: 'After every earn event — Tier Engine check runs',
-          body: `Jab bhi points earn hote hain (order, birthday, review complete checks), Tier Engine automatically trigger hota hai.\n\nYeh customer profile read karke status checks evaluate karega.\n\nAbhi lifetime points: <strong>${life.toLocaleString()} pts</strong> — Tier: <strong>${curTier}</strong>`,
+          body: `Jab bhi points earn hote hain (order, birthday, review complete checks), Tier Engine automatically trigger hota hai.
+
+Yeh customer profile read karke status checks evaluate karega.
+
+Abhi lifetime points: <strong>${life.toLocaleString()} pts</strong> — Tier: <strong>${curTier}</strong>`,
           hl: { bg: '#E6F1FB', color: '#0C447C', text: `Lifetime: ${life.toLocaleString()} pts → Tier: ${curTier}` },
           chips: [{ l: `${curTier} tier active`, bg: '#FDF3E8', c: tc, b: tc }]
         },
@@ -4050,7 +4054,9 @@ function initTierUpgrade() {
           color: '#534AB7', bbg: '#EEEDFE', btc: '#3C3489', badge: 'Threshold check',
           title: 'Tier Engine thresholds compare karta hai',
           eng: 'Lifetime vs thresholds: 500 / 2000 / 5000',
-          body: `System thresholds verify checks trigger criteria:\n• <strong>500 pts</strong> → Silver\n• <strong>2,000 pts</strong> → Gold\n• <strong>5,000 pts</strong> → Platinum\n\nAbhi points: <strong>${life.toLocaleString()} pts</strong> — ${nextTier ? `<strong>${nextTier} ke liye ${nextPts.toLocaleString()} check needed (${needed.toLocaleString()} aur)</strong>` : 'Platinum Elite peak crossed!'}`,
+          body: `System thresholds verify checks trigger criteria:\n• <strong>500 pts</strong> → Silver\n• <strong>2,000 pts</strong> → Gold\n• <strong>5,000 pts</strong> → Platinum
+
+Abhi points: <strong>${life.toLocaleString()} pts</strong> — ${nextTier ? `<strong>${nextTier} ke liye ${nextPts.toLocaleString()} check needed (${needed.toLocaleString()} aur)</strong>` : 'Platinum Elite peak crossed!'}`,
           bar: { pct, color: needed > 0 ? tc : nextColor, label: nextTier ? `${life.toLocaleString()} / ${nextPts.toLocaleString()} → ${nextTier}` : 'Platinum reached!' },
           hl: { bg: '#EEEDFE', color: '#3C3489', text: nextTier ? `${needed.toLocaleString()} points needed for ${nextTier}` : 'Platinum — Highest level achieved!' },
           chips: nextTier ? [{ l: `${needed.toLocaleString()} pts target`, bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }] : [{ l: 'Platinum Elite', bg: '#EEF2FF', c: '#185FA5', b: '#85B7EB' }]
@@ -4063,8 +4069,12 @@ function initTierUpgrade() {
           title: needed > 0 ? `Abhi upgrade nahi — ${needed.toLocaleString()} pts baaki` : `${curTier} → ${nextTier || 'Platinum'} upgrade confirmed!`,
           eng: needed > 0 ? 'Threshold not crossed' : 'Threshold crossed → auto upgrade fires',
           body: needed > 0 
-            ? `Manoj balance (<strong>${life.toLocaleString()} pts</strong>) targets check limit Silver criteria meet nahi karta.\n\nTier status unchanged: <strong>${curTier}</strong>.` 
-            : `<strong>Threshold cross ho gaya!</strong>\n\nSystem ne database write flags prepare kiye. upgrade workflow actions triggered.`,
+            ? `Manoj balance (<strong>${life.toLocaleString()} pts</strong>) targets check limit Silver criteria meet nahi karta.
+
+Tier status unchanged: <strong>${curTier}</strong>.` 
+            : `<strong>Threshold cross ho gaya!</strong>
+
+System ne database write flags prepare kiye. upgrade workflow actions triggered.`,
           hl: needed > 0 
             ? { bg: '#F5F5F5', color: '#444441', text: `${life.toLocaleString()} < ${nextPts.toLocaleString()} → status same` }
             : { bg: '#E1F5EE', color: '#085041', text: `Upgrade to ${nextTier}!` },
@@ -4244,7 +4254,9 @@ function initTierUpgrade() {
           color: '#534AB7', bbg: '#EEEDFE', btc: '#3C3489', badge: 'Threshold Check',
           title: 'System thresholds verify kiye gaye',
           eng: 'Compare actual sales and score against tier targets',
-          body: `Tier limits comparison parameters:\n• <strong>Platinum</strong>: RM 250K+ & Score 850+\n• <strong>Gold</strong>: RM 125K+ & Score 700+\n• <strong>Silver</strong>: RM 25K+ & Score 500+\n\nQualifying tier this quarter: <strong style="color:${tc}">${currentQual.toUpperCase()}</strong>.`,
+          body: `Tier limits comparison parameters:\n• <strong>Platinum</strong>: RM 250K+ & Score 850+\n• <strong>Gold</strong>: RM 125K+ & Score 700+\n• <strong>Silver</strong>: RM 25K+ & Score 500+
+
+Qualifying tier this quarter: <strong style="color:${tc}">${currentQual.toUpperCase()}</strong>.`,
           hl: { bg: '#EEEDFE', color: '#3C3489', text: `Qualifying Tier: ${currentQual}` },
           chips: [{ l: `Qualifies: ${currentQual}`, bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
         },
@@ -4252,7 +4264,9 @@ function initTierUpgrade() {
           color: '#BA7517', bbg: '#FAEEDA', btc: '#633806', badge: 'Consecutive Quarters Check',
           title: '2-Quarter Rule evaluation check runs',
           eng: 'Upgrades/Downgrades require 2 consecutive quarters of performance matching',
-          body: `Single quarter spike ya dip se tier change nahi hota. Partner ko naya level <strong>2 consecutive quarters</strong> maintain karna padta hai. Otherwise, grace period/evaluation active rehta hai.\n\nEvaluation status: <strong>${consecutiveStatus}</strong>.`,
+          body: `Single quarter spike ya dip se tier change nahi hota. Partner ko naya level <strong>2 consecutive quarters</strong> maintain karna padta hai. Otherwise, grace period/evaluation active rehta hai.
+
+Evaluation status: <strong>${consecutiveStatus}</strong>.`,
           hl: { bg: '#FAEEDA', color: '#633806', text: `2-Quarter rule checks: ${consecutiveStatus}` },
           chips: [{ l: '2-Quarter check', bg: '#FAEEDA', c: '#633806', b: '#EF9F27' }]
         },
@@ -4260,7 +4274,9 @@ function initTierUpgrade() {
           color: isDowngrade ? '#A32D2D' : '#1D9E75', bbg: isDowngrade ? '#FCEBEB' : '#E1F5EE', btc: isDowngrade ? '#791F1F' : '#085041', badge: 'Tier Decision',
           title: `Decision: ${decisionText}`,
           eng: 'Final tier status determined for next quarter',
-          body: `Previous tier (<strong>${prev}</strong>) se transition logic apply karne par:\n• Naya Tier status: <strong style="color:${tc}">${currentQual.toUpperCase()}</strong>\n\nTransition details: ${decisionText}.`,
+          body: `Previous tier (<strong>${prev}</strong>) se transition logic apply karne par:\n• Naya Tier status: <strong style="color:${tc}">${currentQual.toUpperCase()}</strong>
+
+Transition details: ${decisionText}.`,
           hl: { bg: isDowngrade ? '#FCEBEB' : '#E1F5EE', color: isDowngrade ? '#791F1F' : '#085041', text: `Final Decision: ${decisionText}` },
           chips: [{ l: decisionText, bg: isDowngrade ? '#FCEBEB' : '#E1F5EE', c: isDowngrade ? '#791F1F' : '#085041', b: isDowngrade ? '#F09595' : '#5DCAA5' }]
         },
@@ -4380,482 +4396,197 @@ function initTierUpgrade() {
   }
 }
 function initRedemption() {
-  if (activeMode === 'b2c') {
-    let rMode = 'redeem'; // 'redeem' or 'saga'
-    let rCurStep = 0;
-    let isStockout = false;
+  const container = document.getElementById('redemption-wrap');
+  if (!container) return;
 
-    const getRedeemSteps = (wallet, orderAmt) => {
-      const maxRm = +(orderAmt * 0.20).toFixed(2);
-      const maxPts = Math.round(maxRm * 100);
-      const actualPts = Math.min(wallet, maxPts);
-      const actualRm = +(actualPts / 100).toFixed(2);
-      const remaining = wallet - actualPts;
-      const finalOrder = +(orderAmt - actualRm).toFixed(2);
-      const capHit = wallet >= maxPts;
-
-      return [
-        {
-          color: '#534AB7', bbg: '#EEEDFE', btc: '#3C3489', badge: 'Step 1 — Checkout',
-          title: 'Customer checkout pe aaya',
-          eng: 'Customer initiates checkout',
-          body: `Customer details verification completed. Cart subtotal: <strong>RM ${orderAmt}</strong>.\nWallet points: <strong>${wallet.toLocaleString()} pts</strong>.\n\nSystem asks: <strong>"Do you want to redeem points?"</strong>`,
-          hl: { bg: '#EEEDFE', color: '#3C3489', text: `Wallet: ${wallet.toLocaleString()} pts | Order: RM ${orderAmt}` },
-          chips: [{ l: 'Points Engine check', bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-        },
-        {
-          color: '#BA7517', bbg: '#FAEEDA', btc: '#633806', badge: 'Step 2 — Cap calculation',
-          title: '20% cap limit calculate hua',
-          eng: 'Max redemption capped at 20% of subtotal value',
-          body: `Capping constraints evaluation:\n<strong>RM ${orderAmt} × 20% = RM ${maxRm}</strong>\n\nMaximum reward deductions limit: <strong>RM ${maxRm} (${maxPts.toLocaleString()} points)</strong>.`,
-          hl: { bg: '#FAEEDA', color: '#633806', text: `Max cap: RM ${maxRm} = ${maxPts.toLocaleString()} pts` },
-          chips: [{ l: '20% Capping Cap', bg: '#FAEEDA', c: '#633806', b: '#EF9F27' }]
-        },
-        {
-          color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Step 3 — Wallet deduction check',
-          title: capHit ? 'Max points limit exceeded' : 'Points deducted',
-          eng: capHit ? 'Wallet balance >= cap limit' : 'Wallet balance < cap limit',
-          body: capHit 
-            ? `Wallet balance (<strong>${wallet.toLocaleString()} pts</strong>) is higher than cap limit (<strong>${maxPts.toLocaleString()} pts</strong>). Capping applies.\n\nPoints used: <strong>${maxPts.toLocaleString()} pts (RM ${maxRm} off)</strong>.` 
-            : `Wallet balance (<strong>${wallet.toLocaleString()} pts</strong>) fits under cap limit. All available points used.\n\nPoints used: <strong>${wallet.toLocaleString()} pts (RM ${actualRm} off)</strong>.`,
-          hl: { bg: '#E1F5EE', color: '#085041', text: `${actualPts.toLocaleString()} points applied` },
-          chips: [{ l: `Redeemed: ${actualPts.toLocaleString()} pts`, bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-        },
-        {
-          color: '#378ADD', bbg: '#E6F1FB', btc: '#0C447C', badge: 'Step 4 — Payment adjustment',
-          title: 'Final pay adjust kiya',
-          eng: 'Final subtotal amount adjusted',
-          body: `Adjusted checkout bill:\n<strong>RM ${orderAmt} − RM ${actualRm} = RM ${finalOrder}</strong>.\n\nWallet debit ledger written: <strong>-${actualPts.toLocaleString()} pts</strong>.`,
-          hl: { bg: '#E6F1FB', color: '#0C447C', text: `Manoj pays: RM ${finalOrder} | Remaining wallet: ${remaining.toLocaleString()} pts` },
-          chips: [{ l: `Cart: RM ${finalOrder}`, bg: '#E6F1FB', c: '#0C447C', b: '#85B7EB' }]
-        },
-        {
-          color: '#712B13', bbg: '#FAECE7', btc: '#712B13', badge: 'Step 5 — Lifetime safety check',
-          title: 'Lifetime counter remains unaffected',
-          eng: 'Redemption never reduces status progress',
-          body: `Deduction completed. Wallet drops to <strong>${remaining.toLocaleString()} pts</strong>.\n\nLifetime count is unmodified. Tier Silver status is protected!`,
-          hl: { bg: '#FAECE7', color: '#712B13', text: 'Lifetime = readonly incrementing counter' },
-          chips: [{ l: 'Tier status safe', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-        }
-      ];
-    };
-
-    function calc() {
-      const wallet = parseInt(document.getElementById('r-bal').value);
-      const orderAmt = parseInt(document.getElementById('r-sub').value);
-      
-      document.getElementById('r-bal-v').textContent = wallet.toLocaleString();
-      document.getElementById('r-sub-v').textContent = orderAmt;
-
-      const steps = getRedeemSteps(wallet, orderAmt);
-      const maxRm = +(orderAmt * 0.20).toFixed(2);
-      const maxPts = Math.round(maxRm * 100);
-      const pointsDeducted = Math.min(wallet, maxPts);
-      const discountRm = (pointsDeducted / 100).toFixed(2);
-      const remainderPayable = orderAmt - parseFloat(discountRm);
-
-      document.getElementById('r-out-max-pts').textContent = maxPts.toLocaleString() + ' pts';
-      document.getElementById('r-out-deduct').textContent = pointsDeducted.toLocaleString() + ' pts';
-      document.getElementById('r-out-discount').textContent = 'RM ' + discountRm;
-      document.getElementById('r-out-payable').textContent = 'RM ' + remainderPayable.toFixed(2);
-
-      if (rMode === 'redeem') {
-        document.getElementById('r-stepper-panel').style.display = 'block';
-        document.getElementById('r-resilience-panel').style.display = 'none';
-
-        const s = steps[rCurStep];
-        const total = steps.length;
-
-        const progHtml = steps.map((step, i) => `
-          <div class="prog-dot" 
-               style="background:${i < rCurStep ? 'var(--color-teal)' : i === rCurStep ? step.color : 'var(--border-color)'}" 
-               onclick="rJumpStep(${i})">
-            ${i + 1}
-          </div>
-          ${i < total - 1 ? `<div class="prog-line ${i < rCurStep ? 'done' : ''}"></div>` : ''}
-        `).join('');
-
-        const chipsHtml = s.chips.map(c => `
-          <div class="step-chip" style="background:${c.bg}; color:${c.c}; border-color:${c.b}">
-            ${c.l}
-          </div>
-        `).join('');
-
-        document.getElementById('r-stepper-panel').innerHTML = `
-          <div class="prog">${progHtml}</div>
-          <div class="scard-wrap">
-            <div class="step-badge" style="background:${s.bbg}; color:${s.btc}">${s.badge}</div>
-            <div class="step-title">${s.title}</div>
-            <div class="step-eng">${s.eng}</div>
-            <div class="step-body">${s.body.replace(/\n/g, '<br>')}</div>
-            <div class="step-hl" style="background:${s.hl.bg}; color:${s.hl.color}">${s.hl.text}</div>
-            <div class="step-chips">${chipsHtml}</div>
-          </div>
-          <div class="nav-row">
-            <button class="btn-prev" ${rCurStep === 0 ? 'disabled' : ''} onclick="rGo2(-1)">← Peeche</button>
-            <span class="step-ctr">Step ${rCurStep + 1} of ${total}</span>
-            <button class="btn-next" onclick="rGo2(1)">
-              ${rCurStep === total - 1 ? 'Finish ✓' : 'Next Step →'}
-            </button>
-          </div>
-        `;
-      } else {
-        document.getElementById('r-stepper-panel').style.display = 'none';
-        document.getElementById('r-resilience-panel').style.display = 'block';
-
-        const logs = document.getElementById('r-resilience-logs');
-        if (isStockout) {
-          logs.innerHTML = `
-            <div style="color:var(--color-coral); margin-bottom:6px;">[17:23:01] 🚨 ORDER FAIL: Voucher item out of stock.</div>
-            <div style="color:var(--color-amber); margin-bottom:6px;">[17:23:01] Automatic points refund system triggered.</div>
-            <div style="color:var(--color-cyan); margin-bottom:6px;">[17:23:02] Refunding: Adding ${pointsDeducted} points back to Manoj's wallet.</div>
-            <div style="color:var(--color-teal);">[17:23:02] Refund Successful: Points returned to Manoj's balance.</div>
-          `;
-        } else {
-          logs.innerHTML = `
-            <div style="color:var(--text-muted); font-style:italic;">No active cancellations. Toggle "Out-Of-Stock Simulation" switch below to see the points refund flow.</div>
-          `;
-        }
-      }
-    }
-
-    // Expose global variables
-    window.rCalc = calc;
-    window.rSetMode = (m) => {
-      rMode = m;
-      rCurStep = 0;
-      document.getElementById('mb-redeem').classList.toggle('active', m === 'redeem');
-      document.getElementById('mb-saga').classList.toggle('active', m === 'saga');
-      calc();
-    };
-    window.rGo2 = (d) => {
-      if (rCurStep + d >= 0 && rCurStep + d < 5) {
-        rCurStep += d;
-        calc();
-      }
-    };
-    window.rJumpStep = (i) => {
-      rCurStep = i;
-      calc();
-    };
-    window.rToggleStockout = () => {
-      isStockout = !isStockout;
-      const btn = document.getElementById('r-fail-toggle');
-      if (isStockout) {
-        btn.textContent = 'Simulating Out-Of-Stock (Active)';
-        btn.style.background = 'var(--color-coral)';
-        btn.style.borderColor = 'var(--color-coral)';
-        btn.style.color = '#fff';
-      } else {
-        btn.textContent = 'Trigger Out-Of-Stock Simulation';
-        btn.style.background = '';
-        btn.style.borderColor = '';
-        btn.style.color = '';
-      }
-      calc();
-    };
-
-    document.getElementById('redemption-wrap').innerHTML = `
-      <div class="mode-toggle" style="display:flex; gap:8px; margin-bottom:1.5rem;">
-        <button class="mode-btn active" id="mb-redeem" onclick="rSetMode('redeem')" style="flex:1; padding:10px; border-radius:10px; font-size:13px; font-weight:500; cursor:pointer; background:var(--color-primary); border-color:var(--color-primary); color:#fff;">
-          Points Redeem karna
-        </button>
-        <button class="mode-btn" id="mb-saga" onclick="rSetMode('saga')" style="flex:1; padding:10px; border-radius:10px; font-size:13px; font-weight:500; cursor:pointer;">
-          Order Cancel & Points Refund
-        </button>
-      </div>
-
-      <div class="slider-box">
-        <div class="ctrl-row">
-          <label>Checkout Cart Subtotal (RM)</label>
-          <input type="range" id="r-sub" min="10" max="1000" step="10" value="200" oninput="rCalc()">
-          <span class="ctrl-val">RM <span id="r-sub-v">200</span></span>
-        </div>
-        <div class="ctrl-row">
-          <label>Wallet Points Balance</label>
-          <input type="range" id="r-bal" min="0" max="5000" step="100" value="1500" oninput="rCalc()">
-          <span class="ctrl-val" style="color:var(--color-teal)"><span id="r-bal-v">1,500</span> pts</span>
-        </div>
-      </div>
-
-      <div class="sim-grid" style="margin-bottom:18px;">
-        <div class="sim-cell">
-          <div class="sc-l">Max Discount Points (20% cap)</div>
-          <div class="sc-v" id="r-out-max-pts">—</div>
-        </div>
-        <div class="sim-cell">
-          <div class="sc-l">Actual Points Deducted</div>
-          <div class="sc-v" id="r-out-deduct">—</div>
-        </div>
-        <div class="sim-cell">
-          <div class="sc-l">Discount Received (RM)</div>
-          <div class="sc-v" id="r-out-discount">—</div>
-        </div>
-        <div class="sim-cell">
-          <div class="sc-l">Payable Subtotal (RM)</div>
-          <div class="sc-v" id="r-out-payable">—</div>
-        </div>
-      </div>
-
-      <!-- Mode Panels -->
-      <div id="r-stepper-panel"></div>
-      <div id="r-resilience-panel" style="display:none;">
-        <div class="sec-div">Order Expiration & Refund Logs</div>
-        <div class="formula-box" style="background:#05070a; min-height:110px; font-family:monospace; font-size:11.5px;">
-          <div id="r-resilience-logs"></div>
-        </div>
-        <div class="action-btns">
-          <button id="r-fail-toggle" onclick="rToggleStockout()">Trigger Out-Of-Stock Simulation</button>
-        </div>
-      </div>
-    `;
-    calc();
-  } else {
-    // B2B Mode
-    let rModeB2B = 'payout'; // 'payout' or 'saga'
-    let rCurStep = 0;
-    let isReturnTriggered = false;
-
-    function calcB2B() {
-      const sales = parseInt(document.getElementById('r-b2b-sales').value);
-      const tier = document.getElementById('r-b2b-tier').value;
-      const claim = parseInt(document.getElementById('r-b2b-claim').value);
-      const retAmt = parseInt(document.getElementById('r-b2b-return').value);
-
-      document.getElementById('r-b2b-sales-v').textContent = sales.toLocaleString();
-      document.getElementById('r-b2b-claim-v').textContent = claim.toLocaleString();
-      document.getElementById('r-b2b-return-v').textContent = retAmt.toLocaleString();
-
-      let rebateRate = 0;
-      let mdfAlloc = 0;
-      if (tier === 'Platinum') { rebateRate = 3.0; mdfAlloc = 5000; }
-      else if (tier === 'Gold') { rebateRate = 2.0; mdfAlloc = 2000; }
-      else if (tier === 'Silver') { rebateRate = 1.0; mdfAlloc = 0; }
-
-      const rebateAmt = sales * (rebateRate / 100);
-      const mdfRemaining = Math.max(0, mdfAlloc - claim);
-      const actualMdfDeducted = Math.min(mdfAlloc, claim);
-
-      document.getElementById('r-b2b-out-rebate').textContent = 'RM ' + rebateAmt.toLocaleString(undefined, {minimumFractionDigits: 2});
-      document.getElementById('r-b2b-out-mdf').textContent = 'RM ' + mdfAlloc.toLocaleString();
-      document.getElementById('r-b2b-out-claimed').textContent = 'RM ' + actualMdfDeducted.toLocaleString();
-      document.getElementById('r-b2b-out-remaining').textContent = 'RM ' + mdfRemaining.toLocaleString();
-
-      if (rModeB2B === 'payout') {
-        document.getElementById('r-b2b-stepper-panel').style.display = 'block';
-        document.getElementById('r-b2b-resilience-panel').style.display = 'none';
-
-        // 5 steps for Payout
-        const steps = [
-          {
-            color: '#378ADD', bbg: '#E6F1FB', btc: '#0C447C', badge: 'Step 1 — Quarterly Close',
-            title: 'Quarterly sales audit completed',
-            eng: 'Quarter close audits sales calculations',
-            body: `Quarter close parameters processed. Total sales registered: <strong>RM ${sales.toLocaleString()}</strong>. Active status tier: <strong>${tier}</strong>.`,
-            hl: { bg: '#E6F1FB', color: '#0C447C', text: `Sales: RM ${sales.toLocaleString()} | Tier: ${tier}` },
-            chips: [{ l: 'Quarter close audit', bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-          },
-          {
-            color: '#534AB7', bbg: '#EEEDFE', btc: '#3C3489', badge: 'Step 2 — Rebate Calculation',
-            title: 'Rebate amounts calculated',
-            eng: 'Rebate = Quarterly Sales × Rebate %',
-            body: `Tier rebate rate (<strong>${rebateRate}%</strong>) evaluated. Rebate earned: <strong>RM ${rebateAmt.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>.`,
-            hl: { bg: '#EEEDFE', color: '#3C3489', text: `Rebate Rate: ${rebateRate}% -> RM ${rebateAmt.toLocaleString(undefined, {minimumFractionDigits: 2})}` },
-            chips: [{ l: `Rebate: RM ${rebateAmt.toLocaleString()}`, bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-          },
-          {
-            color: '#BA7517', bbg: '#FAEEDA', btc: '#633806', badge: 'Step 3 — MDF Allocation',
-            title: 'MDF funds allocated',
-            eng: 'Market Development Funds assigned based on tier',
-            body: `MDF allocation rule check: <strong>${tier}</strong> tier gets <strong>RM ${mdfAlloc.toLocaleString()}</strong>. Funds are deposited in co-marketing wallets.`,
-            hl: { bg: '#FAEEDA', color: '#633806', text: `MDF budget: RM ${mdfAlloc.toLocaleString()}` },
-            chips: [{ l: `MDF: RM ${mdfAlloc.toLocaleString()}`, bg: '#FAEEDA', c: '#633806', b: '#EF9F27' }]
-          },
-          {
-            color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Step 4 — MDF Drawdown Claim',
-            title: 'MDF claim requested',
-            eng: 'Partner submits invoice for co-marketing claims',
-            body: `Claim request of <strong>RM ${claim.toLocaleString()}</strong> check. Available MDF: <strong>RM ${mdfAlloc.toLocaleString()}</strong>. Claim approved: <strong>RM ${actualMdfDeducted.toLocaleString()}</strong> disbursed.`,
-            hl: { bg: '#E1F5EE', color: '#085041', text: `Claimed: RM ${actualMdfDeducted.toLocaleString()} | Remaining MDF: RM ${mdfRemaining.toLocaleString()}` },
-            chips: [{ l: `Disbursed: RM ${actualMdfDeducted}`, bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-          },
-          {
-            color: '#712B13', bbg: '#FAECE7', btc: '#712B13', badge: 'Step 5 — Audits & Compliance',
-            title: 'Audit compliance completed',
-            eng: 'Co-marketing collateral verified by audits team',
-            body: 'MDF claims are auditable. Partner must upload campaign proof (ads, flyers) within 30 days to close the audit loop and lock payouts.',
-            hl: { bg: '#FAECE7', color: '#712B13', text: 'Compliance check completed successfully' },
-            chips: [{ l: 'Audit locks active', bg: '#FAECE7', c: '#712B13', b: '#F0997B' }]
-          }
-        ];
-
-        const s = steps[rCurStep];
-        const total = steps.length;
-
-        const progHtml = steps.map((step, i) => `
-          <div class="prog-dot" 
-               style="background:${i < rCurStep ? 'var(--color-teal)' : i === rCurStep ? step.color : 'var(--border-color)'}" 
-               onclick="rJumpStepB2B(${i})">
-            ${i + 1}
-          </div>
-          ${i < total - 1 ? `<div class="prog-line ${i < rCurStep ? 'done' : ''}"></div>` : ''}
-        `).join('');
-
-        const chipsHtml = s.chips.map(c => `
-          <div class="step-chip" style="background:${c.bg}; color:${c.c}; border-color:${c.b}">
-            ${c.l}
-          </div>
-        `).join('');
-
-        document.getElementById('r-b2b-stepper-panel').innerHTML = `
-          <div class="prog">${progHtml}</div>
-          <div class="scard-wrap">
-            <div class="step-badge" style="background:${s.bbg}; color:${s.btc}">${s.badge}</div>
-            <div class="step-title">${s.title}</div>
-            <div class="step-eng">${s.eng}</div>
-            <div class="step-body">${s.body.replace(/\n/g, '<br>')}</div>
-            <div class="step-hl" style="background:${s.hl.bg}; color:${s.hl.color}">${s.hl.text}</div>
-            <div class="step-chips">${chipsHtml}</div>
-          </div>
-          <div class="nav-row">
-            <button class="btn-prev" ${rCurStep === 0 ? 'disabled' : ''} onclick="rGo2B2B(-1)">← Peeche</button>
-            <span class="step-ctr">Step ${rCurStep + 1} of ${total}</span>
-            <button class="btn-next" onclick="rGo2B2B(1)">
-              ${rCurStep === total - 1 ? 'Finish ✓' : 'Next Step →'}
-            </button>
-          </div>
-        `;
-      } else {
-        document.getElementById('r-b2b-stepper-panel').style.display = 'none';
-        document.getElementById('r-b2b-resilience-panel').style.display = 'block';
-
-        const logs = document.getElementById('r-b2b-resilience-logs');
-        if (isReturnTriggered) {
-          const clawbackVal = retAmt * (rebateRate / 100);
-          const creditNoteVal = retAmt - clawbackVal;
-          logs.innerHTML = `
-            <div style="color:var(--color-coral); margin-bottom:6px;">[15:10:01] 🚨 RETURN TRANSACTION DETECTED: Goods worth RM ${retAmt.toLocaleString()} returned.</div>
-            <div style="color:var(--color-amber); margin-bottom:6px;">[15:10:01] Initiating Returns Saga rollback workflows...</div>
-            <div style="color:var(--color-cyan); margin-bottom:6px;">[15:10:02] Recalculating sales ledger: RM ${sales.toLocaleString()} - RM ${retAmt.toLocaleString()} = RM ${(sales - retAmt).toLocaleString()} net sales.</div>
-            <div style="color:var(--color-amber); margin-bottom:6px;">[15:10:02] Rebate Clawback audit: Deducting RM ${clawbackVal.toLocaleString()} (Clawback rate: ${rebateRate}%) from partner balance.</div>
-            <div style="color:var(--color-teal); margin-bottom:6px;">[15:10:03] Issuing credit note: CN-77821 for Net Credit RM ${creditNoteVal.toLocaleString()} (Goods RM ${retAmt.toLocaleString()} - Rebate RM ${clawbackVal.toLocaleString()}).</div>
-            <div style="color:var(--color-teal);">[15:10:03] Returns Saga Rollback successfully committed. ledger audits logged.</div>
-          `;
-        } else {
-          logs.innerHTML = `
-            <div style="color:var(--text-muted); font-style:italic;">No active returns. Toggle "Trigger Returns Saga & Rollback" button below to see the B2B Credit Note & Rebate Clawback flow.</div>
-          `;
-        }
-      }
-    }
-
-    window.rCalcB2B = calcB2B;
-    window.rSetModeB2B = (m) => {
-      rModeB2B = m;
-      rCurStep = 0;
-      document.getElementById('mb-b2b-payout').classList.toggle('active', m === 'payout');
-      document.getElementById('mb-b2b-saga').classList.toggle('active', m === 'saga');
-      calcB2B();
-    };
-    window.rGo2B2B = (d) => {
-      if (rCurStep + d >= 0 && rCurStep + d < 5) {
-        rCurStep += d;
-        calcB2B();
-      }
-    };
-    window.rJumpStepB2B = (i) => {
-      rCurStep = i;
-      calcB2B();
-    };
-    window.rToggleReturnsSaga = () => {
-      isReturnTriggered = !isReturnTriggered;
-      const btn = document.getElementById('r-b2b-fail-toggle');
-      if (isReturnTriggered) {
-        btn.textContent = 'Returns Saga Active (Triggered)';
-        btn.style.background = 'var(--color-coral)';
-        btn.style.borderColor = 'var(--color-coral)';
-        btn.style.color = '#fff';
-      } else {
-        btn.textContent = 'Trigger Returns Saga & Rollback';
-        btn.style.background = '';
-        btn.style.borderColor = '';
-        btn.style.color = '';
-      }
-      calcB2B();
-    };
-
-    document.getElementById('redemption-wrap').innerHTML = `
-      <div class="mode-toggle" style="display:flex; gap:8px; margin-bottom:1.5rem;">
-        <button class="mode-btn active" id="mb-b2b-payout" onclick="rSetModeB2B('payout')" style="flex:1; padding:10px; border-radius:10px; font-size:13px; font-weight:500; cursor:pointer; background:var(--color-primary); border-color:var(--color-primary); color:#fff;">
-          Rebate & MDF Drawdown
-        </button>
-        <button class="mode-btn" id="mb-b2b-saga" onclick="rSetModeB2B('saga')" style="flex:1; padding:10px; border-radius:10px; font-size:13px; font-weight:500; cursor:pointer;">
-          Returns Saga & Clawback
-        </button>
-      </div>
-
-      <div class="slider-box">
-        <div class="ctrl-row">
-          <label>Quarterly Sales Revenue (RM)</label>
-          <input type="range" id="r-b2b-sales" min="10000" max="500000" step="10000" value="200000" oninput="rCalcB2B()">
-          <span class="ctrl-val">RM <span id="r-b2b-sales-v">200,000</span></span>
-        </div>
-        <div class="ctrl-row">
-          <label>Active Tier</label>
-          <select id="r-b2b-tier" onchange="rCalcB2B()" style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-color); border-radius:8px; padding:6px 12px; font-size:13px; font-family:inherit;">
-            <option value="Silver">Silver (1% rebate)</option>
-            <option value="Gold" selected>Gold (2% rebate)</option>
-            <option value="Platinum">Platinum (3% rebate)</option>
-          </select>
-        </div>
-        <div class="ctrl-row" style="margin-bottom:0">
-          <label>MDF Drawdown Claim (RM)</label>
-          <input type="range" id="r-b2b-claim" min="0" max="10000" step="500" value="1500" oninput="rCalcB2B()">
-          <span class="ctrl-val" style="color:var(--color-teal)">RM <span id="r-b2b-claim-v">1,500</span></span>
-        </div>
-      </div>
-
-      <div class="sim-grid" style="margin-bottom:18px;">
-        <div class="sim-cell">
-          <div class="sc-l">Rebate Earned (Quarterly)</div>
-          <div class="sc-v" id="r-b2b-out-rebate">—</div>
-        </div>
-        <div class="sim-cell">
-          <div class="sc-l">MDF Allocated</div>
-          <div class="sc-v" id="r-b2b-out-mdf">—</div>
-        </div>
-        <div class="sim-cell">
-          <div class="sc-l">MDF Claim Disbursed</div>
-          <div class="sc-v" id="r-b2b-out-claimed">—</div>
-        </div>
-        <div class="sim-cell">
-          <div class="sc-l">Remaining MDF</div>
-          <div class="sc-v" id="r-b2b-out-remaining">—</div>
-        </div>
-      </div>
-
-      <!-- Mode Panels -->
-      <div id="r-b2b-stepper-panel"></div>
-      <div id="r-b2b-resilience-panel" style="display:none;">
-        <div class="slider-box" style="margin-bottom:16px;">
-          <div class="ctrl-row" style="margin-bottom:0">
-            <label>Return Goods Value (RM)</label>
-            <input type="range" id="r-b2b-return" min="1000" max="50000" step="1000" value="10000" oninput="rCalcB2B()">
-            <span class="ctrl-val" style="color:var(--color-coral)">RM <span id="r-b2b-return-v">10,000</span></span>
-          </div>
-        </div>
-        <div class="sec-div">Returns Saga Transactions & Rollback logs</div>
-        <div class="formula-box" style="background:#05070a; min-height:140px; font-family:monospace; font-size:11.5px;">
-          <div id="r-b2b-resilience-logs"></div>
-        </div>
-        <div class="action-btns">
-          <button id="r-b2b-fail-toggle" onclick="rToggleReturnsSaga()">Trigger Returns Saga & Rollback</button>
-        </div>
-      </div>
-    `;
-    calcB2B();
+  if (activeMode === 'b2b') {
+    // Keep B2B simple for now
+    container.innerHTML = `<div style="padding:20px; color:#fff;">B2B Redemption logic goes here.</div>`;
+    return;
   }
+
+  container.innerHTML = `
+    <!-- Top Concept Section -->
+    <div class="pres-slide" style="display:flex; flex-direction:column; align-items:center; text-align:center; padding: 20px; border:none; box-shadow:none;">
+      <h2 style="font-size:24px; color:var(--color-cyan); margin-bottom:10px;">Point Redemption Strategy</h2>
+      <p style="font-size:14px; max-width:700px; margin-bottom:20px; color:var(--text-muted); line-height:1.5;">
+        Points ki cash value dena zaroori hai, lekin 100% free items dene se cash flow ruk jata hai. Ek solid B2C strategy mein humesha "Minimum Threshold" aur "Max Discount Cap" lagana chahiye.
+      </p>
+      <div style="font-family: monospace; font-size: 14px; color: var(--color-amber); background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); padding: 12px 24px; border-radius: 8px;">
+        <span style="color:#fff;">Redemption Value =</span> 100 Points = RM 1.00 (1% Flat Cashback)
+      </div>
+    </div>
+
+    <!-- The Timeline Story -->
+    <div class="timeline" style="margin-top: 20px;">
+      
+      <!-- Step 1 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-primary);">1</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-primary);">Step 1: The Cart Building</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj apni cart mein <strong>RM 1,000</strong> ka samaan add karta hai. Uske account mein pichli shopping ke <strong>50,000 points</strong> (RM 500 value) pade hain.
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-teal);">2</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-teal);">Step 2: Minimum Threshold Check</div>
+          <div class="step-desc" style="line-height:1.5;">
+            System pehle check karta hai ki kya uske paas minimum 500 points (RM 5) hain? Yes! Isse customer chhote (chillar) points redeem karke system ko spam nahi kar sakta. "Redeem" button unlock ho jata hai.
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-coral);">3</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-coral);">Step 3: The Max Cap Limit</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj chahta hai ki wo saare RM 500 points use kar le (50% discount). Lekin business ne apni profit margin bachane ke liye <strong>20% Max Cap</strong> lagaya hai.<br><br>
+            <strong style="color:var(--color-coral);"><i class="ti ti-shield"></i> System Action:</strong> System limit lagata hai ki wo is RM 1,000 ke order par maximum 20% (yani RM 200 / 20,000 points) hi use kar sakta hai.
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-cyan);">4</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-cyan);">Step 4: Final Checkout</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj apne 20,000 points (RM 200) apply karta hai. Usko ek bada discount feel hota hai, aur wo bacha hua <strong>RM 800 cash</strong> pay karta hai.<br><br>
+            <strong style="color:var(--color-cyan);"><i class="ti ti-check"></i> Business Benefit:</strong> Customer ko bada reward mila, lekin company ko RM 800 ka fresh cash flow bhi mila, aur customer abhi bhi agli baar lautega kyunki uske paas 30,000 points bache hain!
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- The Simulator Section -->
+    <div style="margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+      <h3 style="text-align:center; color:#fff; font-size:18px; margin-bottom:20px; font-family: var(--font-display);">Try It Yourself: Redemption Cap Simulator</h3>
+      
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <!-- Left: Interactive Controls -->
+        <div style="flex: 1; min-width: 300px; background: var(--bg-field); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px;">
+          <div class="sect-label">Checkout Simulation</div>
+          
+          <div class="ctrl-row" style="margin-bottom: 16px;">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Cart Total Value (RM)</label>
+            <input type="range" id="sim-red-cart" min="100" max="5000" step="100" value="1000" oninput="simRedemptCalc()">
+            <span class="ctrl-val" id="sim-red-cart-v">RM 1,000</span>
+          </div>
+
+          <div class="ctrl-row" style="margin-bottom: 16px;">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Customer Wallet (Points)</label>
+            <input type="range" id="sim-red-wallet" min="0" max="100000" step="1000" value="50000" oninput="simRedemptCalc()">
+            <span class="ctrl-val" id="sim-red-wallet-v" style="color: var(--color-amber);">50,000 pts</span>
+          </div>
+
+          <div class="ctrl-row" style="margin-bottom: 16px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Max Discount Cap (%)</label>
+            <input type="range" id="sim-red-cap" min="0" max="100" step="10" value="20" oninput="simRedemptCalc()">
+            <span class="ctrl-val" id="sim-red-cap-v" style="color: var(--color-coral);">20% Cap</span>
+          </div>
+          
+          <div style="font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 10px;">
+            * Rule: 100 Points = RM 1.00. Minimum 500 points required to redeem.
+          </div>
+        </div>
+
+        <!-- Right: Real-time Evaluation -->
+        <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px;">
+          
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 15px;">Final Checkout Bill</div>
+            
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:var(--text-main);">
+              <span>Cart Total:</span> <span id="out-red-cart">RM 1,000.00</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:var(--color-amber);">
+              <span>Points Deducted (<span id="out-red-pts-used">20000</span> pts):</span> <span id="out-red-discount">- RM 200.00</span>
+            </div>
+            <div style="height:1px; background:var(--border-color); margin: 10px 0;"></div>
+            <div style="display:flex; justify-content:space-between; font-size:22px; font-weight:bold; color:var(--color-primary);">
+              <span>Out of Pocket Cash:</span> <span id="out-red-cash">RM 800.00</span>
+            </div>
+          </div>
+
+          <!-- Cap Warning -->
+          <div id="out-red-warning" style="background: rgba(244, 63, 94, 0.1); border: 1px solid var(--color-coral); border-radius: var(--radius-md); padding: 16px; color: var(--color-coral); font-size: 12px; display: flex; align-items: flex-start; gap: 10px; display: none;">
+            <i class="ti ti-alert-triangle" style="font-size: 18px;"></i>
+            <div>
+              <strong>Max Cap Reached!</strong><br>
+              <span style="opacity: 0.8;">The customer has more points, but the business rule limits the discount to <span id="out-red-cap-text">20%</span> of the cart value.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    if (window.simRedemptCalc) window.simRedemptCalc();
+  }, 50);
 }
+
+window.simRedemptCalc = function() {
+  const cartEl = document.getElementById('sim-red-cart');
+  if (!cartEl) return;
+
+  const cartValue = parseInt(cartEl.value);
+  const walletPts = parseInt(document.getElementById('sim-red-wallet').value);
+  const capPercent = parseInt(document.getElementById('sim-red-cap').value);
+
+  // Update UI values
+  document.getElementById('sim-red-cart-v').textContent = 'RM ' + cartValue.toLocaleString();
+  document.getElementById('sim-red-wallet-v').textContent = walletPts.toLocaleString() + ' pts';
+  document.getElementById('sim-red-cap-v').textContent = capPercent + '% Cap';
+
+  // Math calculation
+  const walletCashValue = walletPts / 100;
+  const maxAllowedDiscount = cartValue * (capPercent / 100);
+
+  let discountApplied = 0;
+  let ptsDeducted = 0;
+  let isCapped = false;
+
+  if (walletPts >= 500) { // Minimum threshold check
+    if (walletCashValue >= maxAllowedDiscount) {
+      discountApplied = maxAllowedDiscount;
+      isCapped = true;
+    } else {
+      discountApplied = walletCashValue;
+      isCapped = false;
+    }
+    ptsDeducted = discountApplied * 100;
+  }
+
+  const outOfPocket = cartValue - discountApplied;
+
+  // Update Result UI
+  document.getElementById('out-red-cart').textContent = 'RM ' + cartValue.toLocaleString(undefined, {minimumFractionDigits: 2});
+  document.getElementById('out-red-pts-used').textContent = ptsDeducted.toLocaleString();
+  document.getElementById('out-red-discount').textContent = '- RM ' + discountApplied.toLocaleString(undefined, {minimumFractionDigits: 2});
+  document.getElementById('out-red-cash').textContent = 'RM ' + outOfPocket.toLocaleString(undefined, {minimumFractionDigits: 2});
+
+  // Warning logic
+  const warnEl = document.getElementById('out-red-warning');
+  if (isCapped && capPercent < 100) {
+    warnEl.style.display = 'flex';
+    document.getElementById('out-red-cap-text').textContent = capPercent + '%';
+  } else {
+    warnEl.style.display = 'none';
+  }
+};
+
+
 function initEngagement() {
   const STRATS_B2C = [
     { id: 'missions', cat: 'game', icon: 'ti-map', iconBg: '#E6F1FB', iconColor: '#0C447C', isNew: true, title: 'Missions & challenges', sub: 'Weekly mini-tasks complete karo', why: 'Simple points se zyada engaging — customer ke paas ek goal hota hai. "3 din mein 2 order karo" matches.', steps: ['1 Admin sets weekly challenge targets', '2 Dispatched challenge alert: "+200 pts bonus"', '3 Activity logged, goal completions confirm', '4 Instantly credited bonus points'], impact: 'High', effort: 'Medium', retention: 'Weekly engagement' },
@@ -5006,635 +4737,186 @@ function initEngagement() {
 // PAGE 8: RENEWAL & EXPIRY SCENARIOS (INTERACTIVE STEPPER FROM REFERENCE)
 // ==========================================================================
 function initRenewal() {
-  let renMode = activeMode === 'b2c' ? 'points' : 'rebate_expiry';
-  let renStep = 0;
-
-  const SCENARIOS_B2C = {
-    points: [
-      {
-        color: '#534AB7', bbg: '#EEEDFE', btc: '#3C3489', badge: 'Points Expiry Policy',
-        title: 'Points ka ek validity window expiry check hota hai',
-        eng: 'Points validity period config settings checks',
-        body: 'Loyalty configuration registers points TTL limits checks (usually 12 months from deposit). un-redeemed points automatically cancel and update values to zero.',
-        hl: { bg: '#EEEDFE', color: '#3C3489', text: 'Settings: points_expiry_ttl = 12 months' },
-        chips: [{ l: 'Loss aversion engine', bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-      },
-      {
-        color: '#BA7517', bbg: '#FAEEDA', btc: '#633806', badge: 'Day -30 Soft reminder',
-        title: 'Automation scans points balances checks warning dispatch',
-        eng: 'Cron scans balances expiring within 30 days',
-        body: 'WhatsApp message alerts Manoj: \"Manoj, your 500 points (RM 5 value) are expiring in 30 days. Click here to use them.\"',
-        hl: { bg: '#FAEEDA', color: '#633806', text: '30-day window: personalized notifications' },
-        chips: [{ l: 'WhatsApp Send', bg: '#FAEEDA', c: '#633806', b: '#EF9F27' }]
-      },
-      {
-        color: '#A32D2D', bbg: '#FCEBEB', btc: '#791F1F', badge: 'Day -7 Urgent reminder',
-        title: 'Urgent reminder warnings with checkout links',
-        eng: 'Direct order links bypass checkout friction',
-        body: 'Alert prompts escalated warnings: \"URGENT: 500 points expire in 7 days! checkout here now.\" direct checkout links are loaded.',
-        hl: { bg: '#FCEBEB', color: '#791F1F', text: 'Direct link bypass: zero-friction ordering' },
-        chips: [{ l: 'Urgent SMS', bg: '#FCEBEB', c: '#791F1F', b: '#F09595' }]
-      },
-      {
-        color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Active options',
-        title: 'Manoj saves points using 3 active paths',
-        eng: '3 options: Redeem, active earn, or grace extensions',
-        body: 'Manoj can save points by:\n1. checkout order redemption\n2. review or referral earn activities (+expiry date resets)\n3. customer support extension requests',
-        hl: { bg: '#E1F5EE', color: '#085041', text: 'Any earn activity resets expiry window TTL' },
-        chips: [{ l: 'Redeem now', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-      },
-      {
-        color: '#3C3489', bbg: '#EEEDFE', btc: '#26215C', badge: 'Post-expiry',
-        title: 'Points expire and win-back runs',
-        eng: 'Wallet ledger cleans expired points automatically',
-        body: 'Wallet ledger balance modifications sets balance = 0. system writes EXPIRED_TX. Win-back automation dispatches promo codes: \"Points expired? Order today for 2x points comeback bonus!\"',
-        hl: { bg: '#EEEDFE', color: '#3C3489', text: 'Cleanup task complete. Winback campaign launched.' },
-        chips: [{ l: 'Expired cleanup', bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-      }
-    ],
-    tier: [
-      {
-        color: '#185FA5', bbg: '#E6F1FB', btc: '#0C447C', badge: 'Tier Status Maintenance',
-        title: 'Annual qualification check',
-        eng: 'Rolling 12-months validation runs',
-        body: 'Member tiers valid for 12 months. System evaluations verify if Manoj earned 500 points (Silver maintenance threshold) during this cycle.',
-        hl: { bg: '#E6F1FB', color: '#0C447C', text: 'Settings: tier_evaluation_cycle = 12 months' },
-        chips: [{ l: 'Rolling check', bg: '#E6F1FB', c: '#0C447C', b: '#85B7EB' }]
-      },
-      {
-        color: '#BA7517', bbg: '#FAEEDA', btc: '#633806', badge: 'Day -60 Warning',
-        title: 'Progress indicators alerts dispatched',
-        eng: 'Show visual points gap metrics',
-        body: 'Automation prompts Manoj: \"Your Silver Tier expires in 60 days. You need 100 points more to secure Silver multiplier perks. Order today!\"',
-        hl: { bg: '#FAEEDA', color: '#633806', text: 'Gold/Silver target goals prompts' },
-        chips: [{ l: 'Campaign push', bg: '#FAEEDA', c: '#633806', b: '#EF9F27' }]
-      },
-      {
-        color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Tier successfully renewed',
-        title: 'Manoj hits target limits and retains tier',
-        eng: 'Anniversary date extends 12 months',
-        body: 'Threshold crossed check: Manoj points >= 500. system updates anniversary timestamp values, maintains Silver 1.5x multiplier.',
-        hl: { bg: '#E1F5EE', color: '#085041', text: 'Silver tier status secured' },
-        chips: [{ l: 'Renewed', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-      },
-      {
-        color: '#993C1D', bbg: '#FAECE7', btc: '#712B13', badge: 'Tier downgrade',
-        title: 'Kind status downgrade',
-        eng: 'One status downgrade limit checks',
-        body: 'If Manoj missing points target: System downgrades tier status Silver to Bronze. Kind template messages explain active Bronze benefits + comeback paths.',
-        hl: { bg: '#FAECE7', color: '#712B13', text: 'Upgrade/Downgrade transitions logged' },
-        chips: [{ l: 'Bronze downgraded', bg: '#FAECE7', c: '#712B13', b: '#F0997B' }]
-      },
-      {
-        color: '#3B6D11', bbg: '#EAF3DE', btc: '#27500A', badge: 'Grace period',
-        title: '30-day grace period buffer',
-        eng: 'Maintain perks during buffer weeks',
-        body: 'Manoj retains Silver status benefits for 30 additional days grace period to recover points gap, reducing brand churn rates.',
-        hl: { bg: '#EAF3DE', color: '#27500A', text: 'Grace period: Churn prevention standard' },
-        chips: [{ l: '30-day grace', bg: '#EAF3DE', c: '#27500A', b: '#97C459' }]
-      }
-    ],
-    member: [
-      {
-        color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Paid membership scenario',
-        title: 'Paid subscription options',
-        eng: 'Free membership auto-renews, paid subscription billing checks',
-        body: 'Standard member enrollment is free. Paid VIP tiers (e.g. Amazon Prime style) require billing integrations with Stripe/Braintree.',
-        hl: { bg: '#E1F5EE', color: '#085041', text: 'Stripe webhook triggers subscription renewals' },
-        chips: [{ l: 'Paid checkout renewal', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-      },
-      {
-        color: '#534AB7', bbg: '#EEEDFE', btc: '#3C3489', badge: 'Free tier deactivation',
-        title: 'Free member status deactivations',
-        eng: 'Deactivation occurs only on manual exits or extreme inactivity',
-        body: 'Standard free accounts stay active forever. deactivation occurs if Manoj manually opts out or 3 years zero-activity dormancy thresholds cross.',
-        hl: { bg: '#EEEDFE', color: '#3C3489', text: 'Dormancy sweep cron: Daily midnight' },
-        chips: [{ l: 'Manual exit', bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-      },
-      {
-        color: '#C07B00', bbg: '#FFF3D6', btc: '#7A4E00', badge: 'Paid billing cycles',
-        title: 'VIP billing billing check runs',
-        eng: 'Renew billing prompts starts Day -60',
-        body: 'Annual billing anniversary alerts: Day -60, -30, -7 reminders with calculated loyalty values (\"You saved RM 320 this year!\"). Auto-renewal billing executes on Day 0.',
-        hl: { bg: '#FFF3D6', color: '#7A4E00', text: 'Stripe subscription cycle triggers' },
-        chips: [{ l: 'Stripe billing', bg: '#FFF3D6', c: '#7A4E00', b: '#E8B84B' }]
-      },
-      {
-        color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Renewal successful',
-        title: 'Settle subscription payment success',
-        eng: 'Extend VIP entitlement variables 12 months',
-        body: 'Stripe confirms invoice settlement. Dispatches +500 points renewal bonus. VIP status extended.',
-        hl: { bg: '#E1F5EE', color: '#085041', text: 'Invoice paid: +500 pts credited' },
-        chips: [{ l: 'VIP active', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-      },
-      {
-        color: '#D4537E', bbg: '#FBEAF0', btc: '#72243E', badge: 'Non-renewal fallback',
-        title: 'Graceful VIP downgrade fallback',
-        eng: 'VIP perks disabled, revert profile to free tier',
-        body: 'If billing fails: downgrade Manoj to free tier status. Keep profile data history, and send trial coupon re-activation marketing links.',
-        hl: { bg: '#FBEAF0', color: '#72243E', text: 'Downgrade complete. Profile stored.' },
-        chips: [{ l: 'VIP disabled', bg: '#FBEAF0', c: '#72243E', b: '#ED93B1' }]
-      }
-    ]
-  };
-
-  const SCENARIOS_B2B = {
-    rebate_expiry: [
-      {
-        color: '#534AB7', bbg: '#EEEDFE', btc: '#3C3489', badge: 'Rebate Expiry Policy',
-        title: 'Rebate credits ki 12-month validity check hoti hai',
-        eng: 'Rebate credits validity period settings check',
-        body: 'Loyalty settings register config for rebate credits TTL (usually 12 months). Unused credits are flagged for automated expiry processing.',
-        hl: { bg: '#EEEDFE', color: '#3C3489', text: 'Settings: rebate_expiry_ttl = 12 months' },
-        chips: [{ l: 'Expiry Engine scan', bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-      },
-      {
-        color: '#BA7517', bbg: '#FAEEDA', btc: '#633806', badge: 'Day -30 Soft Warning',
-        title: 'Cron job scans balances and triggers email warnings',
-        eng: 'Partner notified via portal and automated email alerts',
-        body: 'Email notification dispatches to SwiftTrade CFO: \"Your RM 5,000 rebate credit is expiring in 30 days. Apply it to your next order to save cash.\"',
-        hl: { bg: '#FAEEDA', color: '#633806', text: '30-day window: CFO automated alerts' },
-        chips: [{ l: 'Email & Push sent', bg: '#FAEEDA', c: '#633806', b: '#EF9F27' }]
-      },
-      {
-        color: '#A32D2D', bbg: '#FCEBEB', btc: '#791F1F', badge: 'Day -7 Urgent Reminder',
-        title: 'Urgent reminder warnings with checkout links',
-        eng: 'Account manager triggers direct call and checkout reminder',
-        body: 'Alert prompts escalated warning: \"URGENT: RM 5,000 rebate credits expire in 7 days! Checkout your stock order now to redeem.\"',
-        hl: { bg: '#FCEBEB', color: '#791F1F', text: 'Direct checkout link: prevent credit loss' },
-        chips: [{ l: 'Urgent SMS/Email', bg: '#FCEBEB', c: '#791F1F', b: '#F09595' }]
-      },
-      {
-        color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Credits Redeemed',
-        title: 'Partner orders inventory and redeems credits',
-        eng: 'Deduct credits from wallet and adjust invoice subtotal',
-        body: 'SwiftTrade places stock order. Expiry engine checks, deducts RM 5,000 rebate credit from active wallet, and updates payable invoice.',
-        hl: { bg: '#E1F5EE', color: '#085041', text: 'Rebate credit applied to checkout invoice' },
-        chips: [{ l: 'Redeemed & reset', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-      },
-      {
-        color: '#3C3489', bbg: '#EEEDFE', btc: '#26215C', badge: 'Post-Expiry Campaign',
-        title: 'Credits expire and winback campaign starts',
-        eng: 'Ledger debits expired credits and sends re-activation bonus',
-        body: 'If credits expire: Balance debited to 0 with EXPIRED_REBATE transaction. System fires winback: \"Expired rebate? Commit to next target and get +5% rebate boost!\"',
-        hl: { bg: '#EEEDFE', color: '#3C3489', text: 'Expired credits cleared. Winback email sent.' },
-        chips: [{ l: 'Re-activation campaign', bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-      }
-    ],
-    annual_tier: [
-      {
-        color: '#185FA5', bbg: '#E6F1FB', btc: '#0C447C', badge: 'Annual Review',
-        title: 'Rolling 12-months purchase validation runs',
-        eng: 'Verify partner annual purchase volumes',
-        body: 'B2B partner tiers are valid for 12 months. System evaluates if Mega Distributors met the RM 100k target to maintain Silver tier multiplier.',
-        hl: { bg: '#E6F1FB', color: '#0C447C', text: 'Settings: tier_review_cycle = 12 months' },
-        chips: [{ l: 'Rolling audit', bg: '#E6F1FB', c: '#0C447C', b: '#85B7EB' }]
-      },
-      {
-        color: '#BA7517', bbg: '#FAEEDA', btc: '#633806', badge: 'Day -60 Warning',
-        title: 'Sales progress indicator alerts sent',
-        eng: 'Portal displays target gap to maintain tier perks',
-        body: 'Automation prompts Mega Distributors: \"Your Silver tier expires in 60 days. You need RM 10,000 sales to secure Silver rebate rates next year.\"',
-        hl: { bg: '#FAEEDA', color: '#633806', text: 'Sales target gap: RM 10,000 remaining' },
-        chips: [{ l: 'Portal alert', bg: '#FAEEDA', c: '#633806', b: '#EF9F27' }]
-      },
-      {
-        color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Tier Renewed',
-        title: 'Mega Distributors hits target and extends tier',
-        eng: 'Tier anniversary date extended 12 months',
-        body: 'Sales target met check: Annual purchases >= RM 100k. Anniversary timestamp extended, maintaining Silver 1% rebate status.',
-        hl: { bg: '#E1F5EE', color: '#085041', text: 'Silver status secured for next 12 months' },
-        chips: [{ l: 'Status Renewed', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-      },
-      {
-        color: '#993C1D', bbg: '#FAECE7', btc: '#712B13', badge: 'Tier Downgrade',
-        title: 'Graceful tier downgrade transition runs',
-        eng: 'One status downgrade limit checks',
-        body: 'If partner misses target: System demotes Mega Distributors Silver to Inactive. Portal displays instructions to regain Silver status.',
-        hl: { bg: '#FAECE7', color: '#712B13', text: 'Downgraded to Inactive (0% rebates)' },
-        chips: [{ l: 'Status: Inactive', bg: '#FAECE7', c: '#712B13', b: '#F0997B' }]
-      },
-      {
-        color: '#3B6D11', bbg: '#EAF3DE', btc: '#27500A', badge: '30-day Grace Period',
-        title: '30-day grace period buffer active',
-        eng: 'Maintain active benefits during buffer weeks',
-        body: 'Mega Distributors retains Silver rebate perks for 30 additional days grace period to make up the sales gap and protect margins.',
-        hl: { bg: '#EAF3DE', color: '#27500A', text: 'Grace period active: 30 days buffer' },
-        chips: [{ l: 'Grace period', bg: '#EAF3DE', c: '#27500A', b: '#97C459' }]
-      }
-    ],
-    contract_renewal: [
-      {
-        color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Expiry Audit',
-        title: 'Annual commercial contract renewal check',
-        eng: 'Audit contract anniversary dates in CRM',
-        body: 'CRM audits contract anniversary date for ProBuild Supply. System flags expiry triggers at Day -90 to initiate negotiations.',
-        hl: { bg: '#E1F5EE', color: '#085041', text: 'Settings: contract_duration = 12 months' },
-        chips: [{ l: 'Expiry audit', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-      },
-      {
-        color: '#534AB7', bbg: '#EEEDFE', btc: '#3C3489', badge: 'Day -60 Negotiations',
-        title: 'Account manager starts commercial reviews',
-        eng: 'Joint Business Planning and target negotiation sessions',
-        body: 'Sales manager triggers meetings: review YoY growth, align on new quarterly target milestones (RM 300k), and credit terms.',
-        hl: { bg: '#EEEDFE', color: '#3C3489', text: 'JBP negotiation window open' },
-        chips: [{ l: 'JBP negotiation', bg: '#EEEDFE', c: '#3C3489', b: '#AFA9EC' }]
-      },
-      {
-        color: '#C07B00', bbg: '#FFF3D6', btc: '#7A4E00', badge: 'Day -30 Draft Signed',
-        title: 'Partner signs digitised commercial contract',
-        eng: 'Digital signature validates updated terms & conditions',
-        body: 'ProBuild Supply signs updated JBP contract via DocuSign. Rates, credits, and target commitments are committed to SQL system.',
-        hl: { bg: '#FFF3D6', color: '#7A4E00', text: 'Contract signed. Rules scheduled.' },
-        chips: [{ l: 'Contract signed', bg: '#FFF3D6', c: '#7A4E00', b: '#E8B84B' }]
-      },
-      {
-        color: '#1D9E75', bbg: '#E1F5EE', btc: '#085041', badge: 'Contract Renewed',
-        title: 'Contract successfully renewed for 12 months',
-        eng: 'Entitlements extended, loyalty bonus credited',
-        body: 'Invoice/ledger status updates: active for next 12 months. Dispatches +1,000 loyalty points renewal bonus. Rebate rate locks.',
-        hl: { bg: '#E1F5EE', color: '#085041', text: 'Contract active. +1000 pts bonus.' },
-        chips: [{ l: 'Active & Credited', bg: '#E1F5EE', c: '#085041', b: '#5DCAA5' }]
-      },
-      {
-        color: '#D4537E', bbg: '#FBEAF0', btc: '#72243E', badge: 'Contract Suspended',
-        title: 'Commercial fallback triggers suspension',
-        eng: 'Negotiation failure disables portal access and rebates',
-        body: 'If renewal negotiation fails or expires: account is set to DORMANT. Disables rebate engines, co-marketing MDF programs, and partner portal access.',
-        hl: { bg: '#FBEAF0', color: '#72243E', text: 'Dormant status: features suspended' },
-        chips: [{ l: 'Suspended', bg: '#FBEAF0', c: '#72243E', b: '#ED93B1' }]
-      }
-    ]
-  };
-
-  function render() {
-    const SCENARIOS = activeMode === 'b2c' ? SCENARIOS_B2C : SCENARIOS_B2B;
-    const steps = SCENARIOS[renMode] || SCENARIOS[Object.keys(SCENARIOS)[0]];
-    const total = steps.length;
-
-    const progHtml = steps.map((step, i) => `
-      <div class="prog-dot" 
-           style="background:${i < renStep ? 'var(--color-teal)' : i === renStep ? step.color : 'var(--border-color)'}" 
-           onclick="renJumpStep(${i})">
-        ${i + 1}
-      </div>
-      ${i < total - 1 ? `<div class="prog-line ${i < renStep ? 'done' : ''}"></div>` : ''}
-    `).join('');
-
-    const s = steps[renStep] || steps[0];
-    const chipsHtml = s.chips.map(c => `
-      <div class="chip" style="background:${c.bg}; color:${c.c}; border-color:${c.b}">
-        ${c.l}
-      </div>
-    `).join('');
-
-    document.getElementById('ren-detail-body').innerHTML = `
-      <div class="prog">${progHtml}</div>
-      <div class="scard-wrap">
-        <div class="step-badge" style="background:${s.bbg}; color:${s.btc}">${s.badge}</div>
-        <div class="step-title">${s.title}</div>
-        <div class="step-eng">${s.eng}</div>
-        <div class="step-body">${s.body.replace(/\n/g, '<br>')}</div>
-        <div class="step-hl" style="background:${s.hl.bg}; color:${s.hl.color}">${s.hl.text}</div>
-        <div class="step-chips">${chipsHtml}</div>
-      </div>
-      <div class="nav-row">
-        <button class="btn-prev" ${renStep === 0 ? 'disabled' : ''} onclick="renGo2(-1)">← Peeche</button>
-        <span class="step-ctr">Step ${renStep + 1} of ${total}</span>
-        <button class="btn-next" onclick="renGo2(1)">
-          ${renStep === total - 1 ? 'Finish ✓' : 'Next Step →'}
-        </button>
-      </div>
-    `;
-  }
-
-  // Expose global variables
-  window.renSetActive = (key) => {
-    renMode = key;
-    renStep = 0;
-    document.querySelectorAll('.r-btn-sc').forEach(b => {
-      b.classList.remove('active');
-    });
-    document.getElementById(`ren-btn-${key}`).classList.add('active');
-    render();
-  };
-  window.renGo2 = (d) => {
-    const SCENARIOS = activeMode === 'b2c' ? SCENARIOS_B2C : SCENARIOS_B2B;
-    if (renStep + d >= 0 && renStep + d < SCENARIOS[renMode].length) {
-      renStep += d;
-      render();
-    }
-  };
-  window.renJumpStep = (i) => {
-    renStep = i;
-    render();
-  };
-
-  const tabsHtml = activeMode === 'b2c' ? `
-    <div class="r-btn-sc e-chip active" id="ren-btn-points" onclick="renSetActive('points')">
-      <i class="ti ti-calendar-time"></i> Points Expiry Loop
-    </div>
-    <div class="r-btn-sc e-chip" id="ren-btn-tier" onclick="renSetActive('tier')">
-      <i class="ti ti-star"></i> Tier Status Maintenance
-    </div>
-    <div class="r-btn-sc e-chip" id="ren-btn-member" onclick="renSetActive('member')">
-      <i class="ti ti-credit-card"></i> Paid Subscription Renewal
-    </div>
-  ` : `
-    <div class="r-btn-sc e-chip active" id="ren-btn-rebate_expiry" onclick="renSetActive('rebate_expiry')">
-      <i class="ti ti-calendar-time"></i> Rebate Expiry Loop
-    </div>
-    <div class="r-btn-sc e-chip" id="ren-btn-annual_tier" onclick="renSetActive('annual_tier')">
-      <i class="ti ti-star"></i> Tier Status Maintenance
-    </div>
-    <div class="r-btn-sc e-chip" id="ren-btn-contract_renewal" onclick="renSetActive('contract_renewal')">
-      <i class="ti ti-credit-card"></i> Contract Renewal Scenarios
-    </div>
-  `;
-
-  document.getElementById('renewal-wrap').innerHTML = `
-    <div class="sect-label">Kaun si renewal flow dekhni hai?</div>
-    <div class="earn-chips">
-      ${tabsHtml}
-    </div>
-
-    <div id="ren-detail-body" class="detail-card" style="margin-top:16px;"></div>
-  `;
-  render();
-}
-
-/* ==========================================================================
-   MASTER BLUEPRINT DECK (PPT VIEW)
-   ========================================================================== */
-const BLUEPRINT_SLIDES = [
-  {
-    title: "Slide 1: Loyalty Ecosystem & Architecture Blueprint",
-    image: "b2c_master_overview.jpg",
-    subtitle: "Complete 14-Engine Core Infrastructure & Instagram Validation Data Pipelines",
-    objective: "Enterprise-level B2C architecture alignment across marketing, sales, and core APIs.",
-    cx: "Manoj signs up, downloads the app, performs transactions, and tags his purchase on Instagram to instantly see points update in his unified wallet profile.",
-    description: "This blueprint charts the global data pipelines connecting POS counters, e-commerce, CRM system, and external social API hooks. Key features highlighted include the Instagram Tagging validation system, showing Webhooks sending payload data, image OCR verifying brand mentions, and ledger credits.",
-    script: "Aap is slide par humare system ka complete B2C Loyalty Ecosystem blueprint dekh rahe hain. Isme total 14 engines run ho rahe hain. Jab customer Instagram par humein tag karta hai, tab humara Webhook trigger hota hai, check kiya jata hai aur wallet auto-credit ho jata hai. Kisi visual cropping ke bina, aap complete architecture aur integration flow ko end-to-end dekh sakte hain.",
-    math: "Active Wallet Balance = (Base Transactions + Social Events) - Redemptions"
-  },
-  {
-    title: "Slide 2: Points Calculations & Social Tagging Workflows",
-    image: "b2c_master_points_tagging.jpg",
-    subtitle: "Mathematical Accrual Formulas, Tier Multipliers & Instagram Campaign Rules",
-    objective: "Define exact mathematics and triggers for point credit, deduplication, and redemption discount caps.",
-    cx: "Manoj earns 100 points for every RM 1 spent as base reward. Reaching 500 points upgrades him to Silver (1.5x points). Points are redeemed at 100 points = RM 1 cash discount, capped at 20% of bill value.",
-    description: "Provides granular mathematical validation: Accrual Formula, Tier Thresholds, and Redemption Discount conversions. Highlights the step-by-step logic gates for the Social Tagging engine including anti-spam, tag authenticity, and daily event caps.",
-    script: "Yeh slide humara calculation aur points engine ka detailed architecture hai. Humne standard conversion rate RM 1 = 100 Points set kiya hai. Multipliers Bronze (1x) se shuru ho kar Platinum (3x) tak jaate hain, aur welcome points par flat 100 Points milte hain. Right side mein tagging verification sequence logic gated hai taaki false tags filter ho sakein.",
-    math: "Points = (Spend × 100) × Tier Multiplier | Welcome Credit = +100 Points"
-  }
-];
-
-let blueprintSlideIndex = 0;
-
-function initBlueprintPPT() {
-  renderBlueprintSlide();
-}
-
-function renderBlueprintSlide() {
-  const container = document.getElementById('blueprint-ppt-wrap');
+  const container = document.getElementById('renewal-wrap');
   if (!container) return;
 
-  const total = BLUEPRINT_SLIDES.length;
-  if (blueprintSlideIndex >= total) blueprintSlideIndex = 0;
-  const s = BLUEPRINT_SLIDES[blueprintSlideIndex];
-
-  // Add B2B Warning if activeMode is B2B (since B2B doesn't have custom diagrams yet)
-  let modeWarning = '';
   if (activeMode === 'b2b') {
-    modeWarning = `
-      <div style="background:rgba(245, 158, 11, 0.1); border:1px solid var(--color-amber); border-radius:10px; padding:10px 14px; margin-bottom:16px; font-size:11.5px; display:flex; align-items:center; gap:8px; color:var(--color-amber); text-align:left;">
-        <i class="ti ti-alert-triangle" style="font-size:16px;"></i>
-        <span><strong>Note:</strong> Master Blueprints specifically map the <strong>B2C Loyalty Ecosystem</strong>. B2B Partner Loyalty rules are detailed under the respective Partner Journey tabs.</span>
-      </div>
-    `;
+    // Keep B2B simple for now
+    container.innerHTML = `<div style="padding:20px; color:#fff;">B2B Renewal logic goes here.</div>`;
+    return;
   }
 
   container.innerHTML = `
-    ${modeWarning}
-    <div class="pres-layout">
-      <!-- Left sidebar slide navigator -->
-      <div class="pres-slide-nav" style="max-height: 640px;">
-        <div class="sect-label" style="margin-bottom:6px; padding-left:4px;">Master Blueprints</div>
-        ${BLUEPRINT_SLIDES.map((slide, idx) => `
-          <button class="pres-slide-link ${idx === blueprintSlideIndex ? 'active' : ''}" onclick="window.blueprintJump(${idx})" style="padding: 6px; display:flex; flex-direction:column; gap:6px; align-items:stretch; height:auto; width:100%;">
-            <div style="display:flex; align-items:center; gap:8px; width:100%;">
-              <span style="font-family:monospace; opacity:0.6; font-size:11px;">0${idx + 1}</span>
-              <span style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; flex:1; font-size:11px; font-weight:bold; text-align:left;">${slide.title.split(': ')[1]}</span>
-            </div>
-            <!-- Mini thumbnail preview -->
-            <div style="height: 60px; border-radius:4px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:#000; position:relative; width:100%;">
-              <img src="${slide.image}" style="width:100%; height:100%; object-fit:cover; opacity: 0.65;" />
-              <div style="position:absolute; bottom:2px; right:4px; font-size:8px; background:rgba(0,0,0,0.6); padding:1px 3px; border-radius:2px; color:var(--color-cyan);">MASTER</div>
-            </div>
-          </button>
-        `).join('')}
+    <!-- Top Concept Section -->
+    <div class="pres-slide" style="display:flex; flex-direction:column; align-items:center; text-align:center; padding: 20px; border:none; box-shadow:none;">
+      <h2 style="font-size:24px; color:var(--color-cyan); margin-bottom:10px;">Renewal & Expiry Strategy</h2>
+      <p style="font-size:14px; max-width:700px; margin-bottom:20px; color:var(--text-muted); line-height:1.5;">
+        Points expire karke customers mein urgency banai jati hai, aur Tier Renewal mein "Soft Downgrade" karke unka trust bachaya jata hai.
+      </p>
+    </div>
+
+    <!-- The Timeline Story -->
+    <div class="timeline" style="margin-top: 20px;">
+      
+      <!-- Step 1 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-primary);">1</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-primary);">Step 1: The Activity-Based Expiry</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj pichle 5 mahine se app open nahi karta. Uske account mein 30,000 Reward Points hain.<br><br>
+            <strong style="color:var(--color-coral);"><i class="ti ti-alarm"></i> System Action:</strong> System usko notification bhejta hai ki "Make a purchase within 30 days or your points will expire!" Agar wo 6 mahine cross karta hai, toh uske points zero ho jayenge. Yeh rule dead liabilities ko clear karta hai.
+          </div>
+        </div>
       </div>
 
-      <!-- Right Column: Active Slide (Image Canvas + Metadata + Notes) -->
-      <div class="pres-slide-content" style="flex:1; min-width:0;">
-        <!-- Projector Card Screen -->
-        <div class="pres-card" style="position:relative; overflow:hidden; background:linear-gradient(135deg, rgba(22, 28, 45, 0.8), rgba(15, 23, 42, 0.95)); border:2px solid rgba(6, 182, 212, 0.35); box-shadow:var(--glow-cyan), var(--shadow-main); padding:20px; min-height:500px; border-radius:16px; display:flex; flex-direction:column; justify-content:space-between; transition:all 0.3s ease;">
+      <!-- Step 2 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-teal);">2</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-teal);">Step 2: Tier Evaluation (Day 365)</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj filhal <strong>Gold Tier</strong> (req. RM 2,000 spend) par hai. Aaj uska 1-year anniversary hai. System check karta hai ki pichle 1 saal mein usne kitna spend kiya.<br><br>
+            <strong style="color:var(--color-teal);"><i class="ti ti-search"></i> System Action:</strong> System dekhta hai ki Manoj ne is saal sirf RM 1,000 spend kiya (Gold maintain karne se kam).
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-cyan);">3</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-cyan);">Step 3: The Soft Downgrade</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Kyunki Manoj RM 2,000 ka target poora nahi kar paya, usko downgrade karna hoga. Lekin use seedha "Bronze" par fekne se wo naraz ho jayega.<br><br>
+            <strong style="color:var(--color-cyan);"><i class="ti ti-heart-handshake"></i> System Action (Soft Downgrade):</strong> System use sirf 1 level niche <strong>Silver Tier</strong> par downgrade karta hai. Isse Manoj ko naya target milta hai, par wo totally demotivated nahi hota.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- The Simulator Section -->
+    <div style="margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+      <h3 style="text-align:center; color:#fff; font-size:18px; margin-bottom:20px; font-family: var(--font-display);">Try It Yourself: Renewal Simulator</h3>
+      
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <!-- Left: Interactive Controls -->
+        <div style="flex: 1; min-width: 300px; background: var(--bg-field); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px;">
+          <div class="sect-label">Annual Check Simulation</div>
           
-          <!-- Slide Top Header -->
-          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px; margin-bottom:12px;">
-            <span style="font-size:9.5px; font-weight:700; color:var(--color-cyan); text-transform:uppercase; letter-spacing:0.1em; background:rgba(6, 182, 212, 0.1); padding:3px 8px; border-radius:20px;">
-              B2C PLATFORM MASTER BLUEPRINT
-            </span>
-            <span style="font-size:10.5px; font-family:monospace; color:var(--text-muted);">
-              Blueprint ${blueprintSlideIndex + 1} of ${total}
-            </span>
+          <div class="ctrl-row" style="margin-bottom: 16px;">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Months of Inactivity</label>
+            <input type="range" id="sim-ren-inact" min="0" max="12" step="1" value="2" oninput="simRenewalCalc()">
+            <span class="ctrl-val" id="sim-ren-inact-v">2 Months</span>
           </div>
 
-          <!-- Slide Content split or vertical flow -->
-          <div style="flex:1; display:flex; flex-direction:column; gap:16px;">
-            <div style="text-align:left;">
-              <h2 style="font-family:var(--font-display); font-size:19px; font-weight:800; color:#fff; margin-bottom:4px;">
-                ${s.title}
-              </h2>
-              <p style="font-size:11.5px; color:var(--text-muted); line-height:1.4; margin:0;">
-                ${s.subtitle}
-              </p>
-            </div>
-
-            <!-- Master Image Viewport with interactive overlay -->
-            <div style="position:relative; background:#05070a; border:1px solid var(--border-color); border-radius:12px; padding:8px; display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:300px; overflow:hidden;">
-              <img src="${s.image}" style="max-width:100%; max-height:360px; object-fit:contain; border-radius:8px; transition:transform 0.3s;" id="blueprint-main-image" onclick="window.openBlueprintLightbox('${s.image}', '${s.title}')" title="Click to zoom / view fullscreen" />
-              
-              <!-- Hover Overlay Controls -->
-              <div style="position:absolute; bottom:12px; right:12px; display:flex; gap:8px; z-index:10;">
-                <button onclick="window.openBlueprintLightbox('${s.image}', '${s.title}')" class="pres-btn-accent" style="display:flex; align-items:center; gap:6px; background:var(--color-cyan); border:none; color:#000; font-size:11px; font-weight:700; padding:6px 12px; border-radius:6px; cursor:pointer; box-shadow:var(--glow-cyan); transition:all 0.2s;">
-                  <i class="ti ti-zoom-in" style="font-size:13px;"></i> Zoom & View Fullscreen
-                </button>
-                <a href="${s.image}" download style="display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.08); border:1px solid var(--border-color); color:#fff; font-size:11px; font-weight:700; padding:6px 12px; border-radius:6px; text-decoration:none; transition:all 0.2s;">
-                  <i class="ti ti-download" style="font-size:13px;"></i> Download
-                </a>
-              </div>
-            </div>
-
-            <!-- Metadata details below the image -->
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; text-align:left; margin-top:6px;">
-              <div>
-                <span style="font-size:8.5px; font-weight:700; color:var(--color-primary); text-transform:uppercase; letter-spacing:0.06em; background:rgba(99,102,241,0.1); padding:2.5px 6px; border-radius:10px; display:inline-block; margin-bottom:4px;">
-                  Business Objective
-                </span>
-                <div style="font-size:11.5px; font-weight:bold; color:#fff; line-height:1.4;">${s.objective}</div>
-              </div>
-              
-              <div>
-                <span style="font-size:8.5px; font-weight:700; color:var(--color-teal); text-transform:uppercase; letter-spacing:0.06em; background:rgba(16,185,129,0.1); padding:2.5px 6px; border-radius:10px; display:inline-block; margin-bottom:4px;">
-                  Blueprint Data Pipelines
-                </span>
-                <div style="font-size:11.5px; color:var(--text-muted); line-height:1.45;">${s.description}</div>
-              </div>
-            </div>
-
-            <div style="text-align:left;">
-              <span style="font-size:8.5px; font-weight:700; color:var(--color-amber); text-transform:uppercase; letter-spacing:0.06em; background:rgba(245,158,11,0.1); padding:2.5px 6px; border-radius:10px; display:inline-block; margin-bottom:4px;">
-                Ecosystem Math & Rules Reference
-              </span>
-              <div style="font-family:monospace; font-size:11.5px; color:var(--color-amber); background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.05); padding:6px 10px; border-radius:6px; margin-top:2px;">
-                ${s.math}
-              </div>
-            </div>
-
+          <div class="ctrl-row" style="margin-bottom: 16px;">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Last 12 Months Spend</label>
+            <input type="range" id="sim-ren-spend" min="0" max="10000" step="100" value="1500" oninput="simRenewalCalc()">
+            <span class="ctrl-val" id="sim-ren-spend-v">RM 1,500</span>
           </div>
 
-          <!-- Bottom Control Navigation Bar -->
-          <div class="pres-controls-row" style="margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 12px;">
-            <button onclick="window.blueprintGo(-1)" ${blueprintSlideIndex === 0 ? 'disabled' : ''} style="background-color:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; padding:6px 14px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; transition:all 0.2s;">
-              ← Peeche (Prev)
-            </button>
-            <div style="display:flex; gap:8px; align-items:center;">
-              ${BLUEPRINT_SLIDES.map((_, idx) => `
-                <span style="width:8px; height:8px; border-radius:50%; background:${idx === blueprintSlideIndex ? 'var(--color-cyan)' : 'rgba(255,255,255,0.15)'}; display:inline-block; cursor:pointer;" onclick="window.blueprintJump(${idx})"></span>
-              `).join('')}
-            </div>
-            <button onclick="window.blueprintGo(1)" class="pres-btn-accent" style="padding:6px 14px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; transition:all 0.2s;">
-              ${blueprintSlideIndex === total - 1 ? 'Start Over ↺' : 'Agla Blueprint (Next) →'}
-            </button>
+          <div class="ctrl-row" style="margin-bottom: 16px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Current Tier</label>
+            <select id="sim-ren-tier" onchange="simRenewalCalc()" style="background:var(--bg-main); color:#fff; border:1px solid var(--border-color); border-radius:4px; padding:4px 8px; width: 120px;">
+              <option value="Bronze">Bronze (0)</option>
+              <option value="Silver">Silver (500)</option>
+              <option value="Gold" selected>Gold (2000)</option>
+              <option value="Platinum">Platinum (5000)</option>
+            </select>
+          </div>
+          
+          <div style="font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 10px;">
+            * Rule: Points expire after 6 months of inactivity. Tiers soft-downgrade by max 1 level per year.
           </div>
         </div>
 
-        <!-- Presenter notes text card below -->
-        <div class="pres-notes-box" style="margin-top:16px; background:rgba(99, 102, 241, 0.08); border-left:4px solid var(--color-primary); text-align:left;">
-          <div class="script-title">
-            <i class="ti ti-microphone"></i> Presenter Notes (Hindi/Hinglish)
-          </div>
-          <div class="script-text">
-            "${s.script}"
+        <!-- Right: Real-time Evaluation -->
+        <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px;">
+          
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            
+            <!-- Expiry Status -->
+            <div style="margin-bottom: 20px;">
+               <div style="font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">Reward Points Status</div>
+               <div id="out-ren-expiry" style="font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--color-primary);">Active (Safe)</div>
+            </div>
+
+            <!-- Tier Status -->
+            <div>
+               <div style="font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">New Tier Decision</div>
+               <div id="out-ren-tier" style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: #fff;">Soft Downgraded to Silver</div>
+            </div>
+            
           </div>
         </div>
-
       </div>
     </div>
   `;
+
+  setTimeout(() => {
+    if (window.simRenewalCalc) window.simRenewalCalc();
+  }, 50);
 }
 
-// Lightbox modal operations
-function openBlueprintLightbox(imgSrc, title) {
-  let lightbox = document.getElementById('blueprint-lightbox');
-  if (!lightbox) {
-    lightbox = document.createElement('div');
-    lightbox.id = 'blueprint-lightbox';
-    lightbox.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(10, 14, 20, 0.96);
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    `;
-    lightbox.innerHTML = `
-      <div style="position: absolute; top: 20px; right: 20px; display: flex; gap: 12px; z-index: 10001;">
-        <button onclick="window.zoomLightbox(1.2)" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color:#fff; font-size:13px; font-weight:bold; padding:8px 12px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;"><i class="ti ti-zoom-in"></i> Zoom In</button>
-        <button onclick="window.zoomLightbox(0.8)" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color:#fff; font-size:13px; font-weight:bold; padding:8px 12px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;"><i class="ti ti-zoom-out"></i> Zoom Out</button>
-        <button onclick="window.resetLightboxZoom()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color:#fff; font-size:13px; font-weight:bold; padding:8px 12px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;"><i class="ti ti-refresh"></i> Reset</button>
-        <button onclick="window.closeBlueprintLightbox()" style="background: var(--color-coral); border: none; color:#fff; font-size:13px; font-weight:bold; padding:8px 16px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;">Close ✕</button>
-      </div>
-      <div id="lightbox-img-container" style="overflow: auto; width: 90vw; height: 85vh; display: flex; align-items: center; justify-content: center; cursor: grab; padding: 20px;">
-        <img id="lightbox-img" src="" style="max-width: 95%; max-height: 95%; transition: transform 0.2s ease, max-width 0.2s, max-height 0.2s; border-radius: 8px; transform-origin: center;" />
-      </div>
-      <div id="lightbox-title" style="color: #fff; margin-top: 10px; font-family: var(--font-display); font-weight: bold; font-size: 15px;"></div>
-    `;
-    document.body.appendChild(lightbox);
-    
-    window.lightboxZoom = 1.0;
-    
-    window.zoomLightbox = (factor) => {
-      window.lightboxZoom *= factor;
-      if (window.lightboxZoom < 0.5) window.lightboxZoom = 0.5;
-      if (window.lightboxZoom > 4.0) window.lightboxZoom = 4.0;
-      const img = document.getElementById('lightbox-img');
-      img.style.transform = `scale(${window.lightboxZoom})`;
-      if (window.lightboxZoom > 1.0) {
-        img.style.maxWidth = 'none';
-        img.style.maxHeight = 'none';
-      } else {
-        img.style.maxWidth = '95%';
-        img.style.maxHeight = '95%';
-      }
-    };
-    
-    window.resetLightboxZoom = () => {
-      window.lightboxZoom = 1.0;
-      const img = document.getElementById('lightbox-img');
-      img.style.transform = 'scale(1)';
-      img.style.maxWidth = '95%';
-      img.style.maxHeight = '95%';
-    };
-    
-    window.closeBlueprintLightbox = () => {
-      const lb = document.getElementById('blueprint-lightbox');
-      if (lb) {
-        lb.style.opacity = '0';
-        lb.style.pointerEvents = 'none';
-      }
-    };
+window.simRenewalCalc = function() {
+  const inactEl = document.getElementById('sim-ren-inact');
+  if (!inactEl) return;
+
+  const inact = parseInt(inactEl.value);
+  const spend = parseInt(document.getElementById('sim-ren-spend').value);
+  const currentTier = document.getElementById('sim-ren-tier').value;
+
+  // Update UI values
+  document.getElementById('sim-ren-inact-v').textContent = inact + (inact === 1 ? ' Month' : ' Months');
+  document.getElementById('sim-ren-spend-v').textContent = 'RM ' + spend.toLocaleString();
+
+  // Expiry Logic
+  const expiryEl = document.getElementById('out-ren-expiry');
+  if (inact >= 6) {
+    expiryEl.textContent = 'EXPIRED (0 pts)';
+    expiryEl.style.color = 'var(--color-coral)';
+  } else {
+    expiryEl.textContent = 'Active (Safe)';
+    expiryEl.style.color = 'var(--color-primary)';
   }
 
-  const img = document.getElementById('lightbox-img');
-  if (img) img.src = imgSrc;
-  const titleEl = document.getElementById('lightbox-title');
-  if (titleEl) titleEl.textContent = title;
-  window.resetLightboxZoom();
+  // Tier Renewal Logic (Assuming 1 RM = 1 Pt base rate for simplicity in simulation)
+  const tiers = ['Bronze', 'Silver', 'Gold', 'Platinum'];
+  const req = { 'Bronze': 0, 'Silver': 500, 'Gold': 2000, 'Platinum': 5000 };
   
-  lightbox.style.pointerEvents = 'auto';
-  lightbox.style.opacity = '1';
-}
+  let targetTierLevel = 0;
+  if (spend >= req['Platinum']) targetTierLevel = 3;
+  else if (spend >= req['Gold']) targetTierLevel = 2;
+  else if (spend >= req['Silver']) targetTierLevel = 1;
+  else targetTierLevel = 0;
 
-window.openBlueprintLightbox = openBlueprintLightbox;
-window.blueprintJump = (idx) => {
-  blueprintSlideIndex = idx;
-  renderBlueprintSlide();
-};
+  const currentLevel = tiers.indexOf(currentTier);
+  let finalLevel = currentLevel;
+  let statusText = '';
 
-window.blueprintGo = (d) => {
-  const total = BLUEPRINT_SLIDES.length;
-  if (blueprintSlideIndex + d >= 0 && blueprintSlideIndex + d < total) {
-    blueprintSlideIndex += d;
-    renderBlueprintSlide();
-  } else if (blueprintSlideIndex + d === total) {
-    blueprintSlideIndex = 0;
-    renderBlueprintSlide();
+  if (targetTierLevel > currentLevel) {
+    finalLevel = targetTierLevel;
+    statusText = 'Upgraded to ' + tiers[finalLevel];
+  } else if (targetTierLevel === currentLevel) {
+    statusText = 'Retained ' + tiers[finalLevel];
+  } else {
+    // Soft Downgrade logic: only drop by 1
+    finalLevel = Math.max(0, currentLevel - 1);
+    statusText = 'Soft Downgraded to ' + tiers[finalLevel];
   }
+
+  const tierEl = document.getElementById('out-ren-tier');
+  tierEl.textContent = statusText;
+  
+  // Style coloring
+  if (statusText.includes('Upgraded')) tierEl.style.color = 'var(--color-cyan)';
+  else if (statusText.includes('Retained')) tierEl.style.color = '#fff';
+  else tierEl.style.color = 'var(--color-coral)';
 };
 
-/* ==========================================================================
-   DYNAMIC TIER UPGRADE (DTS)
-   ========================================================================== */
+
 function initAdvancedTier() {
   const container = document.getElementById('advanced-tier-wrap');
   if (!container) return;
