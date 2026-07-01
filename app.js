@@ -64,51 +64,110 @@ function initPage(pageId) {
 /* ==========================================================================
    0. END-TO-END CUSTOMER JOURNEY (11 MODULES)
    ========================================================================== */
+
 function initJourney() {
   const container = document.getElementById('journey-wrap');
   if (!container) return;
 
   const steps = [
-    { num: 1, title: "Profile Creation & Registration", desc: "Customer sign up karta hai. Profile 100% complete karne par Welcome Points milte hain." },
-    { num: 2, title: "Explore & Engage", desc: "Products browse karta hai, wishlist banata hai, aur app roz open karta hai (Daily Streaks). Isse Behavior Points milte hain." },
-    { num: 3, title: "Place Order", desc: "Cart me items add karke pehla order place karta hai." },
-    { num: 4, title: "Points Earning (Calculation)", desc: "<div style='background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; margin-bottom:5px;'><strong>Formula: Points = RM Spend &times; 1</strong></div>1 RM = 1 Point rule ke hisaab se points calculate hote hain. (e.g., RM 500 = 500 Points)." },
-    { num: 5, title: "Pending Wallet (Lock Period)", desc: "Earn kiye gaye points turant use nahi ho sakte. 14-30 din (Return Window) tak Pending Wallet mein lock rehte hain." },
-    { num: 6, title: "Active Wallet (Points Unlocked)", desc: "Return period safely khatam hone ke baad points Active Wallet mein aate hain." },
-    { num: 7, title: "Second Purchase Unlock", desc: "Customer ke paas Active points hain, par Redeem button locked rehta hai. Jab wo apna 2nd Order place karta hai, tabhi redeem button unlock hota hai (Isse customer wapas aata hai!)." },
-    { num: 8, title: "Points Redemption (Convert to Cash)", desc: "<div style='background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; margin-bottom:5px;'><strong>Formula 1: Cash = Points &divide; 100</strong><br><strong>Formula 2: Max Cap = Cart Total &times; 20%</strong></div>Cash Value = Total Points &divide; 100 (1% cashback). Max 20% cap rule ke sath discount milta hai." },
-    { num: 9, title: "Tier Score Calculation", desc: "<div style='background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; margin-bottom:5px;'><strong>Formula: DTS = [(Spend + Behavior) - Canceled] &times; Freq Multiplier</strong></div>System is formula se calculate karke user ki sacchi loyalty value nikalta hai." },
-    { num: 10, title: "Tier Assignment & Benefits", desc: "DTS score ke hisaab se Bronze, Silver, Gold, Platinum ya Diamond tier assign hota hai." },
-    { num: 11, title: "Enjoy Rewards & Renew", desc: "Har 12 mahine mein system review karta hai aur Expiry ya Soft Downgrade rules lagata hai." }
+    { num: '01', title: "PROFILE & REGISTRATION", color: "#3B82F6", icon: "ti-user-plus", purpose: "Create customer profile and register.", input: "<ul><li>Mobile</li><li>Email</li><li>Referral</li></ul>", logic: "Validate Mobile<br>Create UUID<br>Assign Default Tier", output: "Customer Created", formula: "RM 1 = 1 Point (Default earning rate)", status: "Completed" },
+    { num: '02', title: "EXPLORE & ENGAGE", color: "#10B981", icon: "ti-search", purpose: "Browse products and interact with the brand daily.", input: "<ul><li>App Opens</li><li>Wishlist Adds</li></ul>", logic: "Track Daily Streaks<br>Award Behavior Points", output: "Behavior Points Added", formula: "Rule: Max 1 streak bonus per day", status: "Completed" },
+    { num: '03', title: "PLACE ORDER", color: "#F97316", icon: "ti-shopping-cart", purpose: "Customer places their first purchase.", input: "<ul><li>Cart Items</li><li>Payment Info</li></ul>", logic: "Process Payment<br>Generate Order ID", output: "Order Confirmed", formula: "Base RM total calculated", status: "Completed" },
+    { num: '04', title: "POINTS EARNING", color: "#8B5CF6", icon: "ti-coin", purpose: "Calculate and award raw points based on spend.", input: "<ul><li>Confirmed Order (RM)</li></ul>", logic: "Multiply Spend by Base Rate", output: "Raw Points Generated", formula: "Points = RM Spend × 1", status: "Completed" },
+    { num: '05', title: "PENDING WALLET", color: "#06B6D4", icon: "ti-lock", purpose: "Hold points in escrow to prevent return fraud.", input: "<ul><li>Raw Points</li><li>Return Window Policy</li></ul>", logic: "Lock points for 14 Days<br>Monitor for Refunds", output: "Pending Points Balance", formula: "Rule: Wait 14 days before unlock", status: "Completed" },
+    { num: '06', title: "ACTIVE WALLET", color: "#EAB308", icon: "ti-wallet", purpose: "Unlock points for redemption once return window clears.", input: "<ul><li>Pending Points</li><li>Time Elapsed</li></ul>", logic: "Transfer Pending to Active<br>Update Total Balance", output: "Active Spendable Points", formula: "Active Pts = Pending Pts (after 14d)", status: "Completed" },
+    { num: '07', title: "2ND PURCHASE", color: "#EC4899", icon: "ti-key", purpose: "Unlock the ability to redeem points and upgrade tier.", input: "<ul><li>Order Frequency count</li></ul>", logic: "Check if Orders >= 2<br>Remove Probation Lock", output: "Redemption Unlocked", formula: "IF Orders >= 2 THEN Unlock", status: "Completed" },
+    { num: '08', title: "POINTS REDEMPTION", color: "#6366F1", icon: "ti-gift", purpose: "Convert points to cash discount during checkout.", input: "<ul><li>Active Wallet Balance</li><li>Cart Total</li></ul>", logic: "Convert points to RM<br>Apply Max Cap limit", output: "Discount Applied to Cart", formula: "Cash = Points ÷ 100<br>Max Cap = Cart × 20%", status: "Completed" },
+    { num: '09', title: "TIER SCORE (DTS)", color: "#10B981", icon: "ti-chart-line", purpose: "Calculate the true loyalty value of the customer.", input: "<ul><li>Spend</li><li>Behavior</li><li>Cancellations</li></ul>", logic: "Aggregate 12-month data<br>Apply Frequency Bonus", output: "Dynamic Tier Score (DTS)", formula: "DTS = [(Spend+Behavior)-Cancel] × Freq", status: "Completed" },
+    { num: '10', title: "TIER ASSIGNMENT", color: "#EF4444", icon: "ti-medal", purpose: "Assign the appropriate tier based on DTS.", input: "<ul><li>DTS Output</li><li>Tier Thresholds</li></ul>", logic: "Match DTS to Threshold<br>Assign Benefits", output: "Final Tier (e.g. Platinum)", formula: "Bronze(0) -> Diamond(10000+)", status: "Completed" },
+    { num: '11', title: "RENEW / EXPIRE", color: "#14B8A6", icon: "ti-reload", purpose: "Manage annual tier renewals and inactivity expiry.", input: "<ul><li>Last 12m Spend</li><li>Inactivity Months</li></ul>", logic: "Soft Downgrade tier<br>Zero out expired points", output: "Renewed/Downgraded Tier", formula: "Rule: Drop 1 tier level max", status: "Completed" }
   ];
 
-  let stepHtml = '<div class="timeline" style="margin-top: 10px; padding: 0 10px;">';
+  let gridHtml = '<div class="arch-grid">';
   
   steps.forEach((s) => {
-    let color = 'var(--color-primary)';
-    if (s.num >= 5 && s.num <= 7) color = 'var(--color-coral)';
-    if (s.num >= 8) color = 'var(--color-teal)';
-    if (s.num === 11) color = 'var(--color-amber)';
-
-    stepHtml += `
-      <div class="timeline-step">
-        <div class="step-num" style="background:${color};">${s.num}</div>
-        <div class="step-content" style="border-left: 3px solid ${color};">
-          <div class="step-title" style="color:${color};">${s.title}</div>
-          <div class="step-desc">${s.desc}</div>
+    gridHtml += `
+      <div class="arch-card" style="border-top: 4px solid ${s.color};">
+        <div class="arch-header">
+          <div class="arch-num" style="background:${s.color};">${s.num}</div>
+          <div class="arch-title">${s.title}</div>
+        </div>
+        
+        <div class="arch-icon" style="color:${s.color};">
+          <i class="ti ${s.icon}"></i>
+        </div>
+        
+        <div class="arch-section">
+          <div class="arch-label" style="color:${s.color};">Purpose</div>
+          <div class="arch-value">${s.purpose}</div>
+        </div>
+        
+        <div class="arch-section">
+          <div class="arch-label" style="color:${s.color};">Journey Input</div>
+          <div class="arch-value">${s.input}</div>
+        </div>
+        
+        <div class="arch-section">
+          <div class="arch-label" style="color:${s.color};">Business Logic</div>
+          <div class="arch-value">${s.logic}</div>
+        </div>
+        
+        <div class="arch-section">
+          <div class="arch-label" style="color:${s.color};">Output</div>
+          <div class="arch-value">${s.output}</div>
+        </div>
+        
+        <div class="arch-section">
+          <div class="arch-label" style="color:${s.color};">Formula / Rule</div>
+          <div class="arch-formula">${s.formula}</div>
+        </div>
+        
+        <div class="arch-status" style="color:${s.color};">
+          <i class="ti ti-check"></i> ${s.status}
         </div>
       </div>
     `;
   });
 
-  stepHtml += '</div>';
+  gridHtml += '</div>';
 
-  container.innerHTML = `
-    <div style="padding: 10px;">
-      <h3 style="color:var(--text-main); font-size:18px; margin-bottom:20px; text-align:center;">Customer Journey: Step 1 se Step 11 tak (Full Flow)</h3>
-      ${stepHtml}
+  const flowHtml = `
+    <div class="flow-summary-container">
+      <div class="flow-title">End to End Flow Summary</div>
+      <div class="flow-track">
+        <div class="flow-node"><div class="flow-node-icon" style="color:#3B82F6;"><i class="ti ti-user-plus"></i></div><div class="flow-node-label">Sign Up</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#10B981;"><i class="ti ti-search"></i></div><div class="flow-node-label">Engage</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#F97316;"><i class="ti ti-shopping-cart"></i></div><div class="flow-node-label">Purchase</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#8B5CF6;"><i class="ti ti-coin"></i></div><div class="flow-node-label">Earn</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#06B6D4;"><i class="ti ti-lock"></i></div><div class="flow-node-label">Pending</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#EAB308;"><i class="ti ti-wallet"></i></div><div class="flow-node-label">Wallet</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#6366F1;"><i class="ti ti-gift"></i></div><div class="flow-node-label">Redeem</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#10B981;"><i class="ti ti-chart-line"></i></div><div class="flow-node-label">DTS</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#EF4444;"><i class="ti ti-medal"></i></div><div class="flow-node-label">Tier</div></div>
+        <div class="flow-arrow"><i class="ti ti-arrow-right"></i></div>
+        
+        <div class="flow-node"><div class="flow-node-icon" style="color:#14B8A6;"><i class="ti ti-reload"></i></div><div class="flow-node-label">Renew</div></div>
+      </div>
     </div>
   `;
+
+  container.innerHTML = gridHtml + flowHtml;
 }
 
 function initFormulas() {
