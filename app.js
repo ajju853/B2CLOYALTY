@@ -5640,66 +5640,143 @@ function initAdvancedTier() {
   if (!container) return;
 
   container.innerHTML = `
-    <div style="background: rgba(99, 102, 241, 0.08); border-left: 4px solid var(--color-primary); padding: 14px; border-radius: var(--radius-md); margin-bottom: 20px;">
-      <h3 style="font-family: var(--font-display); font-size: 16px; color: #fff; margin-bottom: 6px;">Dynamic Tier Score (DTS) Formula</h3>
-      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Tier upgrade sirf paise kharch karne par nahi, balki behavior, cancellations, aur frequency par depend karta hai.</p>
-      <div style="font-family: monospace; font-size: 12.5px; color: var(--color-amber); background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; text-align: center;">
-        Score = [ (Confirmed Spend + Behavior Points) - Canceled Spend ] × Frequency Multiplier
+    <!-- Top Concept Section -->
+    <div class="pres-slide" style="display:flex; flex-direction:column; align-items:center; text-align:center; padding: 20px; border:none; box-shadow:none;">
+      <h2 style="font-size:24px; color:var(--color-cyan); margin-bottom:10px;">The Dynamic Tier System (DTS)</h2>
+      <p style="font-size:14px; max-width:700px; margin-bottom:20px; color:var(--text-muted); line-height:1.5;">
+        Tier upgrades shouldn't just be about spending money. A true enterprise loyalty program measures non-transactional behavior, order consistency, and protects the business ledger from cancellations and hit-and-run fraud.
+      </p>
+      <div style="font-family: monospace; font-size: 14px; color: var(--color-amber); background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); padding: 12px 24px; border-radius: 8px;">
+        <span style="color:#fff;">Tier Score =</span> [ (Confirmed Spend + Behavior Points) - Canceled Spend ] × Frequency Multiplier
       </div>
     </div>
 
-    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-      <!-- Left: Interactive Controls -->
-      <div style="flex: 1; min-width: 300px; background: var(--bg-field); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px;">
-        <div class="sect-label">Customer Activity Simulation</div>
-        
-        <div class="ctrl-row" style="margin-bottom: 16px;">
-          <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Confirmed Spend (RM)</label>
-          <input type="range" id="dts-spend" min="0" max="10000" step="100" value="1500" oninput="simDtsCalc()">
-          <span class="ctrl-val" id="dts-spend-v">1500</span>
-        </div>
-
-        <div class="ctrl-row" style="margin-bottom: 16px;">
-          <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Behavior Points (Tags, etc.)</label>
-          <input type="range" id="dts-behavior" min="0" max="500" step="10" value="50" oninput="simDtsCalc()">
-          <span class="ctrl-val" id="dts-behavior-v" style="color: var(--color-primary);">+50</span>
-        </div>
-
-        <div class="ctrl-row" style="margin-bottom: 16px;">
-          <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Canceled Spend (RM)</label>
-          <input type="range" id="dts-cancel" min="0" max="2000" step="50" value="0" oninput="simDtsCalc()">
-          <span class="ctrl-val" id="dts-cancel-v" style="color: var(--color-coral);">-0</span>
-        </div>
-
-        <div class="ctrl-row" style="margin-bottom: 16px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
-          <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Order Frequency (12 months)</label>
-          <input type="range" id="dts-freq" min="1" max="10" step="1" value="1" oninput="simDtsCalc()">
-          <span class="ctrl-val" id="dts-freq-v">1 Order</span>
-        </div>
-        
-        <div style="font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 10px;">
-          * Rules: Requires minimum 2 orders to unlock Tiers (Observation Period). >= 3 orders grants 1.1x multiplier.
+    <!-- The Timeline Story -->
+    <div class="timeline" style="margin-top: 20px;">
+      
+      <!-- Step 1 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-primary);">1</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-primary);">Day 1: The First Big Order (Probation Lock)</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj places his very first order for <strong>RM 5,000</strong>. Normally, 5,000 points instantly unlocks the Platinum Tier.<br><br>
+            <strong style="color:var(--color-coral);"><i class="ti ti-lock"></i> System Action:</strong> Because this is Manoj's 1st order, the system locks his tier. He earns the 5,000 points, but his Tier remains <strong>Bronze (Probation)</strong>. This prevents fraud where a user buys once just for the top-tier benefits and never returns.
+          </div>
         </div>
       </div>
 
-      <!-- Right: Real-time Evaluation -->
-      <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px;">
-        
-        <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
-          <div style="font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">Final Tier Score</div>
-          <div id="dts-out-score" style="font-family: var(--font-display); font-size: 42px; font-weight: 800; color: #fff; text-shadow: var(--glow-cyan); margin-bottom: 20px; transition: transform 0.15s;">0</div>
+      <!-- Step 2 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-teal);">2</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-teal);">Day 15: Behavior & Engagement</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj loves the product. He leaves 2 positive reviews and tags the brand on Instagram.<br><br>
+            <strong style="color:var(--color-teal);"><i class="ti ti-heart"></i> System Action:</strong> The Marketing Cloud detects this and injects <strong>+150 Behavior Points</strong> into his Tier Score. <br>
+            <em>Current Score: 5,150. (Still locked in Bronze until Order #2).</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-cyan);">3</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-cyan);">Day 45: The Second Order (Unlock!)</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj returns and places a small order of <strong>RM 200</strong>.<br><br>
+            <strong style="color:var(--color-cyan);"><i class="ti ti-key"></i> System Action:</strong> The system detects Order Frequency = 2. The probation lock is completely removed!<br>
+            <em>Score: 5,000 + 150 + 200 = 5,350.</em> Manoj instantly upgrades to <strong>Platinum Tier!</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-coral);">4</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-coral);">Day 60: Order Cancellation (Penalty)</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj places a RM 500 order but immediately cancels it before shipping.<br><br>
+            <strong style="color:var(--color-coral);"><i class="ti ti-shield"></i> System Action:</strong> The system strictly deducts the cancelled amount to protect the business ledger (Clawback). <br>
+            <em>Score: 5,350 - 500 = 4,850.</em> Manoj's score drops below 5,000, so he is downgraded to <strong>Gold Tier</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="timeline-step">
+        <div class="step-num" style="background:var(--color-amber);">5</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--color-amber);">Day 90: High Frequency Bonus</div>
+          <div class="step-desc" style="line-height:1.5;">
+            Manoj places his 3rd valid order for <strong>RM 300</strong>.<br><br>
+            <strong style="color:var(--color-amber);"><i class="ti ti-flame"></i> System Action:</strong> Because Manoj has placed 3+ orders in a rolling 12 months, the system rewards his consistency with a <strong>1.1x Multiplier (10% Bonus)</strong> to his entire base score! <br>
+            <em>Score: (4,850 + 300) = 5,150 × 1.1 = <strong>5,665</strong></em>. Manoj is securely back in <strong>Platinum Tier!</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- The Simulator Section -->
+    <div style="margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+      <h3 style="text-align:center; color:#fff; font-size:18px; margin-bottom:20px; font-family: var(--font-display);">Try It Yourself: Live Simulator</h3>
+      
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <!-- Left: Interactive Controls -->
+        <div style="flex: 1; min-width: 300px; background: var(--bg-field); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px;">
+          <div class="sect-label">Customer Activity Simulation</div>
           
-          <div id="dts-out-badge" style="display: inline-block; margin: 0 auto; padding: 10px 20px; border-radius: 30px; font-family: var(--font-display); font-size: 16px; font-weight: 700;">
-            Bronze Tier
+          <div class="ctrl-row" style="margin-bottom: 16px;">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Confirmed Spend (RM)</label>
+            <input type="range" id="dts-spend" min="0" max="10000" step="100" value="1500" oninput="simDtsCalc()">
+            <span class="ctrl-val" id="dts-spend-v">1500</span>
+          </div>
+
+          <div class="ctrl-row" style="margin-bottom: 16px;">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Behavior Points (Tags, etc.)</label>
+            <input type="range" id="dts-behavior" min="0" max="500" step="10" value="50" oninput="simDtsCalc()">
+            <span class="ctrl-val" id="dts-behavior-v" style="color: var(--color-primary);">+50</span>
+          </div>
+
+          <div class="ctrl-row" style="margin-bottom: 16px;">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Canceled Spend (RM)</label>
+            <input type="range" id="dts-cancel" min="0" max="2000" step="50" value="0" oninput="simDtsCalc()">
+            <span class="ctrl-val" id="dts-cancel-v" style="color: var(--color-coral);">-0</span>
+          </div>
+
+          <div class="ctrl-row" style="margin-bottom: 16px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
+            <label style="min-width: 150px; font-size: 12px; color: var(--text-main);">Order Frequency (12 months)</label>
+            <input type="range" id="dts-freq" min="1" max="10" step="1" value="1" oninput="simDtsCalc()">
+            <span class="ctrl-val" id="dts-freq-v">1 Order</span>
+          </div>
+          
+          <div style="font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 10px;">
+            * Rules: Requires minimum 2 orders to unlock Tiers (Observation Period). >= 3 orders grants 1.1x multiplier.
           </div>
         </div>
 
-        <!-- Lock Warning -->
-        <div id="dts-out-lock" style="background: rgba(244, 63, 94, 0.1); border: 1px solid var(--color-coral); border-radius: var(--radius-md); padding: 16px; color: var(--color-coral); font-size: 12px; display: flex; align-items: flex-start; gap: 10px; display: none;">
-          <i class="ti ti-lock" style="font-size: 18px;"></i>
-          <div>
-            <strong>Observation Period Locked</strong><br>
-            <span style="opacity: 0.8;">Customer has only placed 1 order. Tier upgrades are blocked to prevent hit-and-run fraud. They must place their 2nd order to unlock tiers.</span>
+        <!-- Right: Real-time Evaluation -->
+        <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px;">
+          
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">Final Tier Score</div>
+            <div id="dts-out-score" style="font-family: var(--font-display); font-size: 42px; font-weight: 800; color: #fff; text-shadow: var(--glow-cyan); margin-bottom: 20px; transition: transform 0.15s;">0</div>
+            
+            <div id="dts-out-badge" style="display: inline-block; margin: 0 auto; padding: 10px 20px; border-radius: 30px; font-family: var(--font-display); font-size: 16px; font-weight: 700;">
+              Bronze Tier
+            </div>
+          </div>
+
+          <!-- Lock Warning -->
+          <div id="dts-out-lock" style="background: rgba(244, 63, 94, 0.1); border: 1px solid var(--color-coral); border-radius: var(--radius-md); padding: 16px; color: var(--color-coral); font-size: 12px; display: flex; align-items: flex-start; gap: 10px; display: none;">
+            <i class="ti ti-lock" style="font-size: 18px;"></i>
+            <div>
+              <strong>Observation Period Locked</strong><br>
+              <span style="opacity: 0.8;">Customer has only placed 1 order. Tier upgrades are blocked to prevent hit-and-run fraud. They must place their 2nd order to unlock tiers.</span>
+            </div>
           </div>
         </div>
       </div>
