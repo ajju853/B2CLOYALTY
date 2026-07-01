@@ -22,7 +22,10 @@
         <span>B2C Loyalty OS</span>
       </div>
       <div class="nav-tabs">
-        <div class="nav-tab active" onclick="showPage('formulas')" id="tab-formulas">
+        <div class="nav-tab active" onclick="showPage('journey')" id="tab-journey">
+          <i class="ti ti-route"></i> 11-Step Journey
+        </div>
+        <div class="nav-tab" onclick="showPage('formulas')" id="tab-formulas">
           <i class="ti ti-calculator"></i> Master Formulas
         </div>
         <div class="nav-tab" onclick="showPage('advanced-tier')" id="tab-advanced-tier">
@@ -51,13 +54,25 @@
   <!-- Primary viewport container -->
   <main class="viewport">
     
+    <!-- 0. 11-STEP JOURNEY PAGE -->
+    <div class="page active" id="page-journey">
+      <div class="ph">
+        <div class="ph-icon"><i class="ti ti-route"></i></div>
+        <div>
+          <div class="ph-title">End-to-End Customer Journey (11 Modules)</div>
+          <div class="ph-sub">Ek customer ke sign-up se lekar rewards redeem karne tak ka poora safar.</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="journey-wrap"></div>
+    </div>
+
     <!-- 1. MASTER FORMULAS PAGE -->
-    <div class="page active" id="page-formulas">
+    <div class="page" id="page-formulas">
       <div class="ph">
         <div class="ph-icon"><i class="ti ti-calculator"></i></div>
         <div>
           <div class="ph-title">Master Formulas & Math Rules</div>
-          <div class="ph-sub">The core mathematical foundation of the entire B2C Loyalty Engine.</div>
+          <div class="ph-sub">B2C Loyalty Engine ka core math. Points kaise calculate aur convert hote hain.</div>
         </div>
       </div>
       <div class="widget-wrap" id="formulas-wrap"></div>
@@ -69,7 +84,7 @@
         <div class="ph-icon"><i class="ti ti-stars"></i></div>
         <div>
           <div class="ph-title">Dynamic Tier System (DTS)</div>
-          <div class="ph-sub">Manoj's 5-step journey and the live Tier Evaluation Simulator.</div>
+          <div class="ph-sub">Manoj ki 5-step story aur live Tier Evaluation Simulator.</div>
         </div>
       </div>
       <div class="widget-wrap" id="advanced-tier-wrap"></div>
@@ -81,7 +96,7 @@
         <div class="ph-icon"><i class="ti ti-receipt-2"></i></div>
         <div>
           <div class="ph-title">Redemption & Soft Downgrades</div>
-          <div class="ph-sub">Protecting cash flow with Max Caps and saving customer trust with Soft Downgrades.</div>
+          <div class="ph-sub">Max Caps lagakar cash flow bachana, aur Soft Downgrades se customer ka trust bachana.</div>
         </div>
       </div>
       <div class="widget-wrap" id="red-ren-wrap"></div>
@@ -93,7 +108,7 @@
         <div class="ph-icon"><i class="ti ti-shield-lock"></i></div>
         <div>
           <div class="ph-title">Fraud Prevention Strategy</div>
-          <div class="ph-sub">How Pending Points and Clawbacks protect the business from return fraud.</div>
+          <div class="ph-sub">Pending Points aur Clawbacks company ko return fraud se kaise bachate hain.</div>
         </div>
       </div>
       <div class="widget-wrap" id="fraud-wrap"></div>
@@ -105,7 +120,7 @@
         <div class="ph-icon"><i class="ti ti-heart-handshake"></i></div>
         <div>
           <div class="ph-title">25 Unique Engagement Strategies</div>
-          <div class="ph-sub">Driving daily brand interaction beyond just spending money.</div>
+          <div class="ph-sub">Customer ko sirf paise kharch karne ke bajaye, unke time aur attention ke liye reward karna.</div>
         </div>
       </div>
       <div class="widget-wrap" id="engagement-wrap"></div>

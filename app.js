@@ -3,7 +3,7 @@
    B2C LOYALTY MASTER DECK - FRONTEND LOGIC
    ========================================================================== */
 
-const PAGES = ['formulas', 'advanced-tier', 'red-ren', 'fraud', 'engagement'];
+const PAGES = ['journey', 'formulas', 'advanced-tier', 'red-ren', 'fraud', 'engagement'];
 
 document.addEventListener('DOMContentLoaded', () => {
   // Theme Toggle
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Init default page
-  showPage('formulas');
+  showPage('journey');
 });
 
 function showPage(pageId) {
@@ -42,6 +42,7 @@ function showPage(pageId) {
 
 function initPage(pageId) {
   switch (pageId) {
+    case 'journey': initJourney(); break;
     case 'formulas': initFormulas(); break;
     case 'advanced-tier': initAdvancedTier(); break;
     case 'red-ren': initRedRen(); break;
@@ -53,6 +54,57 @@ function initPage(pageId) {
 /* ==========================================================================
    1. MASTER FORMULAS PAGE
    ========================================================================== */
+
+/* ==========================================================================
+   0. END-TO-END CUSTOMER JOURNEY (11 MODULES)
+   ========================================================================== */
+function initJourney() {
+  const container = document.getElementById('journey-wrap');
+  if (!container) return;
+
+  const steps = [
+    { num: 1, title: "Profile Creation & Registration", desc: "Customer sign up karta hai. Profile 100% complete karne par Welcome Points milte hain." },
+    { num: 2, title: "Explore & Engage", desc: "Products browse karta hai, wishlist banata hai, aur app roz open karta hai (Daily Streaks). Isse Behavior Points milte hain." },
+    { num: 3, title: "Place Order", desc: "Cart me items add karke pehla order place karta hai." },
+    { num: 4, title: "Points Earning (Calculation)", desc: "1 RM = 1 Point rule ke hisaab se points calculate hote hain. (e.g., RM 500 = 500 Points)." },
+    { num: 5, title: "Pending Wallet (Lock Period)", desc: "Earn kiye gaye points turant use nahi ho sakte. 14-30 din (Return Window) tak Pending Wallet mein lock rehte hain." },
+    { num: 6, title: "Active Wallet (Points Unlocked)", desc: "Return period safely khatam hone ke baad points Active Wallet mein aate hain." },
+    { num: 7, title: "Second Purchase Unlock", desc: "Customer ke paas Active points hain, par Redeem button locked rehta hai. Jab wo apna 2nd Order place karta hai, tabhi redeem button unlock hota hai (Isse customer wapas aata hai!)." },
+    { num: 8, title: "Points Redemption (Convert to Cash)", desc: "Cash Value = Total Points ÷ 100 (1% cashback). Max 20% cap rule ke sath discount milta hai." },
+    { num: 9, title: "Tier Score Calculation", desc: "System check karta hai: (Spend + Behavior) - Canceled × Frequency Multiplier." },
+    { num: 10, title: "Tier Assignment & Benefits", desc: "DTS score ke hisaab se Bronze, Silver, Gold, Platinum ya Diamond tier assign hota hai." },
+    { num: 11, title: "Enjoy Rewards & Renew", desc: "Har 12 mahine mein system review karta hai aur Expiry ya Soft Downgrade rules lagata hai." }
+  ];
+
+  let stepHtml = '<div class="timeline" style="margin-top: 10px; padding: 0 10px;">';
+  
+  steps.forEach((s) => {
+    let color = 'var(--color-primary)';
+    if (s.num >= 5 && s.num <= 7) color = 'var(--color-coral)';
+    if (s.num >= 8) color = 'var(--color-teal)';
+    if (s.num === 11) color = 'var(--color-amber)';
+
+    stepHtml += `
+      <div class="timeline-step">
+        <div class="step-num" style="background:${color};">${s.num}</div>
+        <div class="step-content" style="border-left: 3px solid ${color};">
+          <div class="step-title" style="color:${color};">${s.title}</div>
+          <div class="step-desc">${s.desc}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  stepHtml += '</div>';
+
+  container.innerHTML = `
+    <div style="padding: 10px;">
+      <h3 style="color:var(--text-main); font-size:18px; margin-bottom:20px; text-align:center;">Customer Journey: Step 1 se Step 11 tak (Full Flow)</h3>
+      ${stepHtml}
+    </div>
+  `;
+}
+
 function initFormulas() {
   const container = document.getElementById('formulas-wrap');
   if (!container) return;
@@ -63,7 +115,7 @@ function initFormulas() {
       <!-- 1. The Base Formula -->
       <div class="pres-slide">
         <h3 style="color:var(--color-primary); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">1. The Base Earning Formula</h3>
-        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">How customers earn raw points from spending money.</p>
+        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">Customer paise kharch karke points kaise kamata hai.</p>
         <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px; font-family:monospace; color:#fff;">
           <strong>Points Earned = Total Spend (RM) × Base Multiplier</strong><br><br>
           <span style="color:var(--color-cyan);">Current Rule: RM 1.00 Spend = 1 Point</span>
@@ -73,22 +125,22 @@ function initFormulas() {
       <!-- 2. Dynamic Tier Score -->
       <div class="pres-slide">
         <h3 style="color:var(--color-teal); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">2. Dynamic Tier Score (DTS) Formula</h3>
-        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">How the system determines a customer's true value for Tier upgrades, accounting for behavior, cancellations, and loyalty frequency.</p>
+        <p style="color:var(--text-muted); line-height:1.6; margin-bottom:10px;">System customer ki asli value kaise nikalta hai (Behavior, Cancel, Frequency ko milakar). for Tier upgrades, accounting for behavior, cancellations, and loyalty frequency.</p>
         <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px; font-family:monospace; color:#fff; margin-bottom: 15px;">
           <strong>DTS = [ (Confirmed Spend) + (Behavior Points) - (Canceled Spend) ] × Frequency Multiplier</strong>
         </div>
         <ul style="color:var(--text-main); line-height:1.6; margin-left: 20px;">
           <li><strong>Confirmed Spend:</strong> Total RM spent on completed orders.</li>
           <li><strong>Behavior Points:</strong> Points awarded manually by the system for non-transactional actions.</li>
-          <li><strong>Canceled Spend:</strong> The exact RM value of any refunded or canceled orders is subtracted to prevent fraud (The Clawback Rule).</li>
-          <li><strong>Frequency Multiplier:</strong> If total orders in 12 months >= 3, Multiplier = 1.1 (A 10% bonus). Otherwise 1.0.</li>
+          <li><strong>Canceled Spend:</strong> Refund ya Cancel hue order ka exact RM value minus ho jata hai taaki fraud na ho. (The Clawback Rule).</li>
+          <li><strong>Frequency Multiplier:</strong> Agar 12 mahine mein 3 ya usse zyada order hain, toh 10% bonus milta hai (Multiplier = 1.1). (A 10% bonus). Otherwise 1.0.</li>
         </ul>
       </div>
 
       <!-- 3. Tier Thresholds -->
       <div class="pres-slide">
         <h3 style="color:var(--color-amber); font-size:20px; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">3. Tier Upgrade Logic & Thresholds</h3>
-        <p style="color:var(--color-coral); font-weight:bold; margin-bottom:10px;">The Probation Lock Rule: IF (Total Orders < 2) THEN Tier = "Bronze (Probation)" REGARDLESS of DTS.</p>
+        <p style="color:var(--color-coral); font-weight:bold; margin-bottom:10px;">Probation Lock Rule (Sabse Zaroori): IF (Total Orders < 2) THEN Tier = "Bronze (Probation)" REGARDLESS of DTS.</p>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
           <div style="background:#FDF3E8; color:#CD7F32; padding:15px; border-radius:8px; text-align:center; font-weight:bold;">Bronze Tier<br>DTS: 0 - 499</div>
           <div style="background:#F5F5F5; color:#888780; padding:15px; border-radius:8px; text-align:center; font-weight:bold;">Silver Tier<br>DTS: 500 - 1,999</div>
@@ -129,8 +181,8 @@ function initAdvancedTier() {
         <div class="step-content">
           <div class="step-title" style="color:var(--color-primary);">Day 1: The First Big Order (Probation Lock)</div>
           <div class="step-desc" style="line-height:1.5;">
-            Manoj places his very first order for <strong>RM 5,000</strong>. Normally, 5,000 points instantly unlocks the Platinum Tier.<br><br>
-            <strong style="color:var(--color-coral);"><i class="ti ti-lock"></i> System Action:</strong> Because this is Manoj's 1st order, the system locks his tier. He earns the 5,000 points, but his Tier remains <strong>Bronze (Probation)</strong>. This prevents fraud where a user buys once just for the top-tier benefits and never returns.
+            Manoj apna sabse pehla order <strong>RM 5,000</strong> ka place karta hai. Normally, 5,000 points se turant Platinum Tier mil jana chahiye.<br><br>
+            <strong style="color:var(--color-coral);"><i class="ti ti-lock"></i> System Action:</strong> Kyunki yeh Manoj ka pehla order hai, system uski Tier ko lock kar deta hai. Usko 5,000 points milte hain, par uska Tier <strong>Bronze (Probation)</strong> hi rehta hai. Isse un fraud logo ko roka jata hai jo ek baar me bada order karke VIP benefits le kar nikal jate hain.
           </div>
         </div>
       </div>
@@ -141,8 +193,8 @@ function initAdvancedTier() {
         <div class="step-content">
           <div class="step-title" style="color:var(--color-teal);">Day 15: Behavior & Engagement</div>
           <div class="step-desc" style="line-height:1.5;">
-            Manoj loves the product. He leaves 2 positive reviews and tags the brand on Instagram.<br><br>
-            <strong style="color:var(--color-teal);"><i class="ti ti-heart"></i> System Action:</strong> The Marketing Cloud detects this and injects <strong>+150 Behavior Points</strong> into his Tier Score. <br>
+            Manoj ko product pasand aata hai. Wo 2 positive reviews likhta hai aur brand ko Instagram par tag karta hai.<br><br>
+            <strong style="color:var(--color-teal);"><i class="ti ti-heart"></i> System Action:</strong> System isko detect karke uske Tier Score me <strong>+150 Behavior Points</strong> add kar deta hai. <br>
             <em>Current Score: 5,150. (Still locked in Bronze until Order #2).</em>
           </div>
         </div>
@@ -154,9 +206,9 @@ function initAdvancedTier() {
         <div class="step-content">
           <div class="step-title" style="color:var(--color-cyan);">Day 45: The Second Order (Unlock!)</div>
           <div class="step-desc" style="line-height:1.5;">
-            Manoj returns and places a small order of <strong>RM 200</strong>.<br><br>
-            <strong style="color:var(--color-cyan);"><i class="ti ti-key"></i> System Action:</strong> The system detects Order Frequency = 2. The probation lock is completely removed!<br>
-            <em>Score: 5,000 + 150 + 200 = 5,350.</em> Manoj instantly upgrades to <strong>Platinum Tier!</strong>
+            Manoj wapas aakar apna 2nd order <strong>RM 200</strong> ka place karta hai.<br><br>
+            <strong style="color:var(--color-cyan);"><i class="ti ti-key"></i> System Action:</strong> System dekhta hai ki Order Frequency = 2 ho gayi hai. Probation lock turant hat jata hai!<br>
+            <em>Score: 5,000 + 150 + 200 = 5,350.</em> Manoj turant <strong>Platinum Tier!</strong> mein upgrade ho jata hai.
           </div>
         </div>
       </div>
@@ -167,9 +219,9 @@ function initAdvancedTier() {
         <div class="step-content">
           <div class="step-title" style="color:var(--color-coral);">Day 60: Order Cancellation (Penalty)</div>
           <div class="step-desc" style="line-height:1.5;">
-            Manoj places a RM 500 order but immediately cancels it before shipping.<br><br>
-            <strong style="color:var(--color-coral);"><i class="ti ti-shield"></i> System Action:</strong> The system strictly deducts the cancelled amount to protect the business ledger (Clawback). <br>
-            <em>Score: 5,350 - 500 = 4,850.</em> Manoj's score drops below 5,000, so he is downgraded to <strong>Gold Tier</strong>.
+            Manoj RM 500 ka order place karta hai par shipping se pehle hi cancel kar deta hai.<br><br>
+            <strong style="color:var(--color-coral);"><i class="ti ti-shield"></i> System Action:</strong> Business ko loss se bachane ke liye system turant us cancelled order ki value deduct kar leta hai (Clawback Rule). <br>
+            <em>Score: 5,350 - 500 = 4,850.</em> Manoj ka score 5,000 se niche gir jata hai, isliye uska Tier downgrade hoke <strong>Gold Tier</strong> ban jata hai.
           </div>
         </div>
       </div>
@@ -180,9 +232,9 @@ function initAdvancedTier() {
         <div class="step-content">
           <div class="step-title" style="color:var(--color-amber);">Day 90: High Frequency Bonus</div>
           <div class="step-desc" style="line-height:1.5;">
-            Manoj places his 3rd valid order for <strong>RM 300</strong>.<br><br>
-            <strong style="color:var(--color-amber);"><i class="ti ti-flame"></i> System Action:</strong> Because Manoj has placed 3+ orders in a rolling 12 months, the system rewards his consistency with a <strong>1.1x Multiplier (10% Bonus)</strong> to his entire base score! <br>
-            <em>Score: (4,850 + 300) = 5,150 × 1.1 = <strong>5,665</strong></em>. Manoj is securely back in <strong>Platinum Tier!</strong>
+            Manoj apna 3rd order <strong>RM 300</strong> ka place karta hai.<br><br>
+            <strong style="color:var(--color-amber);"><i class="ti ti-flame"></i> System Action:</strong> Kyunki Manoj ne pichle 12 mahine me 3+ orders kiye hain, system uski loyalty ke liye uske pure base score me <strong>1.1x Multiplier (10% Bonus)</strong> add kar deta hai! <br>
+            <em>Score: (4,850 + 300) = 5,150 × 1.1 = <strong>5,665</strong></em>. Manoj wapas safely <strong>Platinum Tier!</strong> me pahonch jata hai.
           </div>
         </div>
       </div>
